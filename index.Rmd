@@ -22,6 +22,11 @@ U.S. Army Corps of Engineers
 Phone: 917-790-8717  
 Email: kyle.mckay@usace.army.mil
 
+*DISCLOSURE*:
+
+This site represents a preliminary and working version of decision models for a stream restoration study in Utoy Creek, Atlanta, Georgia. The project is led by the Mobile District of the U.S. Army Corps of Engineers (USACE). This report *DOES NOT* reflect agency findings or outcomes, and this is merely intended as documentation of methods and working notes for internal use. Please refer to the project manager for the Utoy Creek study, Alex Smith (alexandria.n.smith@usace.army.mil) for up-to-date information about the project.  
+
+An interactive version of this report may be accessed [here](https://usace-wrises.github.io/UtoyDecisions/), and the underlying numerical code for this analysis may be downloaded from [this github repository](https://github.com/USACE-WRISES/UtoyDecisions)
 
 ```{r options, include=FALSE}
 #Markdown options
@@ -61,11 +66,13 @@ Did this work?
 
 What is CEICA? Why is it useful?  
 
-Where did the alternatives come from? Describe plan formulation process. Mention miro board.
+Where did the alternatives come from? Describe plan formulation process. Mention the team's use of [miro](https://miro.com/app/board/uXjVN9DAdvA=/).
 
-https://miro.com/app/board/uXjVN9DAdvA=/
+All analyses conducted in the [R Statistical Software](https://cran.r-project.org/). 
 
 Where did benefits come from? Describe model briefly. Include data in an appendix. Describe the need for annualization. 
+
+Annualization was conducted using the [ecorest](https://cran.r-project.org/web/packages/ecorest/index.html) software package. 
 
 ```{r}
 #Summary info on sites 
@@ -120,6 +127,8 @@ for(i in 1:nsites){
 
 
 Where did costs come from? Include data in an appendix. Describe the need for annualization. 
+
+Cost data were annualized using the [EngrEcon](https://cran.r-project.org/web/packages/EngrEcon/index.html) software package, although a [web application](https://wrises.shinyapps.io/engrecon-webapp/) also exists for conducting these calculations.
 
 ```{r}
 #COST ANNUALIZATION

@@ -1504,18 +1504,36 @@ Environmental Laboratory, ERDC<br />
 U.S. Army Corps of Engineers<br />
 Phone: 917-790-8717<br />
 Email: <a href="mailto:kyle.mckay@usace.army.mil" class="email">kyle.mckay@usace.army.mil</a></p>
+<p><em>DISCLOSURE</em>:</p>
+<p>This site represents a preliminary and working version of decision
+models for a stream restoration study in Utoy Creek, Atlanta, Georgia.
+The project is led by the Mobile District of the U.S. Army Corps of
+Engineers (USACE). This report <em>DOES NOT</em> reflect agency findings
+or outcomes, and this is merely intended as documentation of methods and
+working notes for internal use. Please refer to the project manager for
+the Utoy Creek study, Alex Smith (<a href="mailto:alexandria.n.smith@usace.army.mil" class="email">alexandria.n.smith@usace.army.mil</a>) for up-to-date
+information about the project.</p>
+<p>An interactive version of this report may be accessed <a href="https://usace-wrises.github.io/UtoyDecisions/">here</a>, and the
+underlying numerical code for this analysis may be downloaded from <a href="https://github.com/USACE-WRISES/UtoyDecisions">this github
+repository</a></p>
 <p><strong>TEMPORARY ECO DATA. FAKE COST DATA.</strong></p>
 <div id="introduction" class="section level1">
 <h1><strong>1. Introduction</strong></h1>
 <p>Did this work?</p>
 <p>What is CEICA? Why is it useful?</p>
 <p>Where did the alternatives come from? Describe plan formulation
-process. Mention miro board.</p>
-<p><a href="https://miro.com/app/board/uXjVN9DAdvA=/" class="uri">https://miro.com/app/board/uXjVN9DAdvA=/</a></p>
+process. Mention the team’s use of <a href="https://miro.com/app/board/uXjVN9DAdvA=/">miro</a>.</p>
+<p>All analyses conducted in the <a href="https://cran.r-project.org/">R
+Statistical Software</a>.</p>
 <p>Where did benefits come from? Describe model briefly. Include data in
 an appendix. Describe the need for annualization.</p>
+<p>Annualization was conducted using the <a href="https://cran.r-project.org/web/packages/ecorest/index.html">ecorest</a>
+software package.</p>
 <p>Where did costs come from? Include data in an appendix. Describe the
 need for annualization.</p>
+<p>Cost data were annualized using the <a href="https://cran.r-project.org/web/packages/EngrEcon/index.html">EngrEcon</a>
+software package, although a <a href="https://wrises.shinyapps.io/engrecon-webapp/">web application</a>
+also exists for conducting these calculations.</p>
 <table>
 <caption>Table 1. Summary of benefit and cost inputs for each site-scale
 alternative.</caption>
