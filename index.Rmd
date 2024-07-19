@@ -61,6 +61,10 @@ Did this work?
 
 What is CEICA? Why is it useful?  
 
+Where did the alternatives come from? Describe plan formulation process. Mention miro board.
+
+https://miro.com/app/board/uXjVN9DAdvA=/
+
 Where did benefits come from? Describe model briefly. Include data in an appendix. Describe the need for annualization. 
 
 ```{r}
