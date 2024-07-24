@@ -54,10 +54,10 @@ library(viridis)
 #IMPORT ALL UTOY DATA
 
 #Import ecological modeling inputs
-eco <- read.csv("Utoy_Phase 2_EcoInputs_2024-07-20_EcoIn.csv", header=TRUE, dec=".", na.strings="NA", stringsAsFactors = FALSE)
+eco <- read.csv("Utoy_Phase 2_EcoInputs_2024-07-24_EcoIn.csv", header=TRUE, dec=".", na.strings="NA", stringsAsFactors = FALSE)
 
 #Import cost data
-cost <- read.csv("Utoy_Phase 2_EcoInputs_2024-07-20_CostIn.csv", header=TRUE, dec=".", na.strings="NA", stringsAsFactors = FALSE)
+cost <- read.csv("Utoy_Phase 2_EcoInputs_2024-07-24_CostIn.csv", header=TRUE, dec=".", na.strings="NA", stringsAsFactors = FALSE)
 ```
 
 
@@ -106,23 +106,25 @@ Restoration project planning sets the stage for all other design, analysis, or d
 - Promote aesthetics and recreation.  
 - Improve water quality (e.g., TSS, zinc, nutrients).
 
-In pursuit of these objectives, different information was required as planning proceeded from early watershed problem screening to feasibility-level design. The USACE project development team developed a three-phase approach to analysis of the Utoy Creek watershed restoration (Table 1). In phase 1, activities focused on screening sites to a focal set of locations aligned with USACE objectives. This phase used a suite of high-level assumptions and preliminary data on ecological benefits and costs to reduce 60+ potential restoration locations to a more workable 20 sites for more detailed analysis. Phase 2 focused on feasibility-scale analysis of these 20 sites including collection of additional field and analytical data, development of conceptual designs, execution of ecological models, and estimation of cost. This phase ultimately focused on producing site-scale recommendations of restoration actions. Phase 3 examined the portfolio of recommended actions at the watershed-scale, which analysis of ecological outcomes as well as other project effects (i.e., development of a narrative about the "comprehensive" socio-economic benefits of an investment). These phases required a series of assumptions regarding each analytical step, which are briefly presented in Table 1. Additional information on discipline-specific assumptions can be found elsewhere in feasibility documents.
+In pursuit of these objectives, different information was required as planning proceeded from early watershed problem screening to feasibility-level design. The USACE project development team developed a three-phase approach to analysis of the Utoy Creek watershed restoration (Table 1). In phase 1, activities focused on screening sites to a focal set of locations aligned with USACE objectives. This phase used a suite of high-level assumptions and preliminary data on ecological benefits and costs to reduce 60+ potential restoration locations to a more workable 20 sites for more detailed analysis. Phase 2 focused on feasibility-scale analysis of these 20 sites including collection of additional field and analytical data, development of conceptual designs, execution of ecological models, and estimation of parametric cost. This phase ultimately focused on producing site-scale recommendations of restoration actions. Phase 3 examined the portfolio of recommended actions at the watershed-scale, which are analyzed based on ecological outcomes as well as other project effects (i.e., development of a narrative about the "comprehensive" socio-economic benefits of an investment). These phases required a series of assumptions regarding each analytical step, which are briefly presented in Table 1. Additional information on discipline-specific assumptions can be found elsewhere in feasibility documents.
 
 ```{r echo=FALSE}
 #Create empty table
 Table01 <- as.data.frame(matrix(NA, nrow = 7, ncol = 4))
-colnames(Table01) <- c("Scoping Issue", "Site Screening (Aug 2023)", "Site-Scale Analysis (Chapter 2)", "Watershed-Scale Analysis (Chapter 3 and 4)")
+colnames(Table01) <- c("Scoping Issue", "Site Screening (Aug 2023)", "Site-Scale Analysis (Chapter 3)", "Watershed-Scale Analysis (Chapter 4)")
 
 #Specify rows of the table
 Table01[1,] <- c("Primary purpose of analysis", "Screen out sites to a smaller set for more detailed data collection and analysis", "Identify cost-effective restoration actions at each site.", "Develop an effective portfolio of sites for the watershed.")
 Table01[2,] <- c("Formulation of alternatives", "ERDC identification of a conceptual action based largely on channel evolution", "Field-based identification of needs followed by multi-disciplinary discussion of actions into a conceptual plan, which was then formalized into a suite of actions and quantities", "All combinations of sites with recommended actions")
-Table01[3,] <- c("Number of alternatives", "Two: future without project and maximum build out", "Four: future without project, maximum build-out, two intermediate solutions with varying levels of cost and benefit", "One per site")
-Table01[4,] <- c("Ecological Benefits", "Simple habitat unit based solely on scoring sites relative to project objectives.", "Separate instream (UIM) and riparian (REFI) models parameterized by a combination of field measurements, analyses, and judgement. See Figure 1.", "Sum of site-scale habitat units for the recommended action.")
-Table01[5,] <- c("Cost", "Rapid, qualitative cost estimates based on prior unit cost", "Site-specific, rough order of magnitude (ROM) cost engineering analyses", "Sum of site-scale costs for the recommended action")
-Table01[6,] <- c("Treatment of Time", "Snapshot with and without project (i.e., no temporal forecast)", "Temporal trajectories over 50-year horizon based on years 0, 2, 10, and 50 and annualized over the life of the project", "Use of annualized benefits and costs from site-scale recommendations")
-Table01[7,] <- c("Other Social Effects", "Preliminary, qualitative field assessment for relative comparison among divergent sites", "None", "Combined metric based on field assessment, census data, and public input, which is aggregated for groups of nearby sites")
-Table01[8,] <- c("Regional Economic Development", "None", "None", "None")
-Table01[9,] <- c("National Economic Development", "None", "None", "None")
+Table01[3,] <- c("Number of sites", "60+ reaches", "8 reaches", "4-6 reaches")
+Table01[4,] <- c("Number of alternatives", "Two at each site: future without project and maximum build out", "Four at each site: future without project, maximum build-out, two intermediate solutions with varying levels of cost and benefit", "One per site")
+Table01[5,] <- c("Cost Estimation", "Rapid, qualitative cost estimates based on prior unit cost", "Site-specific, alternative-specific parameteric cost", "Class 3 estimates for the recommended actions")
+Table01[6,] <- c("Real Estate", "None", "Number of parcels intersected", "Appraised cost")
+Table01[7,] <- c("Ecological Benefits", "Scoring sites relative to project objectives.", "Separate instream (UIM) and riparian (REFI) models parameterized by a combination of field measurements and analyses. See Figure 1.", "Sum of site-scale habitat units for the recommended action.")
+Table01[8,] <- c("Treatment of Time", "Snapshot with and without project (i.e., no temporal forecast)", "Temporal trajectories over 50-year horizon based on years 0, 2, 10, and 50 and annualized over the life of the project", "Use of annualized benefits and costs from site-scale recommendations")
+Table01[9,] <- c("Other Social Effects", "Preliminary scoring for relative comparison among divergent sites", "None", "Combined metric based on field assessment, census data, and public input, which is aggregated for groups of nearby sites")
+Table01[10,] <- c("Regional Economic Development", "None", "None", "None")
+Table01[11,] <- c("National Economic Development", "None", "None", "None")
 
 #Send output table rows into a single matrix
 rownames(Table01) <- NULL
@@ -245,7 +247,7 @@ colnames(Table02) <- c("Site", "Alternative", "Year",
                        "Instream Quality", "Instream Area (ac)", "Instream Habitat (HU)",
                        "Total Habitat (HU)")
 rownames(Table02) <- NULL
-knitr::kable(Table02, caption="Table 2. Example of ecological benefits computations for Site-17F.", align='c') 
+knitr::kable(Table02, caption="Table 2. Example of ecological benefits computations for Site-17F2M.", align='c') 
 ```
 
 Ecological models were executed for specific points in time over the project life, but decision models require a time-averaged or "annualized" metric of ecological benefit for comparison with monetary investments. Ecological outcomes were annualized using the [ecorest](https://cran.r-project.org/web/packages/ecorest/index.html) R-package (McKay and Hernandez-Abrams 2020). Figure 3 shows an example of the annualized process for two alternatives at Site-17F to demonstrate methodologically how annualization works. Additionally, all ecological outcomes are presented as the net effect of restoration actions over the future without project condition, which is frequently called "ecological lift."
@@ -311,14 +313,14 @@ lines(c(0,2,10,50), eco$Utoy_HU[5:8], lwd = 2, col="blue")
 points(c(0,2,10,50), eco$Utoy_HU[5:8], pch = 19, cex = 1, col = "blue")
 
 #Add legend
-legend("bottomleft", legend = c("FWOP", "Alterantive 1"), lwd = 2, col = c("black", "blue"), bg = "white")
+legend("bottomleft", legend = c("FWOP", "Alternative1"), lwd = 2, col = c("black", "blue"), bg = "white")
 
 #Turn off plot device
-dev.off()
+invisible(dev.off())
 ```
 
 
-![*Figure 3. Example of annualization of ecological benefits for Utoy Creek Site-17F.*](Utoy_Annualization.jpeg)
+![*Figure 3. Example of annualization of ecological benefits for Utoy Creek Site-17F2M.*](Utoy_Annualization.jpeg)
 
 ## *Monetary Costs*
 
@@ -384,7 +386,7 @@ colnames(Table03) <- c("Site", "Alternative", "Construction Duration (mo)",
                        "Project First Cost", "Monitoring Cost", "Adapative Management Cost",
                        "OMRRR Cost", "Total Annualized Cost")
 rownames(Table03) <- NULL
-knitr::kable(Table03, caption="Table 3. Example of monetary cost data for Site-17F.", align='c') 
+knitr::kable(Table03, caption="Table 3. Example of monetary cost data for Site-17F2M.", align='c') 
 ```
 
 
@@ -424,7 +426,7 @@ Conduct CEICA for all sites and store results.
 CEICA <- list(BB = NULL, ProjectFirst = NULL, altnames.BB = NULL, ProjectFirst.BB = NULL)
 
 #Conduct CEICA
-for(i in 1:8){
+for(i in 1:5){
 #for(i in 1:nsites){
   #Isloate the site for this analysis
   sites.temp <- which(AAHU$ReachID == sites[i])
@@ -459,7 +461,7 @@ for(i in 1:8){
 ```
 
 
-## *Site 17F*
+## *Site 17F2M*
 
 This is just placeholder text. Describe the site and alternatives.  
 
@@ -468,7 +470,7 @@ This is just placeholder text. Describe the site and alternatives.
 - Alternative3: Insert text.
 
 
-![*CEICA Summary for 17F.*](CEICA.17F.jpeg)
+![*CEICA Summary for 17F2M.*](CEICA.17F2M.jpeg)
 
 ```{r}
 #Select site to display
@@ -495,7 +497,7 @@ knitr::kable(CE.output.temp, caption="Cost-effectiveness summary.", align='c')
 ```
 
 
-## *Site 17M*
+## *Site 17D2E*
 
 This is just placeholder text. Describe the site and alternatives.  
 
@@ -504,7 +506,7 @@ This is just placeholder text. Describe the site and alternatives.
 - Alternative3: Insert text.
 
 
-![*CEICA Summary for 17M.*](CEICA.17M.jpeg)
+![*CEICA Summary for 17D2E.*](CEICA.17D2E.jpeg)
 
 
 ```{r}
@@ -529,86 +531,136 @@ colnames(CE.output.temp) <- CE.output.temp.names
 knitr::kable(CE.output.temp, caption="Cost-effectiveness summary.", align='c') 
 ```
 
-## *Site 17D*
-
-This is just placeholder text.
-
-## *Site 17E*
-
-This is just placeholder text.
-
-## *Site 17C*
-
-This is just placeholder text.
-
 ## *Site 17B*
 
 This is just placeholder text.
 
+This is just placeholder text. Describe the site and alternatives.  
+
+- Alternative1: Insert text.  
+- Alternative2: Insert text.  
+- Alternative3: Insert text.
+
+
+![*CEICA Summary for 17B.*](CEICA.17B.jpeg)
+
+
+```{r}
+#Select site to display
+i<-3
+
+#Display incremental cost results
+BB.output.temp <- cbind(CEICA$altnames.BB[[i]], formatC(CEICA$BB[[i]][[2]][,1], format="f", digits=2, big.mark = ","),
+                        formatC(CEICA$BB[[i]][[2]][,2], format="f", digits=0, big.mark = ","),
+                        formatC(CEICA$BB[[i]][[2]][,3], format="f", digits=0, big.mark = ","),
+                        formatC(CEICA$ProjectFirst.BB[[i]], format="f", digits=0, big.mark = ","))
+colnames(BB.output.temp) <- BB.output.temp.names
+knitr::kable(BB.output.temp, caption="Incremental cost summary.", align='c') 
+
+#Display cost-effectiveness results
+CE.output.temp <- cbind(alts[[i]], formatC(CEICA$BB[[i]][[1]][,1], format="f", digits=2, big.mark = ","),
+                        formatC(CEICA$BB[[i]][[1]][,2], format="f", digits=0, big.mark = ","),
+                        formatC(CEICA$BB[[i]][[1]][,2]/CEICA$BB[[i]][[1]][,1], format="f", digits=2, big.mark = ","),
+                        formatC(CEICA$ProjectFirst[[i]], format="f", digits=2, big.mark = ","),
+                        CEICA$BB[[i]][[1]][,3], CEICA$BB[[i]][[1]][,4])
+colnames(CE.output.temp) <- CE.output.temp.names
+knitr::kable(CE.output.temp, caption="Cost-effectiveness summary.", align='c') 
+```
+
 ## *Site 2A*
 
-This is just placeholder text.
+This is just placeholder text. Describe the site and alternatives.  
+
+- Alternative1: Insert text.  
+- Alternative2: Insert text.  
+- Alternative3: Insert text.
+
+
+![*CEICA Summary for 2A.*](CEICA.2A.jpeg)
+
+
+```{r}
+#Select site to display
+i<-4
+
+#Display incremental cost results
+BB.output.temp <- cbind(CEICA$altnames.BB[[i]], formatC(CEICA$BB[[i]][[2]][,1], format="f", digits=2, big.mark = ","),
+                        formatC(CEICA$BB[[i]][[2]][,2], format="f", digits=0, big.mark = ","),
+                        formatC(CEICA$BB[[i]][[2]][,3], format="f", digits=0, big.mark = ","),
+                        formatC(CEICA$ProjectFirst.BB[[i]], format="f", digits=0, big.mark = ","))
+colnames(BB.output.temp) <- BB.output.temp.names
+knitr::kable(BB.output.temp, caption="Incremental cost summary.", align='c') 
+
+#Display cost-effectiveness results
+CE.output.temp <- cbind(alts[[i]], formatC(CEICA$BB[[i]][[1]][,1], format="f", digits=2, big.mark = ","),
+                        formatC(CEICA$BB[[i]][[1]][,2], format="f", digits=0, big.mark = ","),
+                        formatC(CEICA$BB[[i]][[1]][,2]/CEICA$BB[[i]][[1]][,1], format="f", digits=2, big.mark = ","),
+                        formatC(CEICA$ProjectFirst[[i]], format="f", digits=2, big.mark = ","),
+                        CEICA$BB[[i]][[1]][,3], CEICA$BB[[i]][[1]][,4])
+colnames(CE.output.temp) <- CE.output.temp.names
+knitr::kable(CE.output.temp, caption="Cost-effectiveness summary.", align='c') 
+```
 
 ## *Site 2B*
 
-This is just placeholder text.
+This is just placeholder text. Describe the site and alternatives.  
 
-## *Site 3A*
+- Alternative1: Insert text.  
+- Alternative2: Insert text.  
+- Alternative3: Insert text.
 
-This is just placeholder text.
 
-## *Site 3D*
+![*CEICA Summary for 2B.*](CEICA.2B.jpeg)
 
-This is just placeholder text.
+
+```{r}
+#Select site to display
+i<-5
+
+#Display incremental cost results
+BB.output.temp <- cbind(CEICA$altnames.BB[[i]], formatC(CEICA$BB[[i]][[2]][,1], format="f", digits=2, big.mark = ","),
+                        formatC(CEICA$BB[[i]][[2]][,2], format="f", digits=0, big.mark = ","),
+                        formatC(CEICA$BB[[i]][[2]][,3], format="f", digits=0, big.mark = ","),
+                        formatC(CEICA$ProjectFirst.BB[[i]], format="f", digits=0, big.mark = ","))
+colnames(BB.output.temp) <- BB.output.temp.names
+knitr::kable(BB.output.temp, caption="Incremental cost summary.", align='c') 
+
+#Display cost-effectiveness results
+CE.output.temp <- cbind(alts[[i]], formatC(CEICA$BB[[i]][[1]][,1], format="f", digits=2, big.mark = ","),
+                        formatC(CEICA$BB[[i]][[1]][,2], format="f", digits=0, big.mark = ","),
+                        formatC(CEICA$BB[[i]][[1]][,2]/CEICA$BB[[i]][[1]][,1], format="f", digits=2, big.mark = ","),
+                        formatC(CEICA$ProjectFirst[[i]], format="f", digits=2, big.mark = ","),
+                        CEICA$BB[[i]][[1]][,3], CEICA$BB[[i]][[1]][,4])
+colnames(CE.output.temp) <- CE.output.temp.names
+knitr::kable(CE.output.temp, caption="Cost-effectiveness summary.", align='c') 
+```
 
 ## *Site 3E*
 
-This is just placeholder text.
+This is just placeholder text. Describe the site and alternatives.  
+
+- Alternative1: Insert text.  
+- Alternative2: Insert text.  
+- Alternative3: Insert text.
 
 
 ## *Site 3F*
 
-This is just placeholder text.
+This is just placeholder text. Describe the site and alternatives.  
+
+- Alternative1: Insert text.  
+- Alternative2: Insert text.  
+- Alternative3: Insert text.
+
 
 ## *Site 19A*
 
-This is just placeholder text.
+This is just placeholder text. Describe the site and alternatives.  
 
-## *Site 25B*
+- Alternative1: Insert text.  
+- Alternative2: Insert text.  
+- Alternative3: Insert text.
 
-This is just placeholder text.
-
-## *Site 1C*
-
-This is just placeholder text.
-
-## *Site 1D*
-
-This is just placeholder text.
-
-## *Site 1E*
-
-This is just placeholder text.
-
-## *Site 1H*
-
-This is just placeholder text.
-
-## *Site 1I*
-
-This is just placeholder text.
-
-## *Site 1J*
-
-This is just placeholder text.
-
-## *Site 5G*
-
-This is just placeholder text.
-
-## *Site 5H*
-
-This is just placeholder text.
 
 ## *Summary of Site Recommendations*
 
@@ -616,7 +668,8 @@ This is just placeholder text.
 
 ```{r}
 #Isolate the recommended alternative at each site (1=FWOP, 2=Alt1, 3=Alt2, 4=Alt3)
-site.recs <- c(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1)
+#Sites: 17F2M, 17D2E, 17B, 2A, 2B, 3E, 3F, 19A
+site.recs <- c(1, 1, 1, 1, 1, 1, 1, 1)
 
 ```
 
@@ -625,11 +678,18 @@ site.recs <- c(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1)
 
 In this section, yada yada yada. Blah, blah, blah.  
 
-# **5. Watershed-scale analysis: Social Benefits**   
 
-In this section, yada yada yada. Blah, blah, blah.  
+## *CEICA with Ecological Benefits*
 
-# **6. Summary of Recommendations**   
+This is just placeholder text.
+
+
+## *CEICA with Comprehensive Benefits*
+
+This is just placeholder text.
+
+
+# **5. Summary of Recommendations**   
 
 In this section, yada yada yada. Blah, blah, blah.  
 
