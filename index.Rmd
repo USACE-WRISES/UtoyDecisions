@@ -3,15 +3,15 @@ title: 'Decision Support Modeling for Utoy Creek'
 author: "Kyle McKay and Liya Abera"
 date: "July 2024"
 output:
-  word_document:
-    toc: yes
-    toc_depth: '5'
   html_document:
     toc: yes
     toc_depth: 5
     toc_float:
       collapsed: no
       smooth_scroll: yes
+  word_document:
+    toc: yes
+    toc_depth: '5'
 ---
 
 
@@ -27,8 +27,7 @@ Email: kyle.mckay@usace.army.mil
 
 **MISSING DATA AND METHODS**: This analysis is missing a variety of information prior to sharing, specifically:  
 - Check that the objectives presented in Section 2.1 align with project objectives.  
-- This version only includes placeholder (i.e., fake) cost data.  
-- Ecological data are being quality controlled and have known erros at this point (i.e., equal riparian areas for left and right bank). Additionally, we need to revisit whether year-0 should be equal to the FWOP for all alternatives.  
+- Ecological data are being quality controlled and have known errors at this point (i.e., equal riparian areas for left and right bank). Additionally, we need to revisit whether year-0 should be equal to the FWOP for all alternatives.  
 - The Utoy Instream Model is also under development and subject to change. For instance, the current version removes hydrologic metrics as well as a few geomorphic metrics (BEHI). 
 
 
@@ -57,7 +56,7 @@ library(viridis)
 eco <- read.csv("Utoy_Phase 2_EcoInputs_2024-07-24_EcoIn.csv", header=TRUE, dec=".", na.strings="NA", stringsAsFactors = FALSE)
 
 #Import cost data
-cost <- read.csv("Utoy_Phase 2_EcoInputs_2024-07-24_CostIn.csv", header=TRUE, dec=".", na.strings="NA", stringsAsFactors = FALSE)
+cost <- read.csv("Utoy_Phase 2_EcoInputs_2024-07-26_CostIn.csv", header=TRUE, dec=".", na.strings="NA", stringsAsFactors = FALSE)
 ```
 
 
@@ -324,7 +323,7 @@ invisible(dev.off())
 
 ## *Monetary Costs*
 
-Cost estimates were compiled for each site-scale restoration action following standard cost engineering and real estate methods. Project first cost currently represents a rough-order-of-magnitude estimate inclusive of real estate, restoration actions, pre-construction engineering and design, construction management, monitoring, and adaptive management. Monitoring and adaptive management are currently assumed to comprise 5% of total project first cost and spread over a ten-year window. Interest during construction was computed based on project first costs minus the 5% for monitoring and adaptive management with an assumed construction duration of 12-months for all actions. The FY24 Federal discount rate (2.75%) was used to annualize project first cost, interest during construction, and monitoring and adaptive management expenses over a 50-year planning horizon. Cost data were annualized using the [EngrEcon](https://cran.r-project.org/web/packages/EngrEcon/index.html) software package, although a [web application](https://wrises.shinyapps.io/engrecon-webapp/) also exists for conducting these calculations. Table 3 provides an example of cost estimates for Site-17F.
+Cost estimates were compiled for each site-scale restoration action following standard cost engineering and real estate methods. At this phase, data are parametric costs for comparative purposes only, which are largely confined to construction activities. At present no real estate, pre-construction engineering and design, construction management, or cultural resources costs were factored in. Monitoring and adaptive management are currently assumed as 2% and 5% of total project first cost and spread over a ten-year window. Operations, maintenance, repair, replacement, and rehabilitation (OMRRR) were assumed as 5% of project first cost applied every 5 years, which is approximately in line with other stream restoration projects (Abera and McKay 2023). Interest during construction was computed based on project first costs with site- and alternative-specific construction durations. The FY24 Federal discount rate (2.75%, USACE 2023) was used to annualize project first cost, interest during construction, and monitoring and adaptive management expenses over a 50-year planning horizon. Cost data were annualized using the [EngrEcon](https://cran.r-project.org/web/packages/EngrEcon/index.html) software package, although a [web application](https://wrises.shinyapps.io/engrecon-webapp/) also exists for conducting these calculations. Table 3 provides an example of cost estimates for Site-17F.
 
 ```{r}
 #COST ANNUALIZATION
@@ -350,7 +349,9 @@ colnames(cost_present) <- c("ReachID", "SiteAction", "ProjectFirst", "Monitoring
   }
   
   #Compute present value O&M cost
-  cost_present$OM <- annual_to_present(discount, 50, cost$OM_Annual)
+  for (i in 1:nactions.total){
+    cost_present$OM[i] <- om_distribute(discount, 50, 10, cost$OM_Annual[i])
+  }
 
 ##########
 #Create a data frame with all ANNUALIZED costs
@@ -369,6 +370,9 @@ colnames(cost_ann) <- c("ReachID", "SiteAction", "ProjectFirst", "Monitoring", "
   #Annualize monitoring and adaptive management over 10 year horizon
   cost_ann$Monitoring <- present_to_annual(discount, 10, cost$Monitoring)
   cost_ann$AdMan <- present_to_annual(discount, 10, cost$AdMan)
+  
+  #Annualize OMRRR cost assumed at ten year intervals
+  cost_ann$OM <- present_to_annual(discount, 50, cost_present$OM)
   
   #Sum annualized costs
   cost_ann$Total <- cost_ann$ProjectFirst + cost_ann$Monitoring + cost_ann$AdMan + cost_ann$IDC + cost_ann$OM
@@ -426,7 +430,7 @@ Conduct CEICA for all sites and store results.
 CEICA <- list(BB = NULL, ProjectFirst = NULL, altnames.BB = NULL, ProjectFirst.BB = NULL)
 
 #Conduct CEICA
-for(i in 1:5){
+for(i in 1:6){
 #for(i in 1:nsites){
   #Isloate the site for this analysis
   sites.temp <- which(AAHU$ReachID == sites[i])
@@ -465,9 +469,10 @@ for(i in 1:5){
 
 This is just placeholder text. Describe the site and alternatives.  
 
-- Alternative1: Insert text.  
-- Alternative2: Insert text.  
-- Alternative3: Insert text.
+- FWOP: Future WithOut Project.  
+- Alternative1: Concrete channel removal with extensive riparian restoration.  
+- Alternative2: Remove concrete channel with small-scale channel restoration.  
+- Alternative3: Chain of wetlands.
 
 
 ![*CEICA Summary for 17F2M.*](CEICA.17F2M.jpeg)
@@ -501,9 +506,10 @@ knitr::kable(CE.output.temp, caption="Cost-effectiveness summary.", align='c')
 
 This is just placeholder text. Describe the site and alternatives.  
 
-- Alternative1: Insert text.  
-- Alternative2: Insert text.  
-- Alternative3: Insert text.
+- FWOP: Future WithOut Project.  
+- Alternative1: Concrete channel removal with left bank wetland.  
+- Alternative2: Concrete channel removal with bankfull bench.  
+- Alternative3: Stabilization with natural bed and grade control.
 
 
 ![*CEICA Summary for 17D2E.*](CEICA.17D2E.jpeg)
@@ -537,9 +543,10 @@ This is just placeholder text.
 
 This is just placeholder text. Describe the site and alternatives.  
 
-- Alternative1: Insert text.  
-- Alternative2: Insert text.  
-- Alternative3: Insert text.
+- FWOP: Future WithOut Project.  
+- Alternative1: Channel and bank stabilization with beaver removal.  
+- Alternative2: Channel and bank stabilization.  
+- Alternative3: Bank stabilization only.
 
 
 ![*CEICA Summary for 17B.*](CEICA.17B.jpeg)
@@ -571,9 +578,10 @@ knitr::kable(CE.output.temp, caption="Cost-effectiveness summary.", align='c')
 
 This is just placeholder text. Describe the site and alternatives.  
 
-- Alternative1: Insert text.  
-- Alternative2: Insert text.  
-- Alternative3: Insert text.
+- FWOP: Future WithOut Project.  
+- Alternative1: Channel realignment.  
+- Alternative2: Channel shaping with bankfull bench.  
+- Alternative3: Minor instream structures.
 
 
 ![*CEICA Summary for 2A.*](CEICA.2A.jpeg)
@@ -605,9 +613,10 @@ knitr::kable(CE.output.temp, caption="Cost-effectiveness summary.", align='c')
 
 This is just placeholder text. Describe the site and alternatives.  
 
-- Alternative1: Insert text.  
-- Alternative2: Insert text.  
-- Alternative3: Insert text.
+- FWOP: Future WithOut Project.  
+- Alternative1: Channel realignment.  
+- Alternative2: Channel shaping with bankfull bench.  
+- Alternative3: Minor instream structures.
 
 
 ![*CEICA Summary for 2B.*](CEICA.2B.jpeg)
@@ -639,27 +648,53 @@ knitr::kable(CE.output.temp, caption="Cost-effectiveness summary.", align='c')
 
 This is just placeholder text. Describe the site and alternatives.  
 
-- Alternative1: Insert text.  
-- Alternative2: Insert text.  
-- Alternative3: Insert text.
+- FWOP: Future WithOut Project.  
+- Alternative1: Bridge replacement with extensive action.  
+- Alternative2: Brdige replacement with minor action.  
+- Alternative3: Bank stabilization.
+
+![*CEICA Summary for 3E.*](CEICA.3E.jpeg)
+
+```{r}
+#Select site to display
+i<-6
+
+#Display incremental cost results
+BB.output.temp <- cbind(CEICA$altnames.BB[[i]], formatC(CEICA$BB[[i]][[2]][,1], format="f", digits=2, big.mark = ","),
+                        formatC(CEICA$BB[[i]][[2]][,2], format="f", digits=0, big.mark = ","),
+                        formatC(CEICA$BB[[i]][[2]][,3], format="f", digits=0, big.mark = ","),
+                        formatC(CEICA$ProjectFirst.BB[[i]], format="f", digits=0, big.mark = ","))
+colnames(BB.output.temp) <- BB.output.temp.names
+knitr::kable(BB.output.temp, caption="Incremental cost summary.", align='c') 
+
+#Display cost-effectiveness results
+CE.output.temp <- cbind(alts[[i]], formatC(CEICA$BB[[i]][[1]][,1], format="f", digits=2, big.mark = ","),
+                        formatC(CEICA$BB[[i]][[1]][,2], format="f", digits=0, big.mark = ","),
+                        formatC(CEICA$BB[[i]][[1]][,2]/CEICA$BB[[i]][[1]][,1], format="f", digits=2, big.mark = ","),
+                        formatC(CEICA$ProjectFirst[[i]], format="f", digits=2, big.mark = ","),
+                        CEICA$BB[[i]][[1]][,3], CEICA$BB[[i]][[1]][,4])
+colnames(CE.output.temp) <- CE.output.temp.names
+knitr::kable(CE.output.temp, caption="Cost-effectiveness summary.", align='c') 
+```
 
 
 ## *Site 3F*
 
 This is just placeholder text. Describe the site and alternatives.  
 
-- Alternative1: Insert text.  
-- Alternative2: Insert text.  
-- Alternative3: Insert text.
+- FWOP: Future WithOut Project.  
+- Alternative1: Large wood features for 50% of reach.  
+- Alternative2: Large wood features for 25% of reach.  
+- Alternative3: Beaver reintroduction.
 
 
 ## *Site 19A*
 
-This is just placeholder text. Describe the site and alternatives.  
+This is just placeholder text. Describe the site and alternatives. Alternative 1 was formulated, but screened out due to constructability during design and cost.  
 
-- Alternative1: Insert text.  
-- Alternative2: Insert text.  
-- Alternative3: Insert text.
+- FWOP: Future WithOut Project.  
+- Alternative2: Floodplain bench for floodplain connectivity.  
+- Alternative3: Regarde segment around culvert.
 
 
 ## *Summary of Site Recommendations*
@@ -696,6 +731,8 @@ In this section, yada yada yada. Blah, blah, blah.
 
 # **References Cited**   
 
+Abera L. and McKay S.K. 2023. Life cycle cost analysis for stream restoration. ASCE Inspire, American Society of Civil Engineers, November 2023, Arlington, Virginia. https://doi.org/10.1061/9780784485163.067. 
+
 Abera L. and McKay S.K. 2024. Package ‘EngrEcon’. CRAN Reference Manual.
 
 EPA. (2016). Total Maximum Daily Load Evaluation for Five Stream Segments in the Suwannee River Basin for Fecal Coliform. The Georgia Department of Natural Resources Environmental Protection Division, February.
@@ -725,6 +762,8 @@ Robinson R. Hansen W., and Orth K.  1995.  Evaluation of environmental investmen
 U.S. Army Corps of Engineers (USACE). 2000. Planning Guidance Notebook. ER-1105-2-100. U.S. Army Corps of Engineers, Washington, D.C.
 
 U.S. Army Corps of Engineers (USACE).  2011.  Assuring quality of planning models.  EC-1105-2-412. Washington, DC.
+
+U.S. Army Corps of Engineers (USACE).  2023.  Federal Interest Rates for Corps of Engineers Projects for Fiscal Year 2024.  Economic Guidance Memorandum, 24-01. Washington, DC.
 
 Wiest S., Menichino G.T., and McKay S.K. *Forthcoming*. Riparian Ecosystem Function Index (REFI). ERDC Technical Report. U.S. Army Engineer Research and Development Center, Vicksburg, Mississippi. 
 
