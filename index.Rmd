@@ -3,15 +3,15 @@ title: 'Decision Support Modeling for Utoy Creek'
 author: "Kyle McKay and Liya Abera"
 date: "July 2024"
 output:
+  word_document:
+    toc: yes
+    toc_depth: '5'
   html_document:
     toc: yes
     toc_depth: 5
     toc_float:
       collapsed: no
       smooth_scroll: yes
-  word_document:
-    toc: yes
-    toc_depth: '5'
 ---
 
 
@@ -53,10 +53,10 @@ library(viridis)
 #IMPORT ALL UTOY DATA
 
 #Import ecological modeling inputs
-eco <- read.csv("Utoy_Phase 2_EcoInputs_2024-07-24_EcoIn.csv", header=TRUE, dec=".", na.strings="NA", stringsAsFactors = FALSE)
+eco <- read.csv("Utoy_Phase 2_EcoInputs_2024-07-30_EcoIn.csv", header=TRUE, dec=".", na.strings="NA", stringsAsFactors = FALSE)
 
 #Import cost data
-cost <- read.csv("Utoy_Phase 2_EcoInputs_2024-07-26_CostIn.csv", header=TRUE, dec=".", na.strings="NA", stringsAsFactors = FALSE)
+cost <- read.csv("Utoy_Phase 2_EcoInputs_2024-07-30_CostIn.csv", header=TRUE, dec=".", na.strings="NA", stringsAsFactors = FALSE)
 ```
 
 
@@ -430,8 +430,7 @@ Conduct CEICA for all sites and store results.
 CEICA <- list(BB = NULL, ProjectFirst = NULL, altnames.BB = NULL, ProjectFirst.BB = NULL)
 
 #Conduct CEICA
-for(i in 1:6){
-#for(i in 1:nsites){
+for(i in 1:nsites){
   #Isloate the site for this analysis
   sites.temp <- which(AAHU$ReachID == sites[i])
   alt.temp <- AAHU$SiteAction[sites.temp]
@@ -687,6 +686,29 @@ This is just placeholder text. Describe the site and alternatives.
 - Alternative2: Large wood features for 25% of reach.  
 - Alternative3: Beaver reintroduction.
 
+![*CEICA Summary for 3F.*](CEICA.3F.jpeg)
+
+```{r}
+#Select site to display
+i<-7
+
+#Display incremental cost results
+BB.output.temp <- cbind(CEICA$altnames.BB[[i]], formatC(CEICA$BB[[i]][[2]][,1], format="f", digits=2, big.mark = ","),
+                        formatC(CEICA$BB[[i]][[2]][,2], format="f", digits=0, big.mark = ","),
+                        formatC(CEICA$BB[[i]][[2]][,3], format="f", digits=0, big.mark = ","),
+                        formatC(CEICA$ProjectFirst.BB[[i]], format="f", digits=0, big.mark = ","))
+colnames(BB.output.temp) <- BB.output.temp.names
+knitr::kable(BB.output.temp, caption="Incremental cost summary.", align='c') 
+
+#Display cost-effectiveness results
+CE.output.temp <- cbind(alts[[i]], formatC(CEICA$BB[[i]][[1]][,1], format="f", digits=2, big.mark = ","),
+                        formatC(CEICA$BB[[i]][[1]][,2], format="f", digits=0, big.mark = ","),
+                        formatC(CEICA$BB[[i]][[1]][,2]/CEICA$BB[[i]][[1]][,1], format="f", digits=2, big.mark = ","),
+                        formatC(CEICA$ProjectFirst[[i]], format="f", digits=2, big.mark = ","),
+                        CEICA$BB[[i]][[1]][,3], CEICA$BB[[i]][[1]][,4])
+colnames(CE.output.temp) <- CE.output.temp.names
+knitr::kable(CE.output.temp, caption="Cost-effectiveness summary.", align='c') 
+```
 
 ## *Site 19A*
 
@@ -695,6 +717,30 @@ This is just placeholder text. Describe the site and alternatives. Alternative 1
 - FWOP: Future WithOut Project.  
 - Alternative2: Floodplain bench for floodplain connectivity.  
 - Alternative3: Regarde segment around culvert.
+
+![*CEICA Summary for 19A.*](CEICA.19A.jpeg)
+
+```{r}
+#Select site to display
+i<-8
+
+#Display incremental cost results
+BB.output.temp <- cbind(CEICA$altnames.BB[[i]], formatC(CEICA$BB[[i]][[2]][,1], format="f", digits=2, big.mark = ","),
+                        formatC(CEICA$BB[[i]][[2]][,2], format="f", digits=0, big.mark = ","),
+                        formatC(CEICA$BB[[i]][[2]][,3], format="f", digits=0, big.mark = ","),
+                        formatC(CEICA$ProjectFirst.BB[[i]], format="f", digits=0, big.mark = ","))
+colnames(BB.output.temp) <- BB.output.temp.names
+knitr::kable(BB.output.temp, caption="Incremental cost summary.", align='c') 
+
+#Display cost-effectiveness results
+CE.output.temp <- cbind(alts[[i]], formatC(CEICA$BB[[i]][[1]][,1], format="f", digits=2, big.mark = ","),
+                        formatC(CEICA$BB[[i]][[1]][,2], format="f", digits=0, big.mark = ","),
+                        formatC(CEICA$BB[[i]][[1]][,2]/CEICA$BB[[i]][[1]][,1], format="f", digits=2, big.mark = ","),
+                        formatC(CEICA$ProjectFirst[[i]], format="f", digits=2, big.mark = ","),
+                        CEICA$BB[[i]][[1]][,3], CEICA$BB[[i]][[1]][,4])
+colnames(CE.output.temp) <- CE.output.temp.names
+knitr::kable(CE.output.temp, caption="Cost-effectiveness summary.", align='c') 
+```
 
 
 ## *Summary of Site Recommendations*
