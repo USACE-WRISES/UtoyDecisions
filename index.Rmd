@@ -1,33 +1,33 @@
 ---
 title: 'Decision Support Modeling for Utoy Creek'
 author: "Kyle McKay and Liya Abera"
-date: "July 2024"
+date: "August 2024"
 output:
-  word_document:
-    toc: yes
-    toc_depth: '5'
   html_document:
     toc: yes
     toc_depth: 5
     toc_float:
       collapsed: no
       smooth_scroll: yes
+  word_document:
+    toc: yes
+    toc_depth: '5'
 ---
 
 
 **Corresponding Author**:  
 Kyle McKay, PhD, PE  
-Environmental Laboratory  
-U.S. Army Corps of Engineers  
+Environmental Laboratory (EL)  
+U.S. Army Engineer Research and Development Center (ERDC)  
+U.S. Army Corps of Engineers (USACE)  
 Email: kyle.mckay@usace.army.mil
 
 **Model Accessibility**: An interactive version of this report may be accessed [here](https://usace-wrises.github.io/UtoyDecisions/). The underlying numerical code as well as an MS Word version of this analysis may be downloaded from [this github repository](https://github.com/USACE-WRISES/UtoyDecisions).
 
-**DISCLOSURE**: This website represents a preliminary and working version of decision models for a stream restoration study in Utoy Creek, Atlanta, Georgia. The project is led by the Mobile District of the U.S. Army Corps of Engineers (USACE) in partnership with the City of Atlanta. This site **DOES NOT** reflect agency findings or outcomes, and this is merely intended as documentation of methods and working notes for internal use. Please refer to the project manager for the Utoy Creek study, Alex Smith (alexandria.n.smith@usace.army.mil), for up-to-date information about the project. A final version of this report will ultimately be included as an appendix to the more detailed feasibility study report.  
+**Disclosure**: This website represents a preliminary and working version of decision models for a stream restoration study in Utoy Creek, Atlanta, Georgia. The project is led by the Mobile District of the U.S. Army Corps of Engineers (USACE) in partnership with the City of Atlanta. This site **DOES NOT** reflect agency findings or outcomes, and this is merely intended as documentation of methods and working notes for internal use. Please refer to the project manager for the Utoy Creek study, Alex Smith (alexandria.n.smith@usace.army.mil), for up-to-date information about the project. A final version of this report will ultimately be included as an appendix to the more detailed feasibility study report.  
 
 **MISSING DATA AND METHODS**: This analysis is missing a variety of information prior to sharing, specifically:  
 - Check that the objectives presented in Section 2.1 align with project objectives.  
-- Ecological data are being quality controlled and have known errors at this point (i.e., equal riparian areas for left and right bank). Additionally, we need to revisit whether year-0 should be equal to the FWOP for all alternatives.  
 - The Utoy Instream Model is also under development and subject to change. For instance, the current version removes hydrologic metrics as well as a few geomorphic metrics (BEHI). 
 
 
@@ -53,10 +53,10 @@ library(viridis)
 #IMPORT ALL UTOY DATA
 
 #Import ecological modeling inputs
-eco <- read.csv("Utoy_Phase 2_EcoInputs_2024-07-30_EcoIn.csv", header=TRUE, dec=".", na.strings="NA", stringsAsFactors = FALSE)
+eco <- read.csv("Utoy_Phase 2_EcoInputs_2024-08-04_EcoIn.csv", header=TRUE, dec=".", na.strings="NA", stringsAsFactors = FALSE)
 
 #Import cost data
-cost <- read.csv("Utoy_Phase 2_EcoInputs_2024-07-30_CostIn.csv", header=TRUE, dec=".", na.strings="NA", stringsAsFactors = FALSE)
+cost <- read.csv("Utoy_Phase 2_EcoInputs_2024-08-04_CostIn.csv", header=TRUE, dec=".", na.strings="NA", stringsAsFactors = FALSE)
 ```
 
 
@@ -82,12 +82,14 @@ Decision support modeling builds from the planning framework established for a r
 Restoration project planning sets the stage for all other design, analysis, or decision tasks. A sound plan formulation strategy clearly articulates a problem statement and objectives from which all choices about design or analysis flow (McKay et al. 2012). The USACE project development team identified objectives for the Utoy Creek restoration project through three primary means. First, USACE policies and budget criteria were used as a template for local objectives. Second, existing local plans and studies in the Utoy Creek watershed were examined. Third, project objectives were compiled from prior studies in the region (e.g., Proctor Creek and Butler Creek). Fourth, preliminary objectives were presented to technical and non-technical stakeholders at a charrette in May 2023. Based on these approaches, the following objectives were identified. 
 
 *Overarching objective: Improve instream conditions suitable for a diversity of aquatic organisms (e.g., fish, crayfish, salamanders, benthic macroinvertebrates, turtles)*.  
+
 - Restore channel geomorphic conditions to less disturbed conditions.  
 - Reduce sediment loading from the stream bed and banks.  
 - Increase instream habitat for a diverse assemblage of local fauna.  
 - Increase connectivity of movement corridors for aquatic species
 
-*Overarching objective: Improve riparian conditions supportive of a diverse aquatic and riparian community*.
+*Overarching objective: Improve riparian conditions supportive of a diverse aquatic and riparian community*.  
+
 - Restore natural sources of organic carbon (i.e., energy) within the system.  
 - Increase floodplain connectivity to support biogeochemical cycling.  
 - Improve temperature and light regimes.  
@@ -95,11 +97,13 @@ Restoration project planning sets the stage for all other design, analysis, or d
 - Increase connectivity of movement corridors for riparian species
 
 *Overarching Objective: Restore flow regimes to a best attainable condition*.
+
 - Decrease peak flows.  
 - Decrease hydrologic flashiness.  
 - Improve watershed capacity to attenuate high flows.
 
 *Secondary Objectives: Pursue socio-economic outcomes while restoring instream and riparian systems*.  
+
 - Increase resiliency to disturbances (e.g., watershed development, climate change, large floods).  
 - Promote social benefits and equity.  
 - Promote aesthetics and recreation.  
@@ -295,7 +299,7 @@ jpeg(filename="Utoy_Annualization.jpeg", width = 6, height = 6, units = "in", re
 
 #Create the shell of the plot
 plot(c(0, 1), c(0, 1), type = "n", 
-     xlim = c(0,50), ylim = c(0,10), axes = FALSE, 
+     xlim = c(0,50), ylim = c(0,4), axes = FALSE, 
      xlab="Time (years)", ylab="Ecological Benefit (Habitat Units)", main="")
 axis(1)
 axis(2, at = axTicks(2), labels = prettyNum(axTicks(2), big.mark = ",", scientific = FALSE), las = 0, cex.axis = 0.75, tick = TRUE)
@@ -312,7 +316,7 @@ lines(c(0,2,10,50), eco$Utoy_HU[5:8], lwd = 2, col="blue")
 points(c(0,2,10,50), eco$Utoy_HU[5:8], pch = 19, cex = 1, col = "blue")
 
 #Add legend
-legend("bottomleft", legend = c("FWOP", "Alternative1"), lwd = 2, col = c("black", "blue"), bg = "white")
+legend("topleft", legend = c("FWOP", "Alternative1"), lwd = 2, col = c("black", "blue"), bg = "white")
 
 #Turn off plot device
 invisible(dev.off())
@@ -323,13 +327,52 @@ invisible(dev.off())
 
 ## *Monetary Costs*
 
-Cost estimates were compiled for each site-scale restoration action following standard cost engineering and real estate methods. At this phase, data are parametric costs for comparative purposes only, which are largely confined to construction activities. At present no real estate, pre-construction engineering and design, construction management, or cultural resources costs were factored in. Monitoring and adaptive management are currently assumed as 2% and 5% of total project first cost and spread over a ten-year window. Operations, maintenance, repair, replacement, and rehabilitation (OMRRR) were assumed as 5% of project first cost applied every 5 years, which is approximately in line with other stream restoration projects (Abera and McKay 2023). Interest during construction was computed based on project first costs with site- and alternative-specific construction durations. The FY24 Federal discount rate (2.75%, USACE 2023) was used to annualize project first cost, interest during construction, and monitoring and adaptive management expenses over a 50-year planning horizon. Cost data were annualized using the [EngrEcon](https://cran.r-project.org/web/packages/EngrEcon/index.html) software package, although a [web application](https://wrises.shinyapps.io/engrecon-webapp/) also exists for conducting these calculations. Table 3 provides an example of cost estimates for Site-17F.
+Cost estimates were compiled for each site-scale restoration action following standard cost engineering methods. At this phase, project first cost represents a parametric cost for comparative purposes only, which is largely confined to construction activities. No real estate, pre-construction engineering and design, construction management, or cultural resources costs were included at present.  
+
+Monitoring and adaptive management are typically conducted over a ten-year window for ecosystem restoration projects (WRDA 2007, Section 2036). Monitoring cost was estimated for four points in time, a sampling event during pre-construction engineering design as well as sampling in years 1, 3, and 5 following construction. Each sampling event assumed collection of data on fish communities, invertebrate communities, bathymetric mapping, and hydraulic outcomes. Adaptive management was estimated a proportion of project first cost ranging between 7.5% and 25% depending on site- and alternative-complexity. **MONITORING COSTS SEEM HIGH RELATIVE TO ADAPTIVE MANAGEMENT COSTS.**
+
+Operations, maintenance, repair, replacement, and rehabilitation (OMRRR) costs were estimated relative to four common practices. First, quarterly site visits were planned for general maintenance to any small-scale restoration features, trash removal, and minor maintenance of educational features (signage, benches, or classrooms) at a cost of \$10,000 per year. Second, bi-annual site visits were planned to include a simple inspection, which were estimated as \$4.00 per linear foot of stream every other year. Third, invasive species removal was estimated to cost \$15,000 per site and occur once every 10-years. Fourth, repair of structural restoration features (e.g., rock, wood, and earth work) was assumed to occur once every 25 years. These estimates resulted in OMRRR costs ranging from 1.2% to 16.7% or project first cost depending on the site and alternative (Appendix B, Table B1), which is approximately in line with other stream restoration projects (Abera and McKay 2023). **OMRRR VALUES WERE ALTERED SIGNIFICANTLY TO BREING THEM IN LINE WITH COMMON RANGES.**
+
+Average annual economic costs were computed for all cost categories. Interest during construction was computed based on project first costs with site- and alternative-specific construction durations. The FY24 Federal discount rate (2.75%, USACE 2023) was used to annualize project first cost, interest during construction, and monitoring and adaptive management expenses over a 50-year planning horizon. Cost data were annualized using the [EngrEcon](https://cran.r-project.org/web/packages/EngrEcon/index.html) software package, although a [web application](https://wrises.shinyapps.io/engrecon-webapp/) also exists for conducting these calculations. Table 3 provides an example of cost estimates for Site-17F.
+
 
 ```{r}
 #COST ANNUALIZATION
 
 #Set federal discont rate for water resources projects in FY24
 discount <- 0.0275
+
+##########
+#Compute OMRRR
+cost_OMRRR_present <- data.frame(matrix(NA, nrow=nactions.total, ncol=10))
+colnames(cost_OMRRR_present) <- c("ReachID", "SiteAction", "RipArea_ft2", "Reach_Length_ft", "ProjectFirst", "Inspection_Trash", "Invasives", "Wood_Rock_Earth", "General", "Total")
+
+#Populate some values from input data
+cost_OMRRR_present$ReachID <- cost$ReachID
+cost_OMRRR_present$SiteAction <- cost$SiteAction
+cost_OMRRR_present$ProjectFirst <- cost$Project_First
+
+#Isolate riparian area and reach length for year-50
+for(i in 1:nactions.total){
+  #Isolate the correct site and alternative
+  site.alt.temp <- which(eco$ReachID == cost_OMRRR_present$ReachID[i] & eco$SiteAction == cost_OMRRR_present$SiteAction[i] & eco$HydroAction == "None" & eco$Year == 50)
+  cost_OMRRR_present$RipArea_ft2[i] <- (eco$Riparian_Area_ac_left[site.alt.temp] + eco$Riparian_Area_ac_right[site.alt.temp]) * 43560
+  cost_OMRRR_present$Reach_Length_ft[i] <- eco$Reach_Length_ft[site.alt.temp]
+  
+  #Override FWOP area and length as zero for purposes of cost estimation
+  cost_OMRRR_present$RipArea_ft2[i] <- ifelse(cost_OMRRR_present$SiteAction[i] == "FWOP", 0, cost_OMRRR_present$RipArea_ft2[i])
+  cost_OMRRR_present$Reach_Length_ft[i] <- ifelse(cost_OMRRR_present$SiteAction[i] == "FWOP", 0, cost_OMRRR_present$Reach_Length_ft[i])
+}
+
+#Calculate OMRRR for each item
+for(i in 1:nactions.total){
+  cost_OMRRR_present$General[i] <- om_distribute(discount, 50, 1, 10000 * ifelse(cost_OMRRR_present$RipArea_ft2[i]>0, 1, 0))
+  cost_OMRRR_present$Inspection_Trash[i] <- om_distribute(discount, 50, 2, 4*cost_OMRRR_present$Reach_Length_ft[i])
+  #cost_OMRRR_present$Invasives[i] <- om_distribute(discount, 50, 10, 1.50 * 0.5 * cost_OMRRR_present$RipArea_ft2[i])
+  cost_OMRRR_present$Invasives[i] <- om_distribute(discount, 50, 10, 15000 * ifelse(cost_OMRRR_present$RipArea_ft2[i]>0, 1, 0))
+  cost_OMRRR_present$Wood_Rock_Earth[i] <- om_distribute(discount, 50, 25, 0.1*cost_OMRRR_present$ProjectFirst[i])
+  cost_OMRRR_present$Total[i] <- cost_OMRRR_present$Inspection_Trash[i] + cost_OMRRR_present$General[i] + cost_OMRRR_present$Invasives[i] + cost_OMRRR_present$Wood_Rock_Earth[i]
+}
 
 ##########
 #Create a data frame with all PRESENT VALUE costs
@@ -342,15 +385,11 @@ colnames(cost_present) <- c("ReachID", "SiteAction", "ProjectFirst", "Monitoring
   cost_present$ProjectFirst <- cost$Project_First
   cost_present$Monitoring <- cost$Monitoring
   cost_present$AdMan <- cost$AdMan
+  cost_present$OM <- cost_OMRRR_present$Total
   
   #Loop over each alternative to compute IDC
   for (i in 1:nactions.total){
     cost_present$IDC[i] <- ifelse(cost$Duration_mo[i]==0, 0, interest_during_construction(discount, cost$Duration_mo[i], cost$Project_First[i]))
-  }
-  
-  #Compute present value O&M cost
-  for (i in 1:nactions.total){
-    cost_present$OM[i] <- om_distribute(discount, 50, 10, cost$OM_Annual[i])
   }
 
 ##########
@@ -361,7 +400,6 @@ colnames(cost_ann) <- c("ReachID", "SiteAction", "ProjectFirst", "Monitoring", "
   #Populate some values from input data
   cost_ann$ReachID <- cost$ReachID
   cost_ann$SiteAction <- cost$SiteAction
-  cost_ann$OM <- cost$OM_Annual
   
   #Annualize project first cost and IDC over 50 year horizon
   cost_ann$ProjectFirst <- present_to_annual(discount, 50, cost$Project_First)
@@ -383,12 +421,12 @@ Table03 <- cbind(cost$ReachID, cost$SiteAction, cost$Duration_mo,
                  formatC(cost$Project_First, format="f", digits=0, big.mark = ","),
                  formatC(cost$Monitoring, format="f", digits=0, big.mark = ","),
                  formatC(cost$AdMan, format="f", digits=0, big.mark = ","),
-                 formatC(cost$OM_Annual, format="f", digits=0, big.mark = ","),
+                 formatC(cost_ann$OM, format="f", digits=0, big.mark = ","),
                  formatC(cost_ann$Total, format="f", digits=0, big.mark = ","))
-Table03 <- Table03[1:4,]
+#Table03 <- Table03[1:4,]
 colnames(Table03) <- c("Site", "Alternative", "Construction Duration (mo)", 
                        "Project First Cost", "Monitoring Cost", "Adapative Management Cost",
-                       "OMRRR Cost", "Total Annualized Cost")
+                       "OMRRR Annual Cost", "Total Annualized Cost")
 rownames(Table03) <- NULL
 knitr::kable(Table03, caption="Table 3. Example of monetary cost data for Site-17F2M.", align='c') 
 ```
@@ -830,6 +868,18 @@ Do we want to dump all of the ecological model inputs or outputs here? It makes 
 
 ```{r}
 #Table of ecological benefits and costs.
+#SHOW AN EXAMPLE SITE (17F)
+TableB01 <- cbind(cost_OMRRR_present$ReachID, cost_OMRRR_present$SiteAction,
+                  formatC(cost_OMRRR_present$General, format="f", digits=0, big.mark = ","), 
+                  formatC(cost_OMRRR_present$Inspection_Trash, format="f", digits=0, big.mark = ","),
+                  formatC(cost_OMRRR_present$Invasives, format="f", digits=0, big.mark = ","),
+                  formatC(cost_OMRRR_present$Wood_Rock_Earth, format="f", digits=0, big.mark = ","),
+                  formatC(cost_OMRRR_present$Total, format="f", digits=0, big.mark = ","),
+                  formatC(100 * cost_ann$OM / cost_present$ProjectFirst, format="f", digits=1, big.mark = ","))
+colnames(TableB01) <- c("Site", "Alternative", "General Maintenance", "Bi-Annual Inspection", 
+                       "Invasive Plant Management", "Structural Repair", "Total OMRRR", "OMRRR_ann / Project First")
+rownames(TableB01) <- NULL
+knitr::kable(TableB01, caption="Table B01. Operations, maintenance, repair, replacement, and rehabilitation (OMRRR) costs for all sites and alternatives in total present value.", align='c') 
 
 ```
 
