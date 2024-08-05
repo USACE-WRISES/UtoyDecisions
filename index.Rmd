@@ -3,15 +3,15 @@ title: 'Decision Support Modeling for Utoy Creek'
 author: "Kyle McKay and Liya Abera"
 date: "August 2024"
 output:
+  word_document:
+    toc: yes
+    toc_depth: '5'
   html_document:
     toc: yes
     toc_depth: 5
     toc_float:
       collapsed: no
       smooth_scroll: yes
-  word_document:
-    toc: yes
-    toc_depth: '5'
 ---
 
 
@@ -25,10 +25,6 @@ Email: kyle.mckay@usace.army.mil
 **Model Accessibility**: An interactive version of this report may be accessed [here](https://usace-wrises.github.io/UtoyDecisions/). The underlying numerical code as well as an MS Word version of this analysis may be downloaded from [this github repository](https://github.com/USACE-WRISES/UtoyDecisions).
 
 **Disclosure**: This website represents a preliminary and working version of decision models for a stream restoration study in Utoy Creek, Atlanta, Georgia. The project is led by the Mobile District of the U.S. Army Corps of Engineers (USACE) in partnership with the City of Atlanta. This site **DOES NOT** reflect agency findings or outcomes, and this is merely intended as documentation of methods and working notes for internal use. Please refer to the project manager for the Utoy Creek study, Alex Smith (alexandria.n.smith@usace.army.mil), for up-to-date information about the project. A final version of this report will ultimately be included as an appendix to the more detailed feasibility study report.  
-
-**MISSING DATA AND METHODS**: This analysis is missing a variety of information prior to sharing, specifically:  
-- Check that the objectives presented in Section 2.1 align with project objectives.  
-- The Utoy Instream Model is also under development and subject to change. For instance, the current version removes hydrologic metrics as well as a few geomorphic metrics (BEHI). 
 
 
 ```{r options, include=FALSE}
@@ -53,10 +49,10 @@ library(viridis)
 #IMPORT ALL UTOY DATA
 
 #Import ecological modeling inputs
-eco <- read.csv("Utoy_Phase 2_EcoInputs_2024-08-04_EcoIn.csv", header=TRUE, dec=".", na.strings="NA", stringsAsFactors = FALSE)
+eco <- read.csv("Utoy_Phase 2_EcoInputs_2024-08-05_EcoIn.csv", header=TRUE, dec=".", na.strings="NA", stringsAsFactors = FALSE)
 
 #Import cost data
-cost <- read.csv("Utoy_Phase 2_EcoInputs_2024-08-04_CostIn.csv", header=TRUE, dec=".", na.strings="NA", stringsAsFactors = FALSE)
+cost <- read.csv("Utoy_Phase 2_EcoInputs_2024-08-05_CostIn.csv", header=TRUE, dec=".", na.strings="NA", stringsAsFactors = FALSE)
 ```
 
 
@@ -79,7 +75,7 @@ Decision support modeling builds from the planning framework established for a r
 
 ## *Plan Formulation Strategy*
 
-Restoration project planning sets the stage for all other design, analysis, or decision tasks. A sound plan formulation strategy clearly articulates a problem statement and objectives from which all choices about design or analysis flow (McKay et al. 2012). The USACE project development team identified objectives for the Utoy Creek restoration project through three primary means. First, USACE policies and budget criteria were used as a template for local objectives. Second, existing local plans and studies in the Utoy Creek watershed were examined. Third, project objectives were compiled from prior studies in the region (e.g., Proctor Creek and Butler Creek). Fourth, preliminary objectives were presented to technical and non-technical stakeholders at a charrette in May 2023. Based on these approaches, the following objectives were identified. 
+Restoration project planning sets the stage for all other design, analysis, or decision tasks. A sound plan formulation strategy clearly articulates a problem statement and objectives from which all choices about design or analysis flow (McKay et al. 2012). The USACE project development team identified objectives for the Utoy Creek restoration project through three primary means. First, USACE policies and budget criteria were used as a template for local objectives. Second, existing local plans and studies in the Utoy Creek watershed were examined. Third, project objectives were compiled from prior studies in the region (e.g., Proctor Creek and Butler Creek). Fourth, preliminary objectives were presented to technical and non-technical stakeholders at a charrette in May 2023. Based on these approaches, the following objectives were identified. **CHECK THAT THESE ARE CONSISTENT WITH THE BROADER STUDY OBJECTIVES.** 
 
 *Overarching objective: Improve instream conditions suitable for a diversity of aquatic organisms (e.g., fish, crayfish, salamanders, benthic macroinvertebrates, turtles)*.  
 
@@ -139,15 +135,77 @@ This report focuses on examining the relative merits of different restoration ac
 
 ## *Ecological Models*
 
-Given a set of site-scale alternatives, an analysis of ecological benefits is required to quantitatively compare the relative merits of actions. For Utoy Creek, two ecological models were used to assess instream and riparian outcomes with the intent of directly aligning models with the project objectives identified above (Figure 2). The Utoy Instream Model (UIM) was developed for this project to capture all aquatic benefits, and the domain of this model can be conceptualized as everything from streambank-to-streambank. The Riparian Ecosystem Function Index (REFI) is a generic ecological model being developed by ERDC (Wiest et al. *Forthcoming*) with the explicit goal of assessing the ecological importance and integrity of riparian zones, which can be conceptualized as everything from the top-of-bank outward.
+Given a set of site-scale alternatives, an analysis of ecological benefits is required to quantitatively compare the relative merits of actions. For Utoy Creek, two ecological models were used to assess instream and riparian outcomes with the intent of directly aligning models with the project objectives identified above (Figure 2). The Riparian Ecosystem Function Index (REFI) is a generic ecological model being developed by ERDC (Wiest et al. *Forthcoming*) with the explicit goal of assessing the ecological importance and integrity of riparian zones, which can be conceptualized as everything from the top-of-bank outward. The Utoy Instream Model (UIM) was developed for this project to capture all aquatic benefits, and the domain of this model can be conceptualized as everything from streambank-to-streambank. 
 
 ![*Figure 2. Overview of the general structure of ecological models used in the Utoy Creek study to quantify ecological benefits.*](Utoy_Decision_Figures_2024-07-20_ModelOverview.png)
 
-The Riparian Ecosystem Function Index (REFI) was developed as a rapid method for quantifying ecological benefits of riparian zones. Specifically, the model was designed to complement a [huge variety of stream models](https://gtmenichino.github.io/RiverEngineeringResources/assessment), which typically consider riparian zones only as a benefit to stream functions (rather than as ecologically beneficial in their own right). The model assesses outcomes relative to three overarching functions, which result in module-scale indices that are then arithmetically averaged into an overaching index (i.e., a zero to one metric of quality). The first module focuses on a traditional notion of riparian zones tied to stream functions and addresses issues such as hydrology attenuation and nutrient uptake. The second module addresses the role of riparian areas as habitats for unique assemblages of organisms. The third module examine the role of riparian areas as migratory pathways for organisms moving laterally from channel to floodplain (e.g., salamanders) as well as longitudinally along river corridors. 
+The Riparian Ecosystem Function Index (REFI) was developed as a rapid method for quantifying ecological benefits of riparian zones. Specifically, the model was designed to complement a [huge variety of stream models](https://gtmenichino.github.io/RiverEngineeringResources/assessment), which typically consider riparian zones only as a benefit to stream functions (rather than as ecologically beneficial in their own right). The model assesses outcomes relative to three overarching functions, which result in module-scale indices that are then arithmetically averaged into an overarching index (i.e., a zero to one metric of quality). The first module focuses on a traditional notion of riparian zones tied to stream functions and addresses issues such as hydrologic attenuation and nutrient uptake. The second module addresses the role of riparian areas as habitats for unique assemblages of organisms. The third module examines the role of riparian areas as migratory pathways for organisms moving laterally from channel to floodplain (e.g., salamanders) as well as longitudinally along river corridors. As of August 2024, REFI has not been certified according to USACE review procedures, but documentation is in development and certification is anticipated late in 2024.
 
-The Utoy Instream Model (UIM) was developed for this feasibility study to closely align quantitative outcomes with project objectives. The models are directly tied to and built from ecological models used to quantify restoration outcomes in the neighboring Proctor Creek watershed (McKay et al. 2018ab). Additional functions and outcomes were added to these models in order to align the UIM with other stream functions (Fischenich 2006) as well as newer stream assessment approaches (McKay et al. 2024). The UIM is organized around four modules, which roughly correspond to the widely used stream functions pyramid (Harman et al. 2012). For the UIM, functions related to hydrology and hydraulics were combined to better align with the USACE's budget criteria for ecosystem restoration (i.e., "hydrologic character"). 
+```{r}
+#Riparian Ecological Functions Index (REFI) - functional form based on Wiest et al. (in review)
+  #Instream inputs: wat_runoff is a 0-15 score associated with watershed runoff. hyd_conn is a 0-15 score associated with hydrologic connectivity of the floodplain. streambank is a 0-15 score associated with streambank processes. energy_nut is a 0-15 score associated with energy and nutrient flows. rip_filter is a 0-15 score associated with riparian filtering. 
+  #Habitat inputs: plant_comm is a 0-15 score associated with plant community integrity. canopy is a 0-15 score associated with canopy habitat complexity. understory is a 0-15 score associated with understory processes. floor is a 0-15 score associated with forest floor habitats. stream_hab is a 0-15 score associated with stream integrity.  
+  #Connectivity inputs: lateral is a 0-15 score associated with lateral movement corridors. longitudinal is a 0-15 score associated with longitudinal movement corridors. 
 
-The quantitative tools for both models are described elsewhere in the feasibility report. In general, all models were documented and tested according to best practices in ecological modeling (Grant and Swannack 2008, McKay et al. 2022). Data were stored in a centralized database, which can be downloaded from [this report's github repository](https://github.com/USACE-WRISES/UtoyDecisions). Both models were executed using the [R Statistical Software](https://cran.r-project.org/), and code is available in the same repository. 
+REFI <- function(wat_runoff, hyd_conn, streambank, energy_nut, rip_filter, plant_comm, canopy, understory, floor, stream_hab, lateral, longitudinal){
+  #Create empty data frame to store outputs
+  REFI.out <- as.data.frame(matrix(NA, nrow = 1, ncol = 4))
+  colnames(REFI.out) <- c("instream", "habitat", "connectivity", "total")
+  
+  #Compute instream outcomes
+  REFI.out$instream <- (wat_runoff / 15 + hyd_conn / 15 + streambank / 15 + energy_nut / 15 + rip_filter / 15) / 5
+  
+  #Compute habitat outcomes
+  REFI.out$habitat <- (plant_comm / 15 + canopy / 15 + understory / 15 + floor / 15 + stream_hab / 15) / 5
+  
+  #Compute connectivity outcomes
+  REFI.out$connectivity <- (lateral / 15 + longitudinal / 15) / 2
+  
+  #Compute overarching index of ecosystem condition
+  REFI.out$total <- (REFI.out$instream + REFI.out$habitat + REFI.out$connectivity) / 3
+  
+  #Send output from function
+  REFI.out
+}
+```
+
+The Utoy Instream Model (UIM) was developed for this feasibility study to closely align quantitative outcomes with project objectives. The models are directly tied to and built from ecological models used to quantify restoration outcomes in the neighboring Proctor Creek watershed (McKay et al. 2018ab). Additional functions and outcomes were added to these models in order to align the UIM with other stream functions (Fischenich 2006) as well as newer stream assessment approaches (McKay et al. 2024). The UIM is organized around four modules, which roughly correspond to the widely used stream functions pyramid (Harman et al. 2012). For the UIM, functions related to hydrology and hydraulics were combined to better align with the USACE's budget criteria for ecosystem restoration (i.e., "hydrologic character"). There is no plan to certify the UIM, although the model is based heavily on two certified models, the Proctor Creek Ecological Model (McKay et al. 2018ab) and the Qualitative Habitat Evaluation Index for Louisville Streams (McKay et al. 2024). 
+
+```{r}
+#Utoy Instream Model - functional form
+  #Hydrology and hydraulic inputs: bhr_score is a 0-20 score associated with bank height ratio (a metric of channel degradation). vel_bf_site is the bankfull velocity at the focal site based on preliminary hydraulic modeling. vel_bf_ref is the bankfull velocity at a reference site based on regional hydraulic geometry. area_bf_site is the bankfull area at the focal site based on preliminary hydraulic modeling. area_bf_ref is the bankfull area at a reference site based on regional hydraulic geometry
+  #Geomorphic inputs: geo_alteration is a 0-20 score for channel alteration. geo_evolution is a 0-20 score reflecting geomorphic change and channel evolution. geo_bank is a 0-20 metric for bank stability. geo_behi is a normalized 0-1 version of the Bank Erosion Hazard Index.
+  #Habitat inputs: hab_cover is a 0-20 score for aquatic habitat and available cover. large_wood is a 0-20 score for the role of large wood in channel process. velocity_depth is a 0-20 score for diversity of hydraulic habitats. substrate is a 0-20 score for substrate, deposition, and embeddedness.  
+  #Connectivity inputs: aop_score is a 0-20 score for animal movement in a general sense. transport_score is a 0-20 score for movement of large wood, sediment, and water. passage_rate is a 0-1 value of fish passage based on the SARP methodology for barrier survey. 
+
+UIM <- function(bhr_score, vel_bf_site, vel_bf_ref, area_bf_site, area_bf_ref, geo_alteration, geo_evolution, geo_bank, hab_cover, large_wood, velocity_depth, substrate, aop_score, transport_score, passage_rate){
+  #Create empty data frame to store outputs
+  UIM.out <- as.data.frame(matrix(NA, nrow = 1, ncol = 5))
+  colnames(UIM.out) <- c("hydro", "geomorph", "habitat", "conn", "total")
+  
+  #Compute hydrologic and hydraulic outcomes
+  UIM.geo.vel <- ifelse(vel_bf_site > 2* vel_bf_ref, 0, 1 - abs(vel_bf_ref - vel_bf_site) / vel_bf_ref)
+  UIM.geo.area <- ifelse(area_bf_site > 2* area_bf_ref, 0, 1 - abs(area_bf_ref - area_bf_site) / area_bf_ref)
+  UIM.out$hydro <- (bhr_score/20 + UIM.geo.vel + UIM.geo.area) / 3
+  
+  #Compute geomorphic outcomes
+  UIM.out$geomorph <- (geo_alteration / 20 + geo_evolution / 20 + geo_bank / 20) / 3
+  
+  #Compute habitat outcomes
+  UIM.out$habitat <- (hab_cover / 20 + large_wood / 20 + velocity_depth / 20 + substrate / 20) / 4
+  
+  #Compute connectivity outcomes
+  UIM.out$conn <- (aop_score/20 + transport_score/20 + passage_rate) / 3
+  
+  #Compute overarching index of ecosystem condition
+  UIM.out$total <- (UIM.out$hydro + UIM.out$geomorph + UIM.out$habitat + UIM.out$conn) / 4
+  
+  #Send output from function
+  UIM.out
+}
+```
+
+The quantitative tools for both models are [described elsewhere](https://usace-wrises.github.io/UtoyEcoMod/) in the feasibility report. In general, all models were documented and tested according to best practices in ecological modeling (Grant and Swannack 2008, McKay et al. 2022). Data were stored in a centralized database, which can be downloaded from [this report's github repository](https://github.com/USACE-WRISES/UtoyDecisions). Both models were executed using the [R Statistical Software](https://cran.r-project.org/), and code is available in the same repository. 
 
 Each model was executed for four points in time for all alternatives. Year-0 was assumed to be the existing condition and represents the pre-restoration, degraded condition of the site. Year-2 represents a point in time reflecting an initial increase in ecological benefits associated with the project actions. In general, this time frame reflects most instream benefits of the project, but riparian outcomes would not fully be captured. Year-10 was then assessed as a representative time frame for obtaining many of the riparian benefits of actions. Year-50 represents a fully mature site with a developed multi-story riparian canopy and instream conditions adjusted to a new dynamic equilibrium. For all sites, the future without project was assumed equal to the existing condition, which assumes no future degradation. 
 
@@ -170,79 +228,60 @@ nactions <- c()
 for(i in 1:nsites){nactions[i] <- length(alts[[i]])}
 nactions.total <- sum(nactions)
 
-##########
-#RIPARIAN OUTCOMES
-#Riparian models are taken from the Riparian Ecological Functions Index (Wiest et al, in review).
-
-#REFI instream outcomes
-  eco$REFI_Instream_left <- (eco$Watershed_Runoff_left + eco$Hydrologic_Connection_left + eco$Streambank_Processes_left +
-                           eco$Energy_Nutrients_Sediment_left + eco$Riparian_Filtering_left) / 5 / 15
-  eco$REFI_Instream_right <- (eco$Watershed_Runoff_right + eco$Hydrologic_Connection_right + eco$Streambank_Processes_right +
-                           eco$Energy_Nutrients_Sediment_right + eco$Riparian_Filtering_right) / 5 / 15
-#REFI habitat outcomes
-  eco$REFI_Habitat_left <- (eco$Plant_Community_left + eco$Canopy_Habitat_left + eco$Understory_Habitat_left +
-                           eco$Floor_Habitat_left + eco$Stream_Habitat_left) / 5 / 15
-  eco$REFI_Habitat_right <- (eco$Plant_Community_right + eco$Canopy_Habitat_right + eco$Understory_Habitat_right +
-                           eco$Floor_Habitat_right + eco$Stream_Habitat_right) / 5 / 15
-#REFI connectivity outcomes
-  eco$REFI_Connectivity_left <- (eco$Lateral_Processes_left + eco$Longitudinal_Movement_Habitat_left) / 2 / 15
-  eco$REFI_Connectivity_right <- (eco$Lateral_Processes_right + eco$Longitudinal_Movement_Habitat_right) / 2 / 15
-#REFI total index
-  eco$REFI_Total_left <- (eco$REFI_Instream_left + eco$REFI_Habitat_left + eco$REFI_Connectivity_left) / 3
-  eco$REFI_Total_right <- (eco$REFI_Instream_right + eco$REFI_Habitat_right + eco$REFI_Connectivity_right) / 3
-#REFI habitat units
-  eco$REFI_HU_left <- eco$REFI_Total_left * eco$Riparian_Area_ac_left
-  eco$REFI_HU_right <- eco$REFI_Total_right * eco$Riparian_Area_ac_right
-  eco$REFI_HU_total <- eco$REFI_HU_left + eco$REFI_HU_right
 
 ##########
-#INSTREAM OUTCOMES
-#Utoy Instream Model (UIM) is strongly based on the Phase 2 Proctor Creek Ecological Models.
+#Create empty data frame for storing results
+utoy <- data.frame(matrix(NA, nrow=ndata, ncol=13))
+colnames(utoy) <- c("ReachID", "SiteAction", "Year", "RipL.Qual", "RipL.Area", "RipL.HU", "RipR.Qual", "RipR.Area", "RipR.HU", "Ins.Qual", "Ins.Area", "Ins.HU", "TOTAL.HU")
 
-#UIM hydrologic and hydraulic outcomes (hydro)
-  eco$UIM_hydro_flashiness <- 1
-  eco$UIM_hydro_peak <- 1
-  eco$UIM_hydro_bank_height <- eco$Bank_Height_Ratio / 20
-  eco$UIM_hydro_velocity <- ifelse(eco$Site_Velocity_ft_s > 2 * eco$Reference_Velocity_ft_s, 0, 
-                                   abs(eco$Reference_Velocity_ft_s - eco$Site_Velocity_ft_s)/eco$Reference_Velocity_ft_s)
-  eco$UIM_hydro_area <- (abs(eco$Site_Area_ft2-eco$Reference_Area_ft2)/eco$Site_Area_ft2) / 20
-  eco$UIM_hydro <- (eco$UIM_hydro_flashiness + eco$UIM_hydro_peak + eco$UIM_hydro_bank_height + eco$UIM_hydro_velocity + eco$UIM_hydro_area) / 5
+utoy$ReachID <- eco$ReachID
+utoy$SiteAction <- eco$SiteAction
+utoy$Year <- eco$Year
 
-#UIM geomorphic index (geomorph)
-  eco$UIM_geomorph_alteration <- eco$Channel_Alteration / 20
-  eco$UIM_geomorph_evolution <- eco$Channel_Stability_Evolution / 20
-  eco$UIM_geomorph_bank <- eco$Bank_Stability / 20
-  #eco$UIM_geomorph_BEHI <- 1
-  eco$UIM_geomorph <- (eco$UIM_geomorph_alteration + eco$UIM_geomorph_evolution + eco$UIM_geomorph_bank) / 3
-
-#UIM instream habitat (habitat)
-  eco$UIM_habitat <- (eco$Habitat_Available_Cover + eco$Large_Wood + eco$Velocity_Depth_Regime + eco$Substrate_Deposition_Embeddedness) / 4 / 20
-
-#UIM longitudinal connectivity (connectivity)
-  eco$UIM_connectivity <- (eco$Aquatic_Organism_Passage/20 + eco$Material_Transport/20 + eco$Passage_Rate) / 3
-
-#UIM total
-  eco$UIM_total <- (eco$UIM_hydro + eco$UIM_geomorph + eco$UIM_habitat + eco$UIM_connectivity) / 4
-  eco$UIM_area_ac <- (eco$Reach_Length_ft * eco$Reach_Top_Width_ft / 43560)
-  eco$UIM_HU <- eco$UIM_total * eco$UIM_area_ac
-
-##########
-#TOTAL HABITAT
-  eco$Utoy_HU <- eco$REFI_HU_total + eco$UIM_HU
+#Loop over all rows in data set
+for(i in 1:ndata){
+  #RIPARIAN OUTCOMES - LEFT
+  #REFI(wat_runoff, hyd_conn, streambank, energy_nut, rip_filter, plant_comm, canopy, understory, floor, stream_hab, lateral, longitudinal)
+  utoy$RipL.Qual[i] <- REFI(eco$Watershed_Runoff_left[i], eco$Hydrologic_Connection_left[i], eco$Stream_Habitat_left[i], eco$Energy_Nutrients_Sediment_left[i], eco$Riparian_Filtering_left[i],
+                            eco$Plant_Community_left[i], eco$Canopy_Habitat_left[i], eco$Understory_Habitat_left[i], eco$Floor_Habitat_left[i], eco$Stream_Habitat_left[i], 
+                            eco$Lateral_Processes_left[i], eco$Longitudinal_Movement_Habitat_left[i])$total
+  utoy$RipL.Area[i] <- eco$Riparian_Area_ac_left[i]
+  utoy$RipL.HU[i] <- utoy$RipL.Qual[i] * utoy$RipL.Area[i]
+  
+  #RIPARIAN OUTCOMES - RIGHT
+  #REFI(wat_runoff, hyd_conn, streambank, energy_nut, rip_filter, plant_comm, canopy, understory, floor, stream_hab, lateral, longitudinal)
+  utoy$RipR.Qual[i] <- REFI(eco$Watershed_Runoff_right[i], eco$Hydrologic_Connection_right[i], eco$Stream_Habitat_right[i], eco$Energy_Nutrients_Sediment_right[i], eco$Riparian_Filtering_right[i],
+                            eco$Plant_Community_right[i], eco$Canopy_Habitat_right[i], eco$Understory_Habitat_right[i], eco$Floor_Habitat_right[i], eco$Stream_Habitat_right[i], 
+                            eco$Lateral_Processes_right[i], eco$Longitudinal_Movement_Habitat_right[i])$total
+  utoy$RipR.Area[i] <- eco$Riparian_Area_ac_right[i]
+  utoy$RipR.HU[i] <- utoy$RipR.Qual[i] * utoy$RipR.Area[i]
+  
+  #INSTREAM OUTCOMES with the Utoy Instream Model (UIM)
+  #UIM(bhr_score, vel_bf_site, vel_bf_ref, area_bf_site, area_bf_ref, geo_alteration, geo_evolution, geo_bank, hab_cover, large_wood, velocity_depth, substrate, aop_score, transport_score, passage_rate)
+  utoy$Ins.Qual[i] <- UIM(eco$Bank_Height_Ratio[i], eco$Site_Velocity_ft_s[i], eco$Reference_Velocity_ft_s[i], eco$Site_Area_ft2[i], eco$Reference_Area_ft2[i],
+    eco$Channel_Alteration[i], eco$Channel_Stability_Evolution[i], eco$Bank_Stability[i],
+    eco$Habitat_Available_Cover[i], eco$Large_Wood[i], eco$Velocity_Depth_Regime[i], eco$Substrate_Deposition_Embeddedness[i],
+    eco$Aquatic_Organism_Passage[i], eco$Material_Transport[i], eco$Passage_Rate[i])$total
+  utoy$Ins.Area[i] <- (eco$Reach_Length_ft[i] * eco$Reach_Top_Width_ft[i]) / 43560
+  utoy$Ins.HU[i] <- utoy$Ins.Qual[i] * utoy$Ins.Area[i]
+  
+  #TOTAL HABITAT
+  utoy$TOTAL.HU[i] <- utoy$RipL.HU[i] + utoy$RipR.HU[i] + utoy$Ins.HU[i]
+}
 
 ##########
 #SHOW AN EXAMPLE SITE (17F)
-Table02 <- cbind(eco$ReachID, eco$SiteAction, eco$Year,
-                 round(eco$REFI_Total_left,2), 
-                 round(eco$Riparian_Area_ac_left,2), 
-                 round(eco$REFI_HU_left,2), 
-                 round(eco$REFI_Total_right,2), 
-                 round(eco$Riparian_Area_ac_right,2), 
-                 round(eco$REFI_HU_right,2),
-                 round(eco$UIM_total,2), 
-                 round(eco$UIM_area_ac,2), 
-                 round(eco$UIM_HU,2),
-                 round(eco$Utoy_HU,2))
+Table02 <- cbind(utoy$ReachID, utoy$SiteAction, utoy$Year,
+                 round(utoy$RipL.Qual,2), 
+                 round(utoy$RipL.Area,2), 
+                 round(utoy$RipL.HU,2), 
+                 round(utoy$RipR.Qual,2), 
+                 round(utoy$RipR.Area,2), 
+                 round(utoy$RipR.HU,2),
+                 round(utoy$Ins.Qual,2), 
+                 round(utoy$Ins.Area,2), 
+                 round(utoy$Ins.HU,2),
+                 round(utoy$TOTAL.HU,2))
 Table02 <- Table02[1:16,]
 colnames(Table02) <- c("Site", "Alternative", "Year", 
                        "Riparian Quality, Left", "Riparian Area, Left (ac)", "Riparian Habitat, Left (HU)",
@@ -253,7 +292,7 @@ rownames(Table02) <- NULL
 knitr::kable(Table02, caption="Table 2. Example of ecological benefits computations for Site-17F2M.", align='c') 
 ```
 
-Ecological models were executed for specific points in time over the project life, but decision models require a time-averaged or "annualized" metric of ecological benefit for comparison with monetary investments. Ecological outcomes were annualized using the [ecorest](https://cran.r-project.org/web/packages/ecorest/index.html) R-package (McKay and Hernandez-Abrams 2020). Figure 3 shows an example of the annualized process for two alternatives at Site-17F to demonstrate methodologically how annualization works. Additionally, all ecological outcomes are presented as the net effect of restoration actions over the future without project condition, which is frequently called "ecological lift."
+Ecological models were executed for specific points in time over the project life, but decision models require a time-averaged or "annualized" metric of ecological benefit for comparison with monetary investments. Ecological outcomes were annualized using the [ecorest](https://cran.r-project.org/web/packages/ecorest/index.html) R-package (McKay and Hernandez-Abrams 2020). Figure 3 shows an example of the annualization process for all alternatives at Site-17F to demonstrate methodologically how annualization works. Additionally, all ecological outcomes are presented as the net effect of restoration actions over the future without project condition, which is frequently called "ecological lift."
 
 ```{r}
 #BENEFIT ANNUALIZATION
@@ -273,9 +312,9 @@ for(i in 1:nactions.total){
   site.alt.temp <- which(eco$ReachID == AAHU$ReachID[i] & eco$SiteAction == AAHU$SiteAction[i] & eco$HydroAction == "None")
   
   #Annualize benefits (first removing NAs)
-  AAHU$RipL[i] <- annualizer(time, as.numeric(eco$REFI_HU_left[site.alt.temp]))
-  AAHU$RipR[i] <- annualizer(time, as.numeric(eco$REFI_HU_right[site.alt.temp]))
-  AAHU$Ins[i] <- annualizer(time, as.numeric(eco$UIM_HU[site.alt.temp]))
+  AAHU$RipL[i] <- annualizer(time, as.numeric(utoy$RipL.HU[site.alt.temp]))
+  AAHU$RipR[i] <- annualizer(time, as.numeric(utoy$RipR.HU[site.alt.temp]))
+  AAHU$Ins[i] <- annualizer(time, as.numeric(utoy$Ins.HU[site.alt.temp]))
   AAHU$Total[i] <- sum(AAHU$RipL[i], AAHU$RipR[i], AAHU$Ins[i])
 }
 
@@ -299,7 +338,7 @@ jpeg(filename="Utoy_Annualization.jpeg", width = 6, height = 6, units = "in", re
 
 #Create the shell of the plot
 plot(c(0, 1), c(0, 1), type = "n", 
-     xlim = c(0,50), ylim = c(0,4), axes = FALSE, 
+     xlim = c(0,50), ylim = c(0,7), axes = FALSE, 
      xlab="Time (years)", ylab="Ecological Benefit (Habitat Units)", main="")
 axis(1)
 axis(2, at = axTicks(2), labels = prettyNum(axTicks(2), big.mark = ",", scientific = FALSE), las = 0, cex.axis = 0.75, tick = TRUE)
@@ -308,15 +347,23 @@ axis(2, at = axTicks(2), labels = prettyNum(axTicks(2), big.mark = ",", scientif
 grid(); box()
 
 #Add FWOP
-lines(c(0,2,10,50), eco$Utoy_HU[1:4], lwd = 2, col="black")
-points(c(0,2,10,50), eco$Utoy_HU[1:4], pch = 19, cex = 1, col = "black")
+lines(c(0,2,10,50), utoy$TOTAL.HU[1:4], lwd = 2, col="black")
+points(c(0,2,10,50), utoy$TOTAL.HU[1:4], pch = 19, cex = 1, col = "black")
 
 #Add Alternative 1
-lines(c(0,2,10,50), eco$Utoy_HU[5:8], lwd = 2, col="blue")
-points(c(0,2,10,50), eco$Utoy_HU[5:8], pch = 19, cex = 1, col = "blue")
+lines(c(0,2,10,50), utoy$TOTAL.HU[5:8], lwd = 2, col="blue")
+points(c(0,2,10,50), utoy$TOTAL.HU[5:8], pch = 19, cex = 1, col = "blue")
+
+#Add Alternative 2
+lines(c(0,2,10,50), utoy$TOTAL.HU[9:12], lwd = 2, col="purple")
+points(c(0,2,10,50), utoy$TOTAL.HU[9:12], pch = 19, cex = 1, col = "purple")
+
+#Add Alternative 3
+lines(c(0,2,10,50), utoy$TOTAL.HU[13:16], lwd = 2, col="red")
+points(c(0,2,10,50), utoy$TOTAL.HU[13:16], pch = 19, cex = 1, col = "red")
 
 #Add legend
-legend("topleft", legend = c("FWOP", "Alternative1"), lwd = 2, col = c("black", "blue"), bg = "white")
+legend("bottomright", legend = c("FWOP", "Alternative1", "Alternative2", "Alternative3"), lwd = 2, col = c("black", "blue", "purple", "red"), bg = "white")
 
 #Turn off plot device
 invisible(dev.off())
@@ -333,7 +380,7 @@ Monitoring and adaptive management are typically conducted over a ten-year windo
 
 Operations, maintenance, repair, replacement, and rehabilitation (OMRRR) costs were estimated relative to four common practices. First, quarterly site visits were planned for general maintenance to any small-scale restoration features, trash removal, and minor maintenance of educational features (signage, benches, or classrooms) at a cost of \$10,000 per year. Second, bi-annual site visits were planned to include a simple inspection, which were estimated as \$4.00 per linear foot of stream every other year. Third, invasive species removal was estimated to cost \$15,000 per site and occur once every 10-years. Fourth, repair of structural restoration features (e.g., rock, wood, and earth work) was assumed to occur once every 25 years. These estimates resulted in OMRRR costs ranging from 1.2% to 16.7% or project first cost depending on the site and alternative (Appendix B, Table B1), which is approximately in line with other stream restoration projects (Abera and McKay 2023). **OMRRR VALUES WERE ALTERED SIGNIFICANTLY TO BREING THEM IN LINE WITH COMMON RANGES.**
 
-Average annual economic costs were computed for all cost categories. Interest during construction was computed based on project first costs with site- and alternative-specific construction durations. The FY24 Federal discount rate (2.75%, USACE 2023) was used to annualize project first cost, interest during construction, and monitoring and adaptive management expenses over a 50-year planning horizon. Cost data were annualized using the [EngrEcon](https://cran.r-project.org/web/packages/EngrEcon/index.html) software package, although a [web application](https://wrises.shinyapps.io/engrecon-webapp/) also exists for conducting these calculations. Table 3 provides an example of cost estimates for Site-17F.
+Average annual economic costs were computed for all cost categories. Interest during construction was computed based on project first costs with site- and alternative-specific construction durations. The FY24 Federal discount rate (2.75%, USACE 2023) was used to annualize project first cost, interest during construction, and monitoring and adaptive management expenses over a 50-year planning horizon. Cost data were annualized using the [EngrEcon](https://cran.r-project.org/web/packages/EngrEcon/index.html) software package, although a [web application](https://wrises.shinyapps.io/engrecon-webapp/) also exists for conducting these calculations. Table 3 provides an example of cost estimates for Site-17F, and Table B03 in Appendix B provides a cost summary for all sites and actions.
 
 
 ```{r}
@@ -423,7 +470,7 @@ Table03 <- cbind(cost$ReachID, cost$SiteAction, cost$Duration_mo,
                  formatC(cost$AdMan, format="f", digits=0, big.mark = ","),
                  formatC(cost_ann$OM, format="f", digits=0, big.mark = ","),
                  formatC(cost_ann$Total, format="f", digits=0, big.mark = ","))
-#Table03 <- Table03[1:4,]
+Table03 <- Table03[1:4,]
 colnames(Table03) <- c("Site", "Alternative", "Construction Duration (mo)", 
                        "Project First Cost", "Monitoring Cost", "Adapative Management Cost",
                        "OMRRR Annual Cost", "Total Annualized Cost")
@@ -442,8 +489,9 @@ Table04 <- cbind(AAHU$ReachID, AAHU$SiteAction,
                  formatC(AAHU$Total, format="f", digits=1, big.mark = ","), 
                  formatC(AAHU$Lift, format="f", digits=1, big.mark = ","), 
                  formatC(cost_present$ProjectFirst, format="f", digits=0, big.mark = ","), 
-                 formatC(cost_ann$Total, format="f", digits=0, big.mark = ","))
-colnames(Table04) <- c("Site", "Alternative", "Ecological Outputs (AAHU)", "Ecological Lift (AAHU)", "Project First Cost", "Annualized Cost")
+                 formatC(cost_ann$Total, format="f", digits=0, big.mark = ","),
+                 formatC(ifelse(AAHU$Lift > 0, cost_ann$Total / AAHU$Lift, 0), format="f", digits=0, big.mark = ","))
+colnames(Table04) <- c("Site", "Alternative", "Ecological Outputs (AAHU)", "Ecological Lift (AAHU)", "Project First Cost", "Annualized Cost", "Unit Cost")
 rownames(Table04) <- NULL
 knitr::kable(Table04, caption="Table 4. Summary of benefit and cost inputs for each site-scale alternative.", align='c') 
 ```
@@ -788,14 +836,84 @@ This is just placeholder text.
 ```{r}
 #Isolate the recommended alternative at each site (1=FWOP, 2=Alt1, 3=Alt2, 4=Alt3)
 #Sites: 17F2M, 17D2E, 17B, 2A, 2B, 3E, 3F, 19A
-site.recs <- c(1, 1, 1, 1, 1, 1, 1, 1)
+site.recs <- c(4, 3, 4, 2, 3, 1, 4, 2)
 
+#Find the cost and benefit data for these sites
+find.site.data <- c()
+for(i in 1:nsites){find.site.data[i] <- which(AAHU$ReachID == sites[i])[site.recs[i]]}
+
+#SEND OUTPUT TABLE
+Table05 <- Table04[find.site.data,]
+knitr::kable(Table05, caption="Table 5. Summary of benefits and costs associated with site-scale recommendations.", align='c') 
 ```
 
 
 # **4. Watershed-scale analysis: Ecological Benefits**   
 
 In this section, yada yada yada. Blah, blah, blah.  
+
+
+```{r}
+#Isolate benefit and cost data only for sites with recommendations
+find.site.data2 <- find.site.data[which(site.recs != 1)]
+nrec <- length(find.site.data2)
+
+#Compute all combinations of sites (assume no dependencies)
+utoy.sys.combos <- data.frame(matrix(NA, nrow= 2^nrec, ncol= nrec))
+colnames(utoy.sys.combos) <- AAHU$ReachID[find.site.data2]
+for(j in 1:nrec){utoy.sys.combos[,j] <- rep(c(rep(0,2^(nrec-j)),rep(1,2^(nrec-j))), 2^(j-1))}
+
+#Number of remaining plans
+ncombos <- length(utoy.sys.combos[,1])
+
+##########
+#Compute costs and benefits for combinations
+sys.CEICA <- data.frame(matrix(NA, nrow=ncombos, ncol=(nrec+6)))
+colnames(sys.CEICA) <- c("Plan", AAHU$ReachID[find.site.data2], "Lift", "AvgAnnCost", "ProjectFirstCost", "CE", "BB")
+sys.CEICA$Plan <- paste("P",seq(1,ncombos),sep="")
+sys.CEICA[,2:(nrec+1)] <- utoy.sys.combos
+
+#Compute costs for each combinatory alternative at each site
+for(i in 1:ncombos){
+  sys.CEICA$Lift[i] <- sum(AAHU$Lift[find.site.data2] * utoy.sys.combos[i,])
+  sys.CEICA$AvgAnnCost[i] <- sum(cost_ann$Total[find.site.data2] * utoy.sys.combos[i,])
+  sys.CEICA$ProjectFirstCost[i] <- sum(cost_present$ProjectFirst[find.site.data2] * utoy.sys.combos[i,])
+}
+
+##########
+#Conduct CEICA
+sys.CEICA$CE <- CEfinder(sys.CEICA$Lift, sys.CEICA$AvgAnnCost)
+sys.CEICA.BB <- BBfinder(sys.CEICA$Lift, sys.CEICA$AvgAnnCost, sys.CEICA$CE)
+sys.CEICA$BB <- sys.CEICA.BB[[1]][,4]
+CEICAplotter(sys.CEICA$Plan, sys.CEICA$Lift, sys.CEICA$AvgAnnCost, sys.CEICA$CE, sys.CEICA$BB, "CEICA.sys.jpeg")
+```
+
+
+![*CEICA Summary for watershed-scale recommendations.*](CEICA.sys.jpeg)
+
+
+```{r}
+#Names of BB plans
+find.sys.BB <- c()
+sys.CEICA.BB.names <- c()
+for(i in 1:sum(sys.CEICA$BB)){
+  find.sys.BB[i] <- which(sys.CEICA$Lift == sys.CEICA.BB[[2]][i,1] & sys.CEICA$AvgAnnCost == sys.CEICA.BB[[2]][i,2])
+  sys.CEICA.BB.names[i] <- sys.CEICA$Plan[find.sys.BB[i]]
+}
+
+##########
+#Display incremental cost results
+Table06 <- cbind(sys.CEICA[find.sys.BB,1:8], 
+                 formatC(sys.CEICA[find.sys.BB,9], format="f", digits=0, big.mark = ","),
+                 formatC(sys.CEICA[find.sys.BB,10], format="f", digits=0, big.mark = ","),
+                 formatC(sys.CEICA[find.sys.BB,11], format="f", digits=0, big.mark = ","),
+                 formatC(sys.CEICA[find.sys.BB,10]/sys.CEICA[find.sys.BB,9], format="f", digits=0, big.mark = ","),
+                 formatC(sys.CEICA.BB[[2]][,3], format="f", digits=0, big.mark = ","))
+colnames(Table06) <- c("Plan", AAHU$ReachID[find.site.data2], "Ecological Lift", 
+                       "Average Annual Cost", "Project First Cost", "Unit Cost", "Incremental Unit Cost")
+rownames(Table06) <- NULL
+knitr::kable(Table06, caption="Table 6. Summary of watershed-scale CEICA outcomes.", align='c') 
+```
 
 
 ## *CEICA with Ecological Benefits*
@@ -867,20 +985,60 @@ Wiest S., Menichino G.T., and McKay S.K. *Forthcoming*. Riparian Ecosystem Funct
 Do we want to dump all of the ecological model inputs or outputs here? It makes for a huge set of tables, but it is a good practice for transparency and reproducibility. 
 
 ```{r}
-#Table of ecological benefits and costs.
-#SHOW AN EXAMPLE SITE (17F)
-TableB01 <- cbind(cost_OMRRR_present$ReachID, cost_OMRRR_present$SiteAction,
+#Table of all ecological outputs.
+TableB01 <- cbind(AAHU$ReachID, AAHU$SiteAction,
+                 formatC(AAHU$RipL, format="f", digits=2, big.mark = ","),
+                 formatC(AAHU$RipR, format="f", digits=2, big.mark = ","),
+                 formatC(AAHU$Ins, format="f", digits=2, big.mark = ","),
+                 formatC(AAHU$Total, format="f", digits=2, big.mark = ","),
+                 formatC(AAHU$Lift, format="f", digits=2, big.mark = ","))
+colnames(TableB01) <- c("Site", "Alternative", "Riparian Outputs, Left", 
+                       "Riparian Outputs, Right", "Instream Outputs", "Total Outputs",
+                       "Ecological Lift")
+rownames(TableB01) <- NULL
+knitr::kable(TableB01, caption="Table B01. Instream, riparian, and combined ecological outputs for all Utoy Creek sites (all in AAHUs).", align='c') 
+```
+
+
+```{r}
+#Table of OMRRR costs.
+TableB02 <- cbind(cost_OMRRR_present$ReachID, cost_OMRRR_present$SiteAction,
                   formatC(cost_OMRRR_present$General, format="f", digits=0, big.mark = ","), 
                   formatC(cost_OMRRR_present$Inspection_Trash, format="f", digits=0, big.mark = ","),
                   formatC(cost_OMRRR_present$Invasives, format="f", digits=0, big.mark = ","),
                   formatC(cost_OMRRR_present$Wood_Rock_Earth, format="f", digits=0, big.mark = ","),
                   formatC(cost_OMRRR_present$Total, format="f", digits=0, big.mark = ","),
                   formatC(100 * cost_ann$OM / cost_present$ProjectFirst, format="f", digits=1, big.mark = ","))
-colnames(TableB01) <- c("Site", "Alternative", "General Maintenance", "Bi-Annual Inspection", 
+colnames(TableB02) <- c("Site", "Alternative", "General Maintenance", "Bi-Annual Inspection", 
                        "Invasive Plant Management", "Structural Repair", "Total OMRRR", "OMRRR_ann / Project First")
-rownames(TableB01) <- NULL
-knitr::kable(TableB01, caption="Table B01. Operations, maintenance, repair, replacement, and rehabilitation (OMRRR) costs for all sites and alternatives in total present value.", align='c') 
+rownames(TableB02) <- NULL
+knitr::kable(TableB02, caption="Table B02. Operations, maintenance, repair, replacement, and rehabilitation (OMRRR) costs for all sites and alternatives in total present value.", align='c') 
+```
 
+```{r}
+#Table of all major cost data.
+TableB03 <- cbind(cost$ReachID, cost$SiteAction, cost$Duration_mo,
+                 formatC(cost$Project_First, format="f", digits=0, big.mark = ","),
+                 formatC(cost$Monitoring, format="f", digits=0, big.mark = ","),
+                 formatC(cost$AdMan, format="f", digits=0, big.mark = ","),
+                 formatC(cost_ann$OM, format="f", digits=0, big.mark = ","),
+                 formatC(cost_ann$Total, format="f", digits=0, big.mark = ","))
+colnames(TableB03) <- c("Site", "Alternative", "Construction Duration (mo)", 
+                       "Project First Cost", "Monitoring Cost", "Adapative Management Cost",
+                       "OMRRR Annual Cost", "Total Annualized Cost")
+rownames(TableB03) <- NULL
+knitr::kable(TableB03, caption="Table B03. Major cost categories for all Utoy Creek sites.", align='c') 
 ```
 
 
+```{r}
+#Table of all major cost data.
+TableB04 <- cbind(sys.CEICA[,1:8], 
+                 formatC(sys.CEICA[,9], format="f", digits=0, big.mark = ","),
+                 formatC(sys.CEICA[,10], format="f", digits=0, big.mark = ","),
+                 formatC(sys.CEICA[,11], format="f", digits=0, big.mark = ","),
+                 sys.CEICA[,12:13])
+colnames(TableB04) <- colnames(sys.CEICA)
+rownames(TableB04) <- NULL
+knitr::kable(TableB04, caption="Table B04. Summary of watershed-scale CEICA.", align='c') 
+```
