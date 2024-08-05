@@ -797,7 +797,7 @@ knitr::kable(CE.output.temp, caption="Cost-effectiveness summary.", align='c')
 This is just placeholder text. Describe the site and alternatives. Alternative 1 was formulated, but screened out due to constructability during design and cost.  
 
 - FWOP: Future WithOut Project.  
-- Alternative2: Floodplain bench for floodplain connectivity. Best buy. Very low unit cost. Also includes regrading actions from Alternative3.  
+- Alternative2 (**RECOMMENDATION**): Floodplain bench for floodplain connectivity. Best buy. Very low unit cost. Also includes regrading actions from Alternative3.  
 - Alternative3: Regrade segment around culvert.
 
 ![*CEICA Summary for 19A.*](CEICA.19A.jpeg)
@@ -847,6 +847,21 @@ knitr::kable(Table05, caption="Table 5. Summary of benefits and costs associated
 # **4. Watershed-scale analysis: Ecological Benefits**   
 
 In this section, yada yada yada. Blah, blah, blah.  
+
+
+## *CEICA with Ecological Benefits*
+
+This is just placeholder text. Notes on interpretting the results.
+
+- Concrete channel (17F2M and 17D2E) is a known sourse of ecological degradation and a clear ecological benefit. 17F2M and 17D2E are a cluster of activities. A plan including both of these actions is reasonable, which implies P128.  
+- The largest plan is still well-below the CAP limit, although costs will go up as the project proceeds.  
+- Includes four clusters of actions in the watershed: (1) known source of ecological degradation at the concrete channel at 17F2M, 17D2E, and 17B, (2) a clear problem in the larger system at 2A and 2B, (3) a demonstration or innovation site at 3F, and (4) a contribution to the South Utoy watershed at 19A.  
+- P128 provides the widest geographic coverage and thus provides the most access for communities. Social analysis in the subsequent section will be informative on this front.  
+- 2A and 2B have the potential to be removed from the plan due to other constraints like real estate and partnership challenges.  
+- Which plan reasonably maximizes ecological benefits (i.e., is the NER)? Probably P128.   
+- What is the least environmentally damaging? Not sure.  
+- Which plan reasonably maximizes ALL benefits (from a comprehensive benefits perspective)? Contingent on the next CEICA with social outcomes.   
+- What is the lowest plan we would accept from an ecological perspective? P14 might be the least acceptable (2A, 2B, 19A) because it includes one actions in North and South Utoy each.   
 
 
 ```{r}
@@ -911,11 +926,24 @@ rownames(Table06) <- NULL
 knitr::kable(Table06, caption="Table 6. Summary of watershed-scale CEICA outcomes.", align='c') 
 ```
 
+This table shows a down-select of the watershed-scale plans to include some other plans of interest
 
-## *CEICA with Ecological Benefits*
+```{r}
+#Identify plans to consider in the "final array". 
+final.array <- c(1, 14, 46, 62, 64, 97, 113, 128)
 
-This is just placeholder text.
-
+#Table of all major cost data.
+Table07 <- cbind(sys.CEICA[,1:8], 
+                 formatC(sys.CEICA[,9], format="f", digits=0, big.mark = ","),
+                 formatC(sys.CEICA[,10], format="f", digits=0, big.mark = ","),
+                 formatC(sys.CEICA[,11], format="f", digits=0, big.mark = ","),
+                 formatC(sys.CEICA[,10]/sys.CEICA[,9], format="f", digits=0, big.mark = ","),
+                 sys.CEICA[,12:13])
+colnames(Table07) <- c(colnames(sys.CEICA[1:11]),"Unit Cost", "CE", "BB")
+Table07 <- Table07[final.array,]
+rownames(Table07) <- NULL
+knitr::kable(Table07, caption="Table 07. Final array of watershed-scale plans.", align='c') 
+```
 
 ## *CEICA with Comprehensive Benefits*
 
@@ -1033,8 +1061,9 @@ TableB04 <- cbind(sys.CEICA[,1:8],
                  formatC(sys.CEICA[,9], format="f", digits=0, big.mark = ","),
                  formatC(sys.CEICA[,10], format="f", digits=0, big.mark = ","),
                  formatC(sys.CEICA[,11], format="f", digits=0, big.mark = ","),
+                 formatC(sys.CEICA[,10]/sys.CEICA[,9], format="f", digits=0, big.mark = ","),
                  sys.CEICA[,12:13])
-colnames(TableB04) <- colnames(sys.CEICA)
+colnames(TableB04) <- c(colnames(sys.CEICA[1:11]),"Unit Cost", "CE", "BB")
 rownames(TableB04) <- NULL
 knitr::kable(TableB04, caption="Table B04. Summary of watershed-scale CEICA.", align='c') 
 ```
