@@ -3,15 +3,15 @@ title: 'Decision Support Modeling for Utoy Creek'
 author: "Kyle McKay and Liya Abera"
 date: "August 2024"
 output:
-  word_document:
-    toc: yes
-    toc_depth: '5'
   html_document:
     toc: yes
     toc_depth: 5
     toc_float:
       collapsed: no
       smooth_scroll: yes
+  word_document:
+    toc: yes
+    toc_depth: '5'
 ---
 
 
@@ -131,7 +131,7 @@ knitr::kable(Table01, caption="Table 1. Overview of the three-phase approach to 
 ```
 
 
-This report focuses on examining the relative merits of different restoration actions at a site-scale as well as the merits of those actions at a watershed-scale. Decision-analysis is intimately tied to the development of decision alternatives (i.e., one never recommends an alternative not considered). Therefore, the plan formulation strategy is briefly reviewed for the site- and watershed-scale activities (i.e., Phases 2 and 3). For each potential restoration site, the entirety of the site was visited by walking the length of the reach in large interdisciplinary teams. During these visits, preliminary restoration concepts were discussed and appropriate measures were identified. Following field activities, a series of working meetings were conducted to refine these ideas into conceptual alternatives. The interactive software miro was used to facilitate input and notes from all disciplines and team members. These [miro boards](https://miro.com/app/board/uXjVN9DAdvA=/) served as a knowledge gathering space for conceptual alternatives. Site-scale actions were then formalized into design-oriented formats to asses quantities of restoration needed for ecological and cost models. Site-scale recommendations were developed independently (Chapter 3), and then all permutations of sites were considered at the watershed scale (Chapters 4 and 5).
+This report focuses on examining the relative merits of different restoration actions at a site-scale as well as the merits of those actions at a watershed-scale. Decision-analysis is intimately tied to the development of decision alternatives (i.e., one never recommends an alternative not considered). Therefore, the plan formulation strategy is briefly reviewed for the site- and watershed-scale activities (i.e., Phases 2 and 3). For each potential restoration site, the entirety of the site was visited by walking the length of the reach in large interdisciplinary teams ([map and photos available here](https://www.google.com/maps/d/viewer?mid=1Q_I-vojsBeAUaEz5fVSjcfW30KlTjYk&ll=33.73601955818017%2C-84.46264131161688&z=17)). During these visits, preliminary restoration concepts were discussed and appropriate measures were identified. Following field activities, a series of working meetings were conducted to refine these ideas into conceptual alternatives. The interactive software miro was used to facilitate input and notes from all disciplines and team members. These [miro boards](https://miro.com/app/board/uXjVN9DAdvA=/) served as a knowledge gathering space for conceptual alternatives. Site-scale actions were then formalized into design-oriented formats to asses quantities of restoration needed for ecological and cost models. Site-scale recommendations were developed independently (Chapter 3), and then all permutations of sites were considered at the watershed scale (Chapters 4 and 5).
 
 ## *Ecological Models*
 
@@ -552,13 +552,16 @@ for(i in 1:nsites){
 
 ## *Site 17F2M*
 
-This is just placeholder text. Describe the site and alternatives.  
+This is just placeholder text. Describe the site and alternatives. **EXPECTED Alt 1 and 3 to be competitive. NEED TO REVISIT BENEFITS AND DOUBLE-CHECK AREAS.**  
 
-- FWOP: Future WithOut Project.  
+- FWOP: Future WithOut Project. Significant ecological degradation at the site compels action at this site. 
 - Alternative1: Concrete channel removal with extensive riparian restoration.  
 - Alternative2: Remove concrete channel with small-scale channel restoration.  
-- Alternative3: Chain of wetlands.
+- Alternative3: Chain of wetlands. Likely to have large hydrologic and sediment capture benefits, which would protect downstream investments. Line of sight in the golf course would not be impeded. 
 
+Alternatives 1 and 2 may be more compelling in light of connectivity to 17D2E. 
+
+**RECOMMENDATION: (Tentatively) Alternative3**
 
 ![*CEICA Summary for 17F2M.*](CEICA.17F2M.jpeg)
 
@@ -591,11 +594,12 @@ knitr::kable(CE.output.temp, caption="Cost-effectiveness summary.", align='c')
 
 This is just placeholder text. Describe the site and alternatives.  
 
-- FWOP: Future WithOut Project.  
-- Alternative1: Concrete channel removal with left bank wetland.  
-- Alternative2: Concrete channel removal with bankfull bench.  
-- Alternative3: Stabilization with natural bed and grade control.
+- FWOP: Future WithOut Project. Significant ecological degradation due to the concrete channel at the site compels action at this site.  
+- Alternative1: Concrete channel removal with left bank wetland. Large lift. Direct effect on cause of ecological degradation. Low unit cost relative to watershed-scale actions.   
+- Alternative2: Concrete channel removal with bankfull bench. Not a best buy, but a strong option. Mobilization cost compels the larger action (Alternative1).  
+- Alternative3: Stabilization with natural bed and grade control. Does not lead to as large of ecological lift, but better than FWOP.
 
+**RECOMMENDATION: Alternative1**
 
 ![*CEICA Summary for 17D2E.*](CEICA.17D2E.jpeg)
 
@@ -624,15 +628,14 @@ knitr::kable(CE.output.temp, caption="Cost-effectiveness summary.", align='c')
 
 ## *Site 17B*
 
-This is just placeholder text.
-
-This is just placeholder text. Describe the site and alternatives.  
+This is just placeholder text. Describe the site and alternatives. **CONFUSION ABOUT THE ROLE OF BEAVERS. NEED TO REVISIT ECOLOGICAL MODEL INPUTS WITH TJ, GARRETT, LIYA, BRENNA, AND KEVIN.**    
 
 - FWOP: Future WithOut Project.  
 - Alternative1: Channel and bank stabilization with beaver removal.  
-- Alternative2: Channel and bank stabilization.  
-- Alternative3: Bank stabilization only.
+- Alternative2: Channel and bank stabilization. Justified by large increase in ecological benefits. Channel degradation appears to be the proximate cause of bank issues. Need to increase adaptive management cost to understand the role of beavers in the system. Need to be mindful of existing riparian zone in refinement of the designs moving forward (access to the site via greenway could mitigate this construction impact). Strong connectivity to upstream investments in 17F2M and 17D2E. Proximity to the greenway and school compels for a larger action. 17C provides bedrock control to minimize risks.   
+- Alternative3: Bank stabilization only. Low ecological benefits given the size of the site, Channel degradation is causing bank erosion.
 
+**RECOMMENDATION: Alternative2**
 
 ![*CEICA Summary for 17B.*](CEICA.17B.jpeg)
 
@@ -836,7 +839,7 @@ This is just placeholder text.
 ```{r}
 #Isolate the recommended alternative at each site (1=FWOP, 2=Alt1, 3=Alt2, 4=Alt3)
 #Sites: 17F2M, 17D2E, 17B, 2A, 2B, 3E, 3F, 19A
-site.recs <- c(4, 3, 4, 2, 3, 1, 4, 2)
+site.recs <- c(4, 3, 3, 2, 3, 1, 4, 2)
 
 #Find the cost and benefit data for these sites
 find.site.data <- c()
