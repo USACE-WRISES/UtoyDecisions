@@ -552,16 +552,13 @@ for(i in 1:nsites){
 
 ## *Site 17F2M*
 
-This is just placeholder text. Describe the site and alternatives. **EXPECTED Alt 1 and 3 to be competitive. NEED TO REVISIT BENEFITS AND DOUBLE-CHECK AREAS.**  
+This is just placeholder text. Describe the site and alternatives. **EXPECTED Alt 1 and 3 to be competitive. NEED TO REVISIT BENEFITS AND DOUBLE-CHECK AREAS.**  Alternatives 1 and 2 may be more compelling in light of connectivity to 17D2E. 
 
 - FWOP: Future WithOut Project. Significant ecological degradation at the site compels action at this site. 
 - Alternative1: Concrete channel removal with extensive riparian restoration.  
 - Alternative2: Remove concrete channel with small-scale channel restoration.  
-- Alternative3: Chain of wetlands. Likely to have large hydrologic and sediment capture benefits, which would protect downstream investments. Line of sight in the golf course would not be impeded. 
+- Alternative3 (**TENTATIVE RECOMMENDATION**): Chain of wetlands. Likely to have large hydrologic and sediment capture benefits, which would protect downstream investments. Line of sight in the golf course would not be impeded. 
 
-Alternatives 1 and 2 may be more compelling in light of connectivity to 17D2E. 
-
-**RECOMMENDATION: (Tentatively) Alternative3**
 
 ![*CEICA Summary for 17F2M.*](CEICA.17F2M.jpeg)
 
@@ -582,8 +579,8 @@ knitr::kable(BB.output.temp, caption="Incremental cost summary.", align='c')
 CE.output.temp.names <- c("Alt", "Lift (AAHU)", "Avg Ann Cost", "Unit Cost","Project First Cost", "CE?", "BB?")
 CE.output.temp <- cbind(alts[[i]], formatC(CEICA$BB[[i]][[1]][,1], format="f", digits=2, big.mark = ","),
                         formatC(CEICA$BB[[i]][[1]][,2], format="f", digits=0, big.mark = ","),
-                        formatC(CEICA$BB[[i]][[1]][,2]/CEICA$BB[[i]][[1]][,1], format="f", digits=2, big.mark = ","),
-                        formatC(CEICA$ProjectFirst[[i]], format="f", digits=2, big.mark = ","),
+                        formatC(CEICA$BB[[i]][[1]][,2]/CEICA$BB[[i]][[1]][,1], format="f", digits=0, big.mark = ","),
+                        formatC(CEICA$ProjectFirst[[i]], format="f", digits=0, big.mark = ","),
                         CEICA$BB[[i]][[1]][,3], CEICA$BB[[i]][[1]][,4])
 colnames(CE.output.temp) <- CE.output.temp.names
 knitr::kable(CE.output.temp, caption="Cost-effectiveness summary.", align='c') 
@@ -595,11 +592,9 @@ knitr::kable(CE.output.temp, caption="Cost-effectiveness summary.", align='c')
 This is just placeholder text. Describe the site and alternatives.  
 
 - FWOP: Future WithOut Project. Significant ecological degradation due to the concrete channel at the site compels action at this site.  
-- Alternative1: Concrete channel removal with left bank wetland. Large lift. Direct effect on cause of ecological degradation. Low unit cost relative to watershed-scale actions.   
+- Alternative1 (**RECOMMENDATION**): Concrete channel removal with left bank wetland. Large lift. Direct effect on cause of ecological degradation. Low unit cost relative to watershed-scale actions.   
 - Alternative2: Concrete channel removal with bankfull bench. Not a best buy, but a strong option. Mobilization cost compels the larger action (Alternative1).  
 - Alternative3: Stabilization with natural bed and grade control. Does not lead to as large of ecological lift, but better than FWOP.
-
-**RECOMMENDATION: Alternative1**
 
 ![*CEICA Summary for 17D2E.*](CEICA.17D2E.jpeg)
 
@@ -619,8 +614,8 @@ knitr::kable(BB.output.temp, caption="Incremental cost summary.", align='c')
 #Display cost-effectiveness results
 CE.output.temp <- cbind(alts[[i]], formatC(CEICA$BB[[i]][[1]][,1], format="f", digits=2, big.mark = ","),
                         formatC(CEICA$BB[[i]][[1]][,2], format="f", digits=0, big.mark = ","),
-                        formatC(CEICA$BB[[i]][[1]][,2]/CEICA$BB[[i]][[1]][,1], format="f", digits=2, big.mark = ","),
-                        formatC(CEICA$ProjectFirst[[i]], format="f", digits=2, big.mark = ","),
+                        formatC(CEICA$BB[[i]][[1]][,2]/CEICA$BB[[i]][[1]][,1], format="f", digits=0, big.mark = ","),
+                        formatC(CEICA$ProjectFirst[[i]], format="f", digits=0, big.mark = ","),
                         CEICA$BB[[i]][[1]][,3], CEICA$BB[[i]][[1]][,4])
 colnames(CE.output.temp) <- CE.output.temp.names
 knitr::kable(CE.output.temp, caption="Cost-effectiveness summary.", align='c') 
@@ -632,10 +627,8 @@ This is just placeholder text. Describe the site and alternatives. **CONFUSION A
 
 - FWOP: Future WithOut Project.  
 - Alternative1: Channel and bank stabilization with beaver removal.  
-- Alternative2: Channel and bank stabilization. Justified by large increase in ecological benefits. Channel degradation appears to be the proximate cause of bank issues. Need to increase adaptive management cost to understand the role of beavers in the system. Need to be mindful of existing riparian zone in refinement of the designs moving forward (access to the site via greenway could mitigate this construction impact). Strong connectivity to upstream investments in 17F2M and 17D2E. Proximity to the greenway and school compels for a larger action. 17C provides bedrock control to minimize risks.   
+- Alternative2 (**RECOMMENDATION**): Channel and bank stabilization. Justified by large increase in ecological benefits. Channel degradation appears to be the proximate cause of bank issues. Need to increase adaptive management cost to understand the role of beavers in the system. Need to be mindful of existing riparian zone in refinement of the designs moving forward (access to the site via greenway could mitigate this construction impact). Strong connectivity to upstream investments in 17F2M and 17D2E. Proximity to the greenway and school compels for a larger action. 17C provides bedrock control to minimize risks.   
 - Alternative3: Bank stabilization only. Low ecological benefits given the size of the site, Channel degradation is causing bank erosion.
-
-**RECOMMENDATION: Alternative2**
 
 ![*CEICA Summary for 17B.*](CEICA.17B.jpeg)
 
@@ -655,8 +648,8 @@ knitr::kable(BB.output.temp, caption="Incremental cost summary.", align='c')
 #Display cost-effectiveness results
 CE.output.temp <- cbind(alts[[i]], formatC(CEICA$BB[[i]][[1]][,1], format="f", digits=2, big.mark = ","),
                         formatC(CEICA$BB[[i]][[1]][,2], format="f", digits=0, big.mark = ","),
-                        formatC(CEICA$BB[[i]][[1]][,2]/CEICA$BB[[i]][[1]][,1], format="f", digits=2, big.mark = ","),
-                        formatC(CEICA$ProjectFirst[[i]], format="f", digits=2, big.mark = ","),
+                        formatC(CEICA$BB[[i]][[1]][,2]/CEICA$BB[[i]][[1]][,1], format="f", digits=0, big.mark = ","),
+                        formatC(CEICA$ProjectFirst[[i]], format="f", digits=0, big.mark = ","),
                         CEICA$BB[[i]][[1]][,3], CEICA$BB[[i]][[1]][,4])
 colnames(CE.output.temp) <- CE.output.temp.names
 knitr::kable(CE.output.temp, caption="Cost-effectiveness summary.", align='c') 
@@ -664,12 +657,12 @@ knitr::kable(CE.output.temp, caption="Cost-effectiveness summary.", align='c')
 
 ## *Site 2A*
 
-This is just placeholder text. Describe the site and alternatives.  
+This is just placeholder text. Describe the site and alternatives. Potential real estate and coordination challenges in the power easement. Minimally, dialog with power company could be productive dialog about bank stabilization methods.  
 
 - FWOP: Future WithOut Project.  
-- Alternative1: Channel realignment.  
+- Alternative1 (**RECOMMENDATION**): Channel realignment. Best buy. Moves stream out of the easement and improves shading (not captured adequately in ecological models). Need to tie in some information on the benefits of stream shading (e.g.,g Rhett Jackson's work at Coweeta). Significant sediment input from banks. Similar cost for more lift than Alternative2.  
 - Alternative2: Channel shaping with bankfull bench.  
-- Alternative3: Minor instream structures.
+- Alternative3: Minor instream structures. Not economically competitive given high cost and low benefit. 
 
 
 ![*CEICA Summary for 2A.*](CEICA.2A.jpeg)
@@ -690,8 +683,8 @@ knitr::kable(BB.output.temp, caption="Incremental cost summary.", align='c')
 #Display cost-effectiveness results
 CE.output.temp <- cbind(alts[[i]], formatC(CEICA$BB[[i]][[1]][,1], format="f", digits=2, big.mark = ","),
                         formatC(CEICA$BB[[i]][[1]][,2], format="f", digits=0, big.mark = ","),
-                        formatC(CEICA$BB[[i]][[1]][,2]/CEICA$BB[[i]][[1]][,1], format="f", digits=2, big.mark = ","),
-                        formatC(CEICA$ProjectFirst[[i]], format="f", digits=2, big.mark = ","),
+                        formatC(CEICA$BB[[i]][[1]][,2]/CEICA$BB[[i]][[1]][,1], format="f", digits=0, big.mark = ","),
+                        formatC(CEICA$ProjectFirst[[i]], format="f", digits=0, big.mark = ","),
                         CEICA$BB[[i]][[1]][,3], CEICA$BB[[i]][[1]][,4])
 colnames(CE.output.temp) <- CE.output.temp.names
 knitr::kable(CE.output.temp, caption="Cost-effectiveness summary.", align='c') 
@@ -699,12 +692,12 @@ knitr::kable(CE.output.temp, caption="Cost-effectiveness summary.", align='c')
 
 ## *Site 2B*
 
-This is just placeholder text. Describe the site and alternatives.  
+This is just placeholder text. Describe the site and alternatives. Potential real estate and coordination challenges in the power easement. Minimally, dialog with power company could be productive dialog about bank stabilization methods.  
 
 - FWOP: Future WithOut Project.  
-- Alternative1: Channel realignment.  
+- Alternative1 (**RECOMMENDATION**): Channel realignment. Best buy. Moves stream out of the easement and improves shading (not captured adequately in ecological models). Need to tie in some information on the benefits of stream shading (e.g.,g Rhett Jackson's work at Coweeta). Significant sediment input from banks. Similar cost for more lift than Alternative2.  
 - Alternative2: Channel shaping with bankfull bench.  
-- Alternative3: Minor instream structures.
+- Alternative3: Minor instream structures. High unit cost.
 
 
 ![*CEICA Summary for 2B.*](CEICA.2B.jpeg)
@@ -725,8 +718,8 @@ knitr::kable(BB.output.temp, caption="Incremental cost summary.", align='c')
 #Display cost-effectiveness results
 CE.output.temp <- cbind(alts[[i]], formatC(CEICA$BB[[i]][[1]][,1], format="f", digits=2, big.mark = ","),
                         formatC(CEICA$BB[[i]][[1]][,2], format="f", digits=0, big.mark = ","),
-                        formatC(CEICA$BB[[i]][[1]][,2]/CEICA$BB[[i]][[1]][,1], format="f", digits=2, big.mark = ","),
-                        formatC(CEICA$ProjectFirst[[i]], format="f", digits=2, big.mark = ","),
+                        formatC(CEICA$BB[[i]][[1]][,2]/CEICA$BB[[i]][[1]][,1], format="f", digits=0, big.mark = ","),
+                        formatC(CEICA$ProjectFirst[[i]], format="f", digits=0, big.mark = ","),
                         CEICA$BB[[i]][[1]][,3], CEICA$BB[[i]][[1]][,4])
 colnames(CE.output.temp) <- CE.output.temp.names
 knitr::kable(CE.output.temp, caption="Cost-effectiveness summary.", align='c') 
@@ -736,10 +729,10 @@ knitr::kable(CE.output.temp, caption="Cost-effectiveness summary.", align='c')
 
 This is just placeholder text. Describe the site and alternatives.  
 
-- FWOP: Future WithOut Project.  
-- Alternative1: Bridge replacement with extensive action.  
-- Alternative2: Brdige replacement with minor action.  
-- Alternative3: Bank stabilization.
+- FWOP (**RECOMMENDATION**): Future WithOut Project. High unit cost relative to other sites compels a lack of investment at this location.  
+- Alternative1: Bridge replacement with extensive action. Very high unit cost.  
+- Alternative2: Brdige replacement with minor action. Very high unit cost.  
+- Alternative3: Bank stabilization. High unit cost relative to other sites.
 
 ![*CEICA Summary for 3E.*](CEICA.3E.jpeg)
 
@@ -758,8 +751,8 @@ knitr::kable(BB.output.temp, caption="Incremental cost summary.", align='c')
 #Display cost-effectiveness results
 CE.output.temp <- cbind(alts[[i]], formatC(CEICA$BB[[i]][[1]][,1], format="f", digits=2, big.mark = ","),
                         formatC(CEICA$BB[[i]][[1]][,2], format="f", digits=0, big.mark = ","),
-                        formatC(CEICA$BB[[i]][[1]][,2]/CEICA$BB[[i]][[1]][,1], format="f", digits=2, big.mark = ","),
-                        formatC(CEICA$ProjectFirst[[i]], format="f", digits=2, big.mark = ","),
+                        formatC(CEICA$BB[[i]][[1]][,2]/CEICA$BB[[i]][[1]][,1], format="f", digits=0, big.mark = ","),
+                        formatC(CEICA$ProjectFirst[[i]], format="f", digits=0, big.mark = ","),
                         CEICA$BB[[i]][[1]][,3], CEICA$BB[[i]][[1]][,4])
 colnames(CE.output.temp) <- CE.output.temp.names
 knitr::kable(CE.output.temp, caption="Cost-effectiveness summary.", align='c') 
@@ -768,12 +761,12 @@ knitr::kable(CE.output.temp, caption="Cost-effectiveness summary.", align='c')
 
 ## *Site 3F*
 
-This is just placeholder text. Describe the site and alternatives.  
+This is just placeholder text. Describe the site and alternatives. Note the high adaptive management cost of all of these actions. All actions are innovative and would be strong demonstrations for the region. This site requires a conversation with CoA about risk vs. return vs. innovation. Currently the only site on South Utoy, which may have benefits from the perspective of increasing the geographic distribution of benefits.  
 
 - FWOP: Future WithOut Project.  
-- Alternative1: Large wood features for 50% of reach.  
-- Alternative2: Large wood features for 25% of reach.  
-- Alternative3: Beaver reintroduction.
+- Alternative1 (**RECOMMENDATION**): Large wood features for 50% of reach. Innovative methods for southeast stream restoration using large wood in more explicit ways. Innovative methods compel inclusion of the larger plan. Non-monetary benefits of demonstrating new techniques.  
+- Alternative2: Large wood features for 25% of reach. Non-cost-effective.  
+- Alternative3: Beaver reintroduction. Cost-effective plan (nearly a best buy). Lots of room for the river at this site, but flood risk needs to be considered further. Experimental action has low-cost, high-reward potential with strong demonstration value for the region as a whole. Uncertain timeframe for benefits with beavers. Downstream bridge crossing with known debris jams. Utility line crossing has a high risk component. Concern about liability of beaver moving off-site into neighboring areas.
 
 ![*CEICA Summary for 3F.*](CEICA.3F.jpeg)
 
@@ -792,8 +785,8 @@ knitr::kable(BB.output.temp, caption="Incremental cost summary.", align='c')
 #Display cost-effectiveness results
 CE.output.temp <- cbind(alts[[i]], formatC(CEICA$BB[[i]][[1]][,1], format="f", digits=2, big.mark = ","),
                         formatC(CEICA$BB[[i]][[1]][,2], format="f", digits=0, big.mark = ","),
-                        formatC(CEICA$BB[[i]][[1]][,2]/CEICA$BB[[i]][[1]][,1], format="f", digits=2, big.mark = ","),
-                        formatC(CEICA$ProjectFirst[[i]], format="f", digits=2, big.mark = ","),
+                        formatC(CEICA$BB[[i]][[1]][,2]/CEICA$BB[[i]][[1]][,1], format="f", digits=0, big.mark = ","),
+                        formatC(CEICA$ProjectFirst[[i]], format="f", digits=0, big.mark = ","),
                         CEICA$BB[[i]][[1]][,3], CEICA$BB[[i]][[1]][,4])
 colnames(CE.output.temp) <- CE.output.temp.names
 knitr::kable(CE.output.temp, caption="Cost-effectiveness summary.", align='c') 
@@ -804,8 +797,8 @@ knitr::kable(CE.output.temp, caption="Cost-effectiveness summary.", align='c')
 This is just placeholder text. Describe the site and alternatives. Alternative 1 was formulated, but screened out due to constructability during design and cost.  
 
 - FWOP: Future WithOut Project.  
-- Alternative2: Floodplain bench for floodplain connectivity.  
-- Alternative3: Regarde segment around culvert.
+- Alternative2: Floodplain bench for floodplain connectivity. Best buy. Very low unit cost. Also includes regrading actions from Alternative3.  
+- Alternative3: Regrade segment around culvert.
 
 ![*CEICA Summary for 19A.*](CEICA.19A.jpeg)
 
@@ -824,8 +817,8 @@ knitr::kable(BB.output.temp, caption="Incremental cost summary.", align='c')
 #Display cost-effectiveness results
 CE.output.temp <- cbind(alts[[i]], formatC(CEICA$BB[[i]][[1]][,1], format="f", digits=2, big.mark = ","),
                         formatC(CEICA$BB[[i]][[1]][,2], format="f", digits=0, big.mark = ","),
-                        formatC(CEICA$BB[[i]][[1]][,2]/CEICA$BB[[i]][[1]][,1], format="f", digits=2, big.mark = ","),
-                        formatC(CEICA$ProjectFirst[[i]], format="f", digits=2, big.mark = ","),
+                        formatC(CEICA$BB[[i]][[1]][,2]/CEICA$BB[[i]][[1]][,1], format="f", digits=0, big.mark = ","),
+                        formatC(CEICA$ProjectFirst[[i]], format="f", digits=0, big.mark = ","),
                         CEICA$BB[[i]][[1]][,3], CEICA$BB[[i]][[1]][,4])
 colnames(CE.output.temp) <- CE.output.temp.names
 knitr::kable(CE.output.temp, caption="Cost-effectiveness summary.", align='c') 
@@ -839,7 +832,7 @@ This is just placeholder text.
 ```{r}
 #Isolate the recommended alternative at each site (1=FWOP, 2=Alt1, 3=Alt2, 4=Alt3)
 #Sites: 17F2M, 17D2E, 17B, 2A, 2B, 3E, 3F, 19A
-site.recs <- c(4, 3, 3, 2, 3, 1, 4, 2)
+site.recs <- c(4, 2, 3, 2, 2, 1, 2, 2)
 
 #Find the cost and benefit data for these sites
 find.site.data <- c()
