@@ -930,7 +930,7 @@ This table shows a down-select of the watershed-scale plans to include some othe
 
 ```{r}
 #Identify plans to consider in the "final array". 
-final.array <- c(1, 14, 46, 62, 64, 97, 113, 128)
+final.array <- c(1, 13, 14, 16, 46, 62, 64, 97, 109, 113, 128)
 
 #Table of all major cost data.
 Table07 <- cbind(sys.CEICA[,1:8], 
