@@ -1034,7 +1034,7 @@ TableB02 <- cbind(cost_OMRRR_present$ReachID, cost_OMRRR_present$SiteAction,
                   formatC(cost_OMRRR_present$Total, format="f", digits=0, big.mark = ","),
                   formatC(100 * cost_ann$OM / cost_present$ProjectFirst, format="f", digits=1, big.mark = ","))
 colnames(TableB02) <- c("Site", "Alternative", "General Maintenance", "Bi-Annual Inspection", 
-                       "Invasive Plant Management", "Structural Repair", "Total OMRRR", "OMRRR_ann / Project First")
+                       "Invasive Plant Management", "Structural Repair", "Total OMRRR", "OMRRR_ann / construction")
 rownames(TableB02) <- NULL
 knitr::kable(TableB02, caption="Table B02. Operations, maintenance, repair, replacement, and rehabilitation (OMRRR) costs for all sites and alternatives in total present value.", align='c') 
 ```
