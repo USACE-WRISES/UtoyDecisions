@@ -452,16 +452,16 @@ colnames(cost_ann) <- c("ReachID", "SiteAction", "ProjectFirst", "Monitoring", "
   cost_ann$ProjectFirst <- present_to_annual(discount, 50, cost$Project_First)
   cost_ann$IDC <- present_to_annual(discount, 50, cost_present$IDC)
   
-  #Annualize monitoring and adaptive management over 10 year horizon
-  cost_ann$Monitoring <- present_to_annual(discount, 10, cost$Monitoring)
-  cost_ann$AdMan <- present_to_annual(discount, 10, cost$AdMan)
+  #Annualize monitoring and adaptive management over 50 year horizon - REVISED WITH 50-YEAR PERIOD OF ANALYSIS
+  cost_ann$Monitoring <- present_to_annual(discount, 50, cost$Monitoring)
+  cost_ann$AdMan <- present_to_annual(discount, 50, cost$AdMan)
   
   #Annualize OMRRR cost assumed at ten year intervals
   cost_ann$OM <- present_to_annual(discount, 50, cost_present$OM)
   
   #Sum annualized costs
   cost_ann$Total <- cost_ann$ProjectFirst + cost_ann$Monitoring + cost_ann$AdMan + cost_ann$IDC + cost_ann$OM
-  
+
 ##########
 #SHOW AN EXAMPLE SITE (17F)
 Table03 <- cbind(cost$ReachID, cost$SiteAction, cost$Duration_mo,
