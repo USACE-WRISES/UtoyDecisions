@@ -1,7 +1,7 @@
 ---
 title: 'Decision Support Modeling for Utoy Creek'
-author: "Kyle McKay, Liya Abera, and Garrett Menichino"
-date: "August 2024"
+author: "S. Kyle McKay, Liya E. Abera, and Garrett Menichino"
+date: "October 2024"
 output:
   html_document:
     toc: yes
@@ -14,18 +14,16 @@ output:
     toc_depth: '5'
 ---
 
-
-**Corresponding Author**:  
-Kyle McKay, PhD, PE  
-Environmental Laboratory (EL)  
-U.S. Army Engineer Research and Development Center (ERDC)  
-U.S. Army Corps of Engineers (USACE)  
-Email: kyle.mckay@usace.army.mil
+**Corresponding Author**:\
+Kyle McKay, PhD, PE\
+Environmental Laboratory (EL)\
+U.S. Army Engineer Research and Development Center (ERDC)\
+U.S. Army Corps of Engineers (USACE)\
+Email: [kyle.mckay\@usace.army.mil](mailto:kyle.mckay@usace.army.mil){.email}
 
 **Model Accessibility**: An interactive version of this report may be accessed [here](https://usace-wrises.github.io/UtoyDecisions/). The underlying numerical code as well as an MS Word version of this analysis may be downloaded from [this github repository](https://github.com/USACE-WRISES/UtoyDecisions).
 
-**Disclosure**: This website represents a preliminary and working version of decision models for a stream restoration study in Utoy Creek, Atlanta, Georgia. The project is led by the Mobile District of the U.S. Army Corps of Engineers (USACE) in partnership with the City of Atlanta. This site **DOES NOT** reflect agency findings or outcomes, and this is merely intended as documentation of methods and working notes for internal use. Please refer to the project manager for the Utoy Creek study, Alex Smith (alexandria.n.smith@usace.army.mil), for up-to-date information about the project. A final version of this report will ultimately be included as an appendix to the more detailed feasibility study report.  
-
+**Disclosure**: This website represents a working version of decision models for a stream restoration study in Utoy Creek, Atlanta, Georgia. The project is led by the Mobile District of the U.S. Army Corps of Engineers (USACE) in partnership with the City of Atlanta. This site **DOES NOT** reflect agency findings or outcomes, and this is merely intended as documentation of methods and working notes for internal use. Please refer to the project manager for the Utoy Creek study, Alex Smith ([alexandria.n.smith\@usace.army.mil](mailto:alexandria.n.smith@usace.army.mil){.email}), for up-to-date information about the project. A final version of this report will be included as an appendix to the more detailed feasibility study report.
 
 ```{r options, include=FALSE}
 #Markdown options
@@ -55,57 +53,36 @@ eco <- read.csv("Utoy_Phase 2_EcoInputs_2024-08-05_EcoIn.csv", header=TRUE, dec=
 cost <- read.csv("Utoy_Phase 2_EcoInputs_2024-08-05_CostIn.csv", header=TRUE, dec=".", na.strings="NA", stringsAsFactors = FALSE)
 ```
 
+# **1. Introduction**
 
-# **1. Introduction**   
-
-The Utoy Creek watershed drains the southwest portion of the City of Atlanta into the Chattahoochee River (Figure 1). This small-to-middle order stream is within the Piedmont region of the southeastern United States, and Utoy Creek exhibits many common characteristics of regional streams such as historical channel degradation due to poor sediment management as well  modern challenges like flashy runoff from urban development. The majority of Utoy Creek's watershed is situated within City of Atlanta boundaries; however, downstream portions of the watershed are within Fulton County. Two main tributaries, North and South Utoy Creeks, unite to form the main stem approximately five miles upstream the Chattahoochee River (EPA, 2016). The total combined length of the main stem and primary tributaries is approximately 22 miles (Walker, 2016).  Including sub-tributaries, the total length of stream is over 50 miles in the Utoy Creek watershed. The total drainage basin is approximately 33.7 square miles with 64% developed and 18% impervious.  
+The Utoy Creek watershed drains the southwest portion of the City of Atlanta into the Chattahoochee River (Figure 1). This small-to-middle order stream is within the Piedmont region of the southeastern United States, and Utoy Creek exhibits many common characteristics of regional streams such as historical channel degradation due to poor sediment management as well modern challenges like flashy runoff from urban development (Jackson et al. 2023). The majority of Utoy Creek's watershed is situated within City of Atlanta boundaries; however, downstream portions of the watershed are within Fulton County. Two main tributaries, North and South Utoy Creeks, unite to form the main stem approximately five river miles upstream the Chattahoochee River (EPA, 2016). The total combined length of the main stem and primary tributaries is approximately 22 miles (Walker, 2016). Including sub-tributaries, the total length of stream is over 50 miles in the Utoy Creek watershed. The total drainage basin is approximately 33.7 square miles with 64% developed and 18% impervious.
 
 ![*Figure 1. Overview of the Utoy Creek watershed.*](Utoy_Watershed_Map.png)
 
-In partnership with the City of Atlanta, the USACE's Mobile District is leading a feasibility study of potential stream restoration actions in the Utoy Creek watershed. The study is authorized through the USACE's continuing authorities program for aquatic ecosystem restoration (Section 206, WRDA 1996). In summer 2023, the project development team conducted preliminary project planning activities such as identification of problems and opportunities, setting ecosystem restoration objectives, and screening potential restoration sites. From fall 2023 to summer 2024, the project development team advanced restoration planning through actions such as field data collection, design of alternatives, ecological modeling, cost estimation, analysis of socio-economic benefits, and public and interagency meetings. This report summarizes various aspects of these activities for the purpose of informing restoration decisions and recommendations for the study as a whole. Specifically, this document presents cost-effectiveness and incremental cost analyses to guide development of the agency's recommended restoration plan.
+In partnership with the City of Atlanta, the USACE's Mobile District is leading a feasibility study of potential stream restoration actions in the Utoy Creek watershed. The study is authorized through the USACE's continuing authorities program (CAP) for aquatic ecosystem restoration (Section 206, WRDA 1996). In summer 2023, the project development team conducted preliminary project planning activities such as identification of problems and opportunities, setting ecosystem restoration objectives, and screening potential restoration sites. From fall 2023 to summer 2024, the project development team advanced restoration planning through actions such as field data collection, design of alternatives, ecological modeling, cost estimation, analysis of socio-economic benefits, and public and interagency meetings. This report summarizes various aspects of these activities for the purpose of informing restoration decisions and recommendations for the study as a whole. Specifically, this document presents cost-effectiveness and incremental cost analyses to guide development of the agency's recommended restoration plan as well as economic analysis of the recommend plan (**CHECK WITH STEPHEN PHILLIPS**).
 
 Cost-effectiveness and incremental cost analyses (CEICA) are a set of methods for comparing non-monetary ecological benefits with monetary investment costs. Cost-effectiveness analysis provides a mechanism for examining the efficiency of alternative actions (Robinson et al. 1995). An "efficiency frontier" identifies all plans that efficiently provide benefits on a *per cost basis*. Incremental cost analysis is conducted on the set of cost-effective plans. This technique sequentially compares each plan to all higher cost plans to reveal changes in unit cost as output levels increase and eliminates plans that do not efficiently provide benefits on an *incremental unit cost basis*. Collectively, these techniques help USACE planning teams assess the question of "Is the next increment of ecological benefit worth the next increment of investment cost?"
 
-This report applies CEICA in multiple contexts to inform decisions in the Utoy Creek watershed. In Chapter 2, the overarching project planning framework is presented that includes the plan formulation strategy along with an overview of ecological benefits and cost estimates. These data provide the fundamental inputs to CEICA and are presented here to contextualize decision making. Additional information on these analyses may be found in other portions of the feasibility report documents. In Chapter 3, CEICA is conducted for individual restoration sites separately to identify recommended outcomes based on ecological criteria (i.e., the authorized purpose). Chapter 4 conducts CEICA at the watershed-scale using the site-scale recommendations from the prior chapter with the goal of identifying an effective portfolio of investments based on ecological benefits. In Chapter 5, a more comprehensive view of project benefits is undertaken by applying CEICA to understand the effects of portfolios of actions on social outcomes. Chapter 6 concludes with a synthesis of the recommendations from prior analyses.
+This report applies CEICA in multiple contexts to inform decisions in the Utoy Creek watershed. In Chapter 2, the overarching project planning framework is presented that includes the plan formulation strategy along with an overview of ecological benefits and cost estimates. These data provide the fundamental inputs to CEICA and are presented here to contextualize decision making. Additional information on these analyses may be found in other portions of the feasibility report documents and appendices. In Chapter 3, CEICA is conducted for individual restoration sites separately to identify recommended outcomes based on ecological criteria (i.e., the authorized purpose). Chapter 4 conducts CEICA at the watershed-scale using the site-scale recommendations from the prior chapter with the goal of identifying an effective portfolio of investments based on ecological benefits. From this analysis, a Tentatively Selected Plan (TSP) is identified. In Chapter 5, a more comprehensive view of project benefits is undertaken by examining the economic benefits of the TSP (**CHECK WITH STEPHEN PHILLIPS**). Chapter 6 concludes with a synthesis of the recommendations from these analyses.
 
+# **2. Project Planning Framework**
 
-# **2. Project Planning Framework**   
-
-Decision support modeling builds from the planning framework established for a restoration study as a whole. As such, this chapter briefly reviews major components of restoration planning in Utoy Creek. 
+Decision support modeling builds from the planning framework established for a restoration study as a whole. As such, this chapter briefly reviews major components of restoration planning in Utoy Creek.
 
 ## *Plan Formulation Strategy*
 
-Restoration project planning sets the stage for all other design, analysis, or decision tasks. A sound plan formulation strategy clearly articulates a problem statement and objectives from which all choices about design or analysis flow (McKay et al. 2012). The USACE project development team identified objectives for the Utoy Creek restoration project through three primary means. First, USACE policies and budget criteria were used as a template for local objectives. Second, existing local plans and studies in the Utoy Creek watershed were examined. Third, project objectives were compiled from prior studies in the region (e.g., Proctor Creek and Butler Creek). Fourth, preliminary objectives were presented to technical and non-technical stakeholders at a charrette in May 2023. Based on these approaches, the following objectives were identified. **CHECK THAT THESE ARE CONSISTENT WITH THE BROADER STUDY OBJECTIVES.** 
+Restoration project planning sets the stage for all other design, analysis, or decision tasks. A sound plan formulation strategy clearly articulates a problem statement and objectives from which all choices about design or analysis flow (McKay et al. 2012). The USACE project development team identified objectives for the Utoy Creek restoration project through three primary means. First, USACE policies and budget criteria were used as a template for local objectives. Second, existing local plans and studies in the Utoy Creek watershed were examined. Third, project objectives were compiled from prior studies in the region (e.g., Proctor Creek and Butler Creek). Fourth, preliminary objectives were presented to technical and non-technical stakeholders at a charrette in May 2023. Based on these approaches, the following objectives were identified.
 
-*Overarching objective: Improve instream conditions suitable for a diversity of aquatic organisms (e.g., fish, crayfish, salamanders, benthic macroinvertebrates, turtles)*.  
+-   Restore flow regimes to best attainable conditions achievable in altered urban environments.\
+-   Decrease peak flows induced by high levels of impervious areas.\
+-   Decrease flashiness of the urban hydrograph.\
+-   Improve in-channel conditions suitable for diverse aquatic organisms.\
+-   Reduce sediment loading from stream bed and banks.\
+-   Increase in-stream habitat for a diverse assemblage of local fauna.\
+-   Increase connectivity of the channel for movement of aquatic species.\
+-   Improve riparian conditions supportive of a diverse aquatic and riparian community.
 
-- Restore channel geomorphic conditions to less disturbed conditions.  
-- Reduce sediment loading from the stream bed and banks.  
-- Increase instream habitat for a diverse assemblage of local fauna.  
-- Increase connectivity of movement corridors for aquatic species
-
-*Overarching objective: Improve riparian conditions supportive of a diverse aquatic and riparian community*.  
-
-- Restore natural sources of organic carbon (i.e., energy) within the system.  
-- Increase floodplain connectivity to support biogeochemical cycling.  
-- Improve temperature and light regimes.  
-- Increase riparian habitat to support native biodiversity.  
-- Increase connectivity of movement corridors for riparian species
-
-*Overarching Objective: Restore flow regimes to a best attainable condition*.
-
-- Decrease peak flows.  
-- Decrease hydrologic flashiness.  
-- Improve watershed capacity to attenuate high flows.
-
-*Secondary Objectives: Pursue socio-economic outcomes while restoring instream and riparian systems*.  
-
-- Increase resiliency to disturbances (e.g., watershed development, climate change, large floods).  
-- Promote social benefits and equity.  
-- Promote aesthetics and recreation.  
-- Improve water quality (e.g., TSS, zinc, nutrients).
-
-In pursuit of these objectives, different information was required as planning proceeded from early watershed problem screening to feasibility-level design. The USACE project development team developed a three-phase approach to analysis of the Utoy Creek watershed restoration (Table 1). In phase 1, activities focused on screening sites to a focal set of locations aligned with USACE objectives. This phase used a suite of high-level assumptions and preliminary data on ecological benefits and costs to reduce 60+ potential restoration locations to a more workable 20 sites for more detailed analysis. Phase 2 focused on feasibility-scale analysis of these 20 sites including collection of additional field and analytical data, development of conceptual designs, execution of ecological models, and estimation of parametric cost. This phase ultimately focused on producing site-scale recommendations of restoration actions. Phase 3 examined the portfolio of recommended actions at the watershed-scale, which are analyzed based on ecological outcomes as well as other project effects (i.e., development of a narrative about the "comprehensive" socio-economic benefits of an investment). These phases required a series of assumptions regarding each analytical step, which are briefly presented in Table 1. Additional information on discipline-specific assumptions can be found elsewhere in feasibility documents.
+In pursuit of these objectives, different information was required as planning proceeded from early watershed-scale problem screening to feasibility-level design. The USACE project development team developed a three-phase approach to analysis of the Utoy Creek watershed restoration (Table 1). In phase 1, activities focused on screening sites to a focal set of locations aligned with USACE objectives. This phase used a suite of high-level assumptions and preliminary data on ecological benefits and costs to reduce 60+ potential restoration locations to a more workable 20 sites for more detailed analysis. Phase 2 focused on feasibility-scale analysis of these 20 sites including collection of additional field and desktop data, development of conceptual designs, execution of ecological models, and estimation of construction cost. This phase ultimately focused on producing site-scale recommendations of restoration actions. Phase 3 examined the portfolio of recommended actions at the watershed-scale, which are analyzed based on ecological outcomes as well as other project effects (i.e., development of a qualitative narrative about the "comprehensive" socio-economic benefits of an investment). These phases required a series of assumptions regarding each analytic step, which are briefly presented in Table 1. Additional information on discipline-specific assumptions can be found elsewhere in feasibility documents.
 
 ```{r echo=FALSE}
 #Create empty table
@@ -115,14 +92,14 @@ colnames(Table01) <- c("Scoping Issue", "Site Screening (Aug 2023)", "Site-Scale
 #Specify rows of the table
 Table01[1,] <- c("Primary purpose of analysis", "Screen out sites to a smaller set for more detailed data collection and analysis", "Identify cost-effective restoration actions at each site.", "Develop an effective portfolio of sites for the watershed.")
 Table01[2,] <- c("Formulation of alternatives", "ERDC identification of a conceptual action based largely on channel evolution", "Field-based identification of needs followed by multi-disciplinary discussion of actions into a conceptual plan, which was then formalized into a suite of actions and quantities", "All combinations of sites with recommended actions")
-Table01[3,] <- c("Number of sites", "60+ reaches", "8 reaches", "4-6 reaches")
+Table01[3,] <- c("Number of sites", "60+ reaches", "8 reaches", "7 reaches")
 Table01[4,] <- c("Number of alternatives", "Two at each site: future without project and maximum build out", "Four at each site: future without project, maximum build-out, two intermediate solutions with varying levels of cost and benefit", "One per site")
-Table01[5,] <- c("Cost Estimation", "Rapid, qualitative cost estimates based on prior unit cost", "Site-specific, alternative-specific parameteric cost", "Class 3 estimates for the recommended actions")
-Table01[6,] <- c("Real Estate", "None", "Number of parcels intersected", "Appraised cost")
-Table01[7,] <- c("Ecological Benefits", "Scoring sites relative to project objectives.", "Separate instream (UIM) and riparian (REFI) models parameterized by a combination of field measurements and analyses. See Figure 1.", "Sum of site-scale habitat units for the recommended action.")
+Table01[5,] <- c("Cost Estimation", "Rapid, qualitative cost estimates based on prior unit cost", "Site-specific, alternative-specific construction cost", "Class 3 estimates for the recommended actions")
+Table01[6,] <- c("Real Estate", "None", "None", "Appraised cost")
+Table01[7,] <- c("Ecological Benefits", "Scoring sites relative to project objectives.", "Separate instream (UIM) and riparian (REFI) models parameterized by a combination of field measurements and analyses (See Figure 2).", "Sum of site-scale habitat units for the recommended action.")
 Table01[8,] <- c("Treatment of Time", "Snapshot with and without project (i.e., no temporal forecast)", "Temporal trajectories over 50-year horizon based on years 0, 2, 10, and 50 and annualized over the life of the project", "Use of annualized benefits and costs from site-scale recommendations")
 Table01[9,] <- c("Other Social Effects", "Preliminary scoring for relative comparison among divergent sites", "None", "Combined metric based on field assessment, census data, and public input, which is aggregated for groups of nearby sites")
-Table01[10,] <- c("Regional Economic Development", "None", "None", "None")
+Table01[10,] <- c("Regional Economic Development", "None", "None", "Chapter 5")
 Table01[11,] <- c("National Economic Development", "None", "None", "None")
 
 #Send output table rows into a single matrix
@@ -130,16 +107,15 @@ rownames(Table01) <- NULL
 knitr::kable(Table01, caption="Table 1. Overview of the three-phase approach to Utoy Creek analyses.", align="c") 
 ```
 
-
-This report focuses on examining the relative merits of different restoration actions at a site-scale as well as the merits of those actions at a watershed-scale. Decision-analysis is intimately tied to the development of decision alternatives (i.e., one never recommends an alternative not considered). Therefore, the plan formulation strategy is briefly reviewed for the site- and watershed-scale activities (i.e., Phases 2 and 3). For each potential restoration site, the entirety of the site was visited by walking the length of the reach in large interdisciplinary teams ([map and photos available here](https://www.google.com/maps/d/viewer?mid=1Q_I-vojsBeAUaEz5fVSjcfW30KlTjYk&ll=33.73601955818017%2C-84.46264131161688&z=17)). During these visits, preliminary restoration concepts were discussed and appropriate measures were identified. Following field activities, a series of working meetings were conducted to refine these ideas into conceptual alternatives. The interactive software miro was used to facilitate input and notes from all disciplines and team members. These [miro boards](https://miro.com/app/board/uXjVN9DAdvA=/) served as a knowledge gathering space for conceptual alternatives. Site-scale actions were then formalized into design-oriented formats to asses quantities of restoration needed for ecological and cost models. Site-scale recommendations were developed independently (Chapter 3), and then all permutations of sites were considered at the watershed scale (Chapters 4 and 5).
+This report focuses on examining the relative merits of different restoration actions at a site-scale as well as the merits of those actions at a watershed-scale. Decision-analysis is intimately tied to the development of decision alternatives (i.e., one never recommends an alternative not considered). The plan formulation strategy is, therefore, briefly reviewed for the site- and watershed-scale activities (i.e., Phases 2 and 3). For each potential restoration site, the length of the reach was observed in large interdisciplinary teams ([map and photos available here](https://www.google.com/maps/d/viewer?mid=1Q_I-vojsBeAUaEz5fVSjcfW30KlTjYk&ll=33.73601955818017%2C-84.46264131161688&z=17)). During these visits, preliminary restoration concepts were discussed and appropriate measures were identified. Following field activities, a series of working meetings were conducted to refine these ideas into conceptual alternatives. The interactive software [miro](https://miro.com) was used to facilitate input and notes from all disciplines and team members, which served as a knowledge gathering space for conceptual alternatives. Site-scale actions were then formalized into design-oriented formats to asses quantities of restoration needed for ecological and cost models. Site-scale recommendations were developed independently (Chapter 3), and then all permutations of sites were considered at the watershed scale (Chapter 4).
 
 ## *Ecological Models*
 
-Given a set of site-scale alternatives, an analysis of ecological benefits is required to quantitatively compare the relative merits of actions. For Utoy Creek, two ecological models were used to assess instream and riparian outcomes with the intent of directly aligning models with the project objectives identified above (Figure 2). The Riparian Ecosystem Function Index (REFI) is a generic ecological model being developed by ERDC (Wiest et al. *Forthcoming*) with the explicit goal of assessing the ecological importance and integrity of riparian zones, which can be conceptualized as everything from the top-of-bank outward. The Utoy Instream Model (UIM) was developed for this project to capture all aquatic benefits, and the domain of this model can be conceptualized as everything from streambank-to-streambank. 
+Given a set of site-scale alternatives, ecological benefits were analyzed to quantitatively compare the relative merits of actions. For Utoy Creek, two ecological models were used to assess instream and riparian outcomes with the intent of directly aligning models with the project objectives identified above (Figure 2). The Riparian Ecosystem Function Index (REFI) is a generic ecological model being developed by ERDC (Wiest et al. *Forthcoming*) with the explicit goal of assessing the ecological importance and integrity of riparian zones, which can be conceptualized as everything from the top-of-bank outward. The Utoy Instream Model (UIM) was developed for this project to capture all aquatic benefits, and the domain of this model can be conceptualized as everything from streambank-to-streambank.
 
 ![*Figure 2. Overview of the general structure of ecological models used in the Utoy Creek study to quantify ecological benefits.*](Utoy_Decision_Figures_2024-07-20_ModelOverview.png)
 
-The Riparian Ecosystem Function Index (REFI) was developed as a rapid method for quantifying ecological benefits of riparian zones. Specifically, the model was designed to complement a [huge variety of stream models](https://gtmenichino.github.io/RiverEngineeringResources/assessment), which typically consider riparian zones only as a benefit to stream functions (rather than as ecologically beneficial in their own right). The model assesses outcomes relative to three overarching functions, which result in module-scale indices that are then arithmetically averaged into an overarching index (i.e., a zero to one metric of quality). The first module focuses on a traditional notion of riparian zones tied to stream functions and addresses issues such as hydrologic attenuation and nutrient uptake. The second module addresses the role of riparian areas as habitats for unique assemblages of organisms. The third module examines the role of riparian areas as migratory pathways for organisms moving laterally from channel to floodplain (e.g., salamanders) as well as longitudinally along river corridors. As of August 2024, REFI has not been certified according to USACE review procedures, but documentation is in development and certification is anticipated late in 2024.
+The Riparian Ecosystem Function Index (REFI) was developed as a rapid method for quantifying ecological benefits of riparian zones. Specifically, the model was designed to complement a [huge variety of stream models](https://gtmenichino.github.io/RiverEngineeringResources/assessment), which typically consider riparian zones only as a benefit to stream functions rather than as ecologically beneficial in their own right. The model assesses outcomes relative to three overarching functions, which result in module-scale indices that are then arithmetically averaged into an overarching index (i.e., a zero to one metric of riparian quality). The first module focuses on a traditional notion of riparian zones tied to stream functions and addresses issues such as hydrologic attenuation and nutrient uptake. The second module addresses the role of riparian areas as habitats for unique assemblages of organisms. The third module examines the role of riparian areas as migratory pathways for organisms moving laterally from channel to floodplain (e.g., salamanders) as well as longitudinally along river corridors. As of August 2024, REFI has not been certified according to USACE review procedures, but documentation is in development and certification is anticipated late in 2024.
 
 ```{r}
 #Riparian Ecological Functions Index (REFI) - functional form based on Wiest et al. (in review)
@@ -169,7 +145,7 @@ REFI <- function(wat_runoff, hyd_conn, streambank, energy_nut, rip_filter, plant
 }
 ```
 
-The Utoy Instream Model (UIM) was developed for this feasibility study to closely align quantitative outcomes with project objectives. The models are directly tied to and built from ecological models used to quantify restoration outcomes in the neighboring Proctor Creek watershed (McKay et al. 2018ab). Additional functions and outcomes were added to these models in order to align the UIM with other stream functions (Fischenich 2006) as well as newer stream assessment approaches (McKay et al. 2024). The UIM is organized around four modules, which roughly correspond to the widely used stream functions pyramid (Harman et al. 2012). For the UIM, functions related to hydrology and hydraulics were combined to better align with the USACE's budget criteria for ecosystem restoration (i.e., "hydrologic character"). There is no plan to certify the UIM, although the model is based heavily on two certified models, the Proctor Creek Ecological Model (McKay et al. 2018ab) and the Qualitative Habitat Evaluation Index for Louisville Streams (McKay et al. 2024). 
+The Utoy Instream Model (UIM) was developed for this feasibility study to closely align quantitative outcomes with project objectives. The models are directly tied to and adapted from ecological models used to quantify restoration outcomes in the neighboring Proctor Creek watershed (McKay et al. 2018ab). Additional functions and outcomes were added to these models in order to align the UIM with other stream functions (Fischenich 2006) as well as newer stream assessment approaches (McKay et al. 2024). The UIM is organized around four modules, which roughly correspond to the widely used stream functions pyramid (Harman et al. 2012). For the UIM, functions related to hydrology and hydraulics were combined to better align with the USACE's budget criteria for ecosystem restoration (i.e., "hydrologic character"). There is no plan to certify the UIM, although the model is based heavily on two certified models, the Proctor Creek Ecological Model (McKay et al. 2018ab) and the Qualitative Habitat Evaluation Index for Louisville Streams (McKay et al. 2024).
 
 ```{r}
 #Utoy Instream Model - functional form
@@ -205,11 +181,11 @@ UIM <- function(bhr_score, vel_bf_site, vel_bf_ref, area_bf_site, area_bf_ref, g
 }
 ```
 
-The quantitative tools for both models are [described elsewhere](https://usace-wrises.github.io/UtoyEcoMod/) in the feasibility report. In general, all models were documented and tested according to best practices in ecological modeling (Grant and Swannack 2008, McKay et al. 2022). Data were stored in a centralized database, which can be downloaded from [this report's github repository](https://github.com/USACE-WRISES/UtoyDecisions). Both models were executed using the [R Statistical Software](https://cran.r-project.org/), and code is available in the same repository. 
+The quantitative tools for both models are described in **APPENDIX XX** in the feasibility report as well as in [online code documentation](https://usace-wrises.github.io/UtoyEcoMod/). In general, all models were documented and tested according to best practices in ecological modeling (Grant and Swannack 2008, McKay et al. 2022). Data were stored in a centralized database, which can be downloaded from [this report's github repository](https://github.com/USACE-WRISES/UtoyDecisions). Both models were executed using the [R Statistical Software](https://cran.r-project.org/), and code is available in the same repository.
 
-Each model was executed for four points in time for all alternatives. Year-0 was assumed to be the existing condition and represents the pre-restoration, degraded condition of the site. Year-2 represents a point in time reflecting an initial increase in ecological benefits associated with the project actions. In general, this time frame reflects most instream benefits of the project, but riparian outcomes would not fully be captured. Year-10 was then assessed as a representative time frame for obtaining many of the riparian benefits of actions. Year-50 represents a fully mature site with a developed multi-story riparian canopy and instream conditions adjusted to a new dynamic equilibrium. For all sites, the future without project was assumed equal to the existing condition, which assumes no future degradation. 
+Each model was executed for four points in time for all alternatives. Year-0 was assumed to be the existing condition and represents the pre-restoration, degraded condition of the site. Year-2 represents a point in time reflecting an initial increase in ecological benefits associated with the project actions. In general, this time frame reflects most instream benefits of the project, but riparian outcomes would not fully be captured. Year-10 was then assessed as a representative time frame for obtaining many of the riparian benefits of actions. Year-50 represents a fully mature site with a developed multi-story riparian canopy and instream conditions adjusted to a new dynamic equilibrium. For all sites, the future without project was assumed equal to the existing condition, which assumes no future degradation.
 
-Instream and riparian outcomes were summarized as "habitat units" capturing the quantity and quality of the ecosystem at a given point in time. The model outputs were summed to derive a metric of the overall ecological benefit of ecosystem restoration. Table 2 presents an example of ecological model outputs for each time frame at Site-17F in the Utoy Creek watershed. 
+Instream and riparian outcomes were summarized as "habitat units" (HU) capturing the quantity and quality of the ecosystem at a given point in time. The model outputs were summed to derive a metric of the overall ecological benefit of ecosystem restoration. Table 2 presents an example of ecological model outputs for each time frame at Site-17F2M in the Utoy Creek watershed.
 
 ```{r}
 #Dataset size
@@ -270,7 +246,7 @@ for(i in 1:ndata){
 }
 
 ##########
-#SHOW AN EXAMPLE SITE (17F)
+#SHOW AN EXAMPLE SITE (17F2M)
 Table02 <- cbind(utoy$ReachID, utoy$SiteAction, utoy$Year,
                  round(utoy$RipL.Qual,2), 
                  round(utoy$RipL.Area,2), 
@@ -292,7 +268,7 @@ rownames(Table02) <- NULL
 knitr::kable(Table02, caption="Table 2. Example of ecological benefits computations for Site-17F2M.", align='c') 
 ```
 
-Ecological models were executed for specific points in time over the project life, but decision models require a time-averaged or "annualized" metric of ecological benefit for comparison with monetary investments. Ecological outcomes were annualized using the [ecorest](https://cran.r-project.org/web/packages/ecorest/index.html) R-package (McKay and Hernandez-Abrams 2020). Figure 3 shows an example of the annualization process for all alternatives at Site-17F to demonstrate methodologically how annualization works. Additionally, all ecological outcomes are presented as the net effect of restoration actions over the future without project condition, which is frequently called "ecological lift."
+Ecological models were executed for specific points in time over the project life, but decision models require a time-averaged or "annualized" metric of ecological benefit for comparison with monetary investments. These annualized ecological outcomes are referred to as Average Annual Habitat Units (AAHUs). Ecological outcomes were annualized using the [ecorest](https://cran.r-project.org/web/packages/ecorest/index.html) R-package (Version 2.0.0, McKay et al. 2024b). Figure 3 shows an example of the annualization process for all alternatives at Site-17F2M to demonstrate methodologically how annualization works. Additionally, all ecological outcomes are presented as the net effect of restoration actions over the future without project condition, which is frequently called "ecological lift." Ecological outcomes are summarized in Appendix B. 
 
 ```{r}
 #BENEFIT ANNUALIZATION
@@ -334,7 +310,10 @@ for(i in 1:nsites){
 #SHOW AN EXAMPLE OF A TIME SERIES (17F)
 
 #Create plot to present annualization data
-jpeg(filename="Utoy_Annualization.jpeg", width = 6, height = 6, units = "in", res = 400)
+jpeg(filename="Utoy_Annualization.jpeg", width = 12, height = 6, units = "in", res = 400)
+
+#Specify two plot areas
+par(mfrow=c(1,2))
 
 #Create the shell of the plot
 plot(c(0, 1), c(0, 1), type = "n", 
@@ -365,23 +344,26 @@ points(c(0,2,10,50), utoy$TOTAL.HU[13:16], pch = 19, cex = 1, col = "red")
 #Add legend
 legend("bottomright", legend = c("FWOP", "Alternative1", "Alternative2", "Alternative3"), lwd = 2, col = c("black", "blue", "purple", "red"), bg = "white")
 
+#Add barplot of AAHUs
+barplot(AAHU$Lift[1:4], names.arg=AAHU$SiteAction[1:4], 
+        col=c("black", "blue", "purple", "red"),ylim=c(0,7),
+        xlab="Alternative", ylab="Ecological Lift (AAHU)"); box()
+
 #Turn off plot device
 invisible(dev.off())
 ```
-
 
 ![*Figure 3. Example of annualization of ecological benefits for Utoy Creek Site-17F2M.*](Utoy_Annualization.jpeg)
 
 ## *Monetary Costs*
 
-Cost estimates were compiled for each site-scale restoration action following standard cost engineering methods. At this phase, construction cost represents a parametric cost for comparative purposes only, which is largely confined to construction activities. No real estate, pre-construction engineering and design, construction management, or cultural resources costs were included at present.  
+Cost estimates were compiled for each site-scale restoration action following standard cost engineering methods. At this phase, construction cost represents a parametric cost for comparative purposes only, which is confined to construction activities. No real estate, pre-construction engineering and design, construction management, or cultural resources costs were included at present.
 
-Monitoring and adaptive management are typically conducted over a ten-year window for ecosystem restoration projects (WRDA 2007, Section 2036). Monitoring cost was estimated for four points in time, a sampling event during pre-construction engineering design as well as sampling in years 1, 3, and 5 following construction. Each sampling event assumed collection of data on fish communities, invertebrate communities, bathymetric mapping, and hydraulic outcomes. Adaptive management was estimated a proportion of construction cost ranging between 7.5% and 25% depending on site- and alternative-complexity. **MONITORING COSTS SEEM HIGH RELATIVE TO ADAPTIVE MANAGEMENT COSTS.**
+Monitoring and adaptive management are typically conducted over a ten-year window for ecosystem restoration projects (WRDA 2007, Section 2036). Monitoring cost was estimated for four points in time, a sampling event during pre-construction engineering design as well as sampling in years 1, 3, and 5 following construction. Each sampling event assumed collection of data on fish communities, invertebrate communities, bathymetric mapping, and hydraulic outcomes. Adaptive management was estimated a proportion of construction cost ranging between 7.5% and 25% depending on site- and alternative-complexity (Appendix B). 
 
-Operations, maintenance, repair, replacement, and rehabilitation (OMRRR) costs were estimated relative to four common practices. First, quarterly site visits were planned for general maintenance to any small-scale restoration features, trash removal, and minor maintenance of educational features (signage, benches, or classrooms) at a cost of \$10,000 per year. Second, bi-annual site visits were planned to include a simple inspection, which were estimated as \$4.00 per linear foot of stream every other year. Third, invasive species removal was estimated to cost \$15,000 per site and occur once every 10-years. Fourth, repair of structural restoration features (e.g., rock, wood, and earth work) was assumed to occur once every 25 years. These estimates resulted in OMRRR costs ranging from 1.2% to 16.7% or construction cost depending on the site and alternative (Appendix B, Table B1), which is approximately in line with other stream restoration projects (Abera and McKay 2023). **OMRRR VALUES WERE ALTERED SIGNIFICANTLY TO BREING THEM IN LINE WITH COMMON RANGES.**
+Operations, maintenance, repair, replacement, and rehabilitation (OMRRR) costs were estimated relative to four common practices. First, quarterly site visits were planned for general maintenance to any small-scale restoration features, trash removal, and minor maintenance of educational features (signage, benches, or classrooms) at a cost of \$10,000 per year. Second, bi-annual site visits were planned to include a simple inspection, which were estimated as \$4.00 per linear foot of stream every other year. Third, invasive species removal was estimated to cost \$15,000 per site and occur once every 10-years. Fourth, repair of structural restoration features (e.g., rock, wood, and earth work) was assumed to occur once every 25 years. These estimates resulted in OMRRR costs ranging from 1.2% to 16.7% or construction cost depending on the site and alternative (Appendix B, Table B1), which is approximately in line with other stream restoration projects (Abera and McKay 2023). 
 
-Average annual economic costs were computed for all cost categories. Interest during construction was computed based on construction costs with site- and alternative-specific construction durations. The FY24 Federal discount rate (2.75%, USACE 2023) was used to annualize construction cost, interest during construction, and monitoring and adaptive management expenses over a 50-year planning horizon. Cost data were annualized using the [EngrEcon](https://cran.r-project.org/web/packages/EngrEcon/index.html) software package, although a [web application](https://wrises.shinyapps.io/engrecon-webapp/) also exists for conducting these calculations. Table 3 provides an example of cost estimates for Site-17F, and Table B03 in Appendix B provides a cost summary for all sites and actions.
-
+Average annual economic costs were computed for all cost categories. Interest during construction was computed based on construction costs with site- and alternative-specific construction durations. The FY24 Federal discount rate (2.75%, USACE 2023) was used to annualize construction cost, interest during construction, and monitoring and adaptive management expenses over a 50-year planning horizon. Cost data were annualized using the [EngrEcon](https://cran.r-project.org/web/packages/EngrEcon/index.html) software package, although a [web application](https://wrises.shinyapps.io/engrecon-webapp/) also exists for conducting these calculations. Table 3 provides an example of cost estimates for Site-17F2M, and Appendix B provides a cost summary for all sites and actions.
 
 ```{r}
 #COST ANNUALIZATION
@@ -478,10 +460,12 @@ rownames(Table03) <- NULL
 knitr::kable(Table03, caption="Table 3. Example of monetary cost data for Site-17F2M.", align='c') 
 ```
 
-
 ## *Summary of Inputs to CEICA*
 
-Non-monetary ecological benefits and monetary investment costs provide the primary inputs to CEICA. This chapter has examined the methods by which these outcomes were obtained, although other portions of the feasibility report provide greater detail. Table 4 summarizes the benefits and costs of all restoration actions at all sites considered in this analysis. **Is there anything interesting to say about trends in these outcomes at this stage?**
+Non-monetary ecological benefits and monetary investment costs provide the primary inputs to CEICA. This chapter has examined the methods by which these outcomes were obtained, although other portions of the feasibility report provide greater detail. Table 4 summarizes the benefits and costs of all restoration actions at all sites considered in this analysis. 
+
+The plan formulation strategy sought to identify a range of potential costs and ecological benefits, which was generally achieved. For instance, unit costs provide a range of investment options within each site (e.g., \$8,000 - \$45,000 per AAHU at Site-17F2M). Unit costs also vary widely across sites (i.e., \$2,000 - \$97,000 per AAHU). Furthermore, construction costs are in appropriate ranges to align with the CAP authorization for the Utoy Creek project. 
+
 
 ```{r}
 #SEND OUTPUT TABLE
@@ -496,18 +480,15 @@ rownames(Table04) <- NULL
 knitr::kable(Table04, caption="Table 4. Summary of benefit and cost inputs for each site-scale alternative.", align='c') 
 ```
 
+# **3. Site-by-site analysis**
 
-# **3. Site-by-site analysis**   
+**RESUME EDITING HERE.** In this section, yada yada yada. Blah, blah, blah.
 
-**RESUME EDITING HERE.** In this section, yada yada yada. Blah, blah, blah.  
+Cost-effectiveness analysis provides a mechanism for examining the efficiency of alternative actions (Robinson et al. 1995). For any given level of investment, the agency wants to identify the plan with the most return-on-investment (i.e., the most environmental benefits for a given level of cost or the least cost for a given level of environmental benefit). An "efficiency frontier" identifies all plans that efficiently provide benefits on a *per cost basis*.
 
-Cost-effectiveness analysis provides a mechanism for examining the efficiency of alternative actions (Robinson et al. 1995). For any given level of investment, the agency wants to identify the plan with the most return-on-investment (i.e., the most environmental benefits for a given level of cost or the least cost for a given level of environmental benefit). An "efficiency frontier" identifies all plans that efficiently provide benefits on a *per cost basis*. 
+Incremental cost analysis is conducted on the set of cost-effective plans. This technique sequentially compares each plan to all higher cost plans to reveal changes in unit cost as output levels increase and eliminates plans that do not efficiently provide benefits on an *incremental unit cost basis*. Specifically, this analysis examines the slope of the cost-effectiveness frontier to isolate how the unit cost (\$/unit) increases as the magnitude of environmental benefit increases. Incremental cost analysis is ultimately intended to inform decision-makers about the consequences of increasing unit cost when increasing benefits (i.e., each unit becomes more expensive). Plans emerging from incremental cost analysis efficiently accomplish the objective relative to unit costs and are typically referred to as "best buys." Importantly, all "best buys" are cost-effective, but all cost-effective plans are not best buys.
 
-
-Incremental cost analysis is conducted on the set of cost-effective plans. This technique sequentially compares each plan to all higher cost plans to reveal changes in unit cost as output levels increase and eliminates plans that do not efficiently provide benefits on an *incremental unit cost basis*. Specifically, this analysis examines the slope of the cost-effectiveness frontier to isolate how the unit cost ($/unit) increases as the magnitude of environmental benefit increases. Incremental cost analysis is ultimately intended to inform decision-makers about the consequences of increasing unit cost when increasing benefits (i.e., each unit becomes more expensive). Plans emerging from incremental cost analysis efficiently accomplish the objective relative to unit costs and are typically referred to as "best buys." Importantly, all "best buys" are cost-effective, but all cost-effective plans are not best buys. 
-
-
-For Utoy Creek, CEICA will ultimately be applied at both the site- and watershed-scales in the feasibility study. However, only watershed scale assessments are presented here for the purpose of site screening. Five separate CEICA analyses are undertaken for: (1) the mainstem Utoy Creek and lower Watershed, (2) North Utoy Creek Watershed, (3) South Utoy Creek Watershed, (4) hydrologic restoration actions, and (5) social outcomes. These sets of actions were separately assessed for multiple reasons. First, a separate prioritization more equitably distributes actions across the watershed and allows the USACE team to see portfolios of actions more clearly emerge. Second, hydrologic and social outcomes relied on different metrics, and separate prioritization facilitates comparison of outcomes in a more comprehensive format. Third, the larger number of sites in Utoy Creek (63 sites) creates numerical limitations to studying portfolios of actions (i.e., 9 * 10^18 potential combinations). Because of this numerical constraint, a maximum five restoration actions were allowed in each portfolio. These four planning sets are presented separately below.  
+For Utoy Creek, CEICA will ultimately be applied at both the site- and watershed-scales in the feasibility study. However, only watershed scale assessments are presented here for the purpose of site screening. Five separate CEICA analyses are undertaken for: (1) the mainstem Utoy Creek and lower Watershed, (2) North Utoy Creek Watershed, (3) South Utoy Creek Watershed, (4) hydrologic restoration actions, and (5) social outcomes. These sets of actions were separately assessed for multiple reasons. First, a separate prioritization more equitably distributes actions across the watershed and allows the USACE team to see portfolios of actions more clearly emerge. Second, hydrologic and social outcomes relied on different metrics, and separate prioritization facilitates comparison of outcomes in a more comprehensive format. Third, the larger number of sites in Utoy Creek (63 sites) creates numerical limitations to studying portfolios of actions (i.e., 9 \* 10\^18 potential combinations). Because of this numerical constraint, a maximum five restoration actions were allowed in each portfolio. These four planning sets are presented separately below.
 
 Conduct CEICA for all sites and store results.
 
@@ -549,16 +530,14 @@ for(i in 1:nsites){
 }
 ```
 
-
 ## *Site 17F2M*
 
-This is just placeholder text. Describe the site and alternatives. **EXPECTED Alt 1 and 3 to be competitive. NEED TO REVISIT BENEFITS AND DOUBLE-CHECK AREAS.**  Alternatives 1 and 2 may be more compelling in light of connectivity to 17D2E. 
+This is just placeholder text. Describe the site and alternatives. **EXPECTED Alt 1 and 3 to be competitive. NEED TO REVISIT BENEFITS AND DOUBLE-CHECK AREAS.** Alternatives 1 and 2 may be more compelling in light of connectivity to 17D2E.
 
-- FWOP: Future WithOut Project. Significant ecological degradation at the site compels action at this site. 
-- Alternative1: Concrete channel removal with extensive riparian restoration.  
-- Alternative2: Remove concrete channel with small-scale channel restoration.  
-- Alternative3 (**TENTATIVE RECOMMENDATION**): Chain of wetlands. Likely to have large hydrologic and sediment capture benefits, which would protect downstream investments. Line of sight in the golf course would not be impeded. 
-
+-   FWOP: Future WithOut Project. Significant ecological degradation at the site compels action at this site.
+-   Alternative1: Concrete channel removal with extensive riparian restoration.\
+-   Alternative2: Remove concrete channel with small-scale channel restoration.\
+-   Alternative3 (**TENTATIVE RECOMMENDATION**): Chain of wetlands. Likely to have large hydrologic and sediment capture benefits, which would protect downstream investments. Line of sight in the golf course would not be impeded.
 
 ![*CEICA Summary for 17F2M.*](CEICA.17F2M.jpeg)
 
@@ -586,18 +565,16 @@ colnames(CE.output.temp) <- CE.output.temp.names
 knitr::kable(CE.output.temp, caption="Cost-effectiveness summary.", align='c') 
 ```
 
-
 ## *Site 17D2E*
 
-This is just placeholder text. Describe the site and alternatives.  
+This is just placeholder text. Describe the site and alternatives.
 
-- FWOP: Future WithOut Project. Significant ecological degradation due to the concrete channel at the site compels action at this site.  
-- Alternative1 (**RECOMMENDATION**): Concrete channel removal with left bank wetland. Large lift. Direct effect on cause of ecological degradation. Low unit cost relative to watershed-scale actions.   
-- Alternative2: Concrete channel removal with bankfull bench. Not a best buy, but a strong option. Mobilization cost compels the larger action (Alternative1).  
-- Alternative3: Stabilization with natural bed and grade control. Does not lead to as large of ecological lift, but better than FWOP.
+-   FWOP: Future WithOut Project. Significant ecological degradation due to the concrete channel at the site compels action at this site.\
+-   Alternative1 (**RECOMMENDATION**): Concrete channel removal with left bank wetland. Large lift. Direct effect on cause of ecological degradation. Low unit cost relative to watershed-scale actions.\
+-   Alternative2: Concrete channel removal with bankfull bench. Not a best buy, but a strong option. Mobilization cost compels the larger action (Alternative1).\
+-   Alternative3: Stabilization with natural bed and grade control. Does not lead to as large of ecological lift, but better than FWOP.
 
 ![*CEICA Summary for 17D2E.*](CEICA.17D2E.jpeg)
-
 
 ```{r}
 #Select site to display
@@ -623,15 +600,14 @@ knitr::kable(CE.output.temp, caption="Cost-effectiveness summary.", align='c')
 
 ## *Site 17B*
 
-This is just placeholder text. Describe the site and alternatives. **CONFUSION ABOUT THE ROLE OF BEAVERS. NEED TO REVISIT ECOLOGICAL MODEL INPUTS WITH TJ, GARRETT, LIYA, BRENNA, AND KEVIN.**    
+This is just placeholder text. Describe the site and alternatives. **CONFUSION ABOUT THE ROLE OF BEAVERS. NEED TO REVISIT ECOLOGICAL MODEL INPUTS WITH TJ, GARRETT, LIYA, BRENNA, AND KEVIN.**
 
-- FWOP: Future WithOut Project.  
-- Alternative1: Channel and bank stabilization with beaver removal.  
-- Alternative2 (**RECOMMENDATION**): Channel and bank stabilization. Justified by large increase in ecological benefits. Channel degradation appears to be the proximate cause of bank issues. Need to increase adaptive management cost to understand the role of beavers in the system. Need to be mindful of existing riparian zone in refinement of the designs moving forward (access to the site via greenway could mitigate this construction impact). Strong connectivity to upstream investments in 17F2M and 17D2E. Proximity to the greenway and school compels for a larger action. 17C provides bedrock control to minimize risks.   
-- Alternative3: Bank stabilization only. Low ecological benefits given the size of the site, Channel degradation is causing bank erosion.
+-   FWOP: Future WithOut Project.\
+-   Alternative1: Channel and bank stabilization with beaver removal.\
+-   Alternative2 (**RECOMMENDATION**): Channel and bank stabilization. Justified by large increase in ecological benefits. Channel degradation appears to be the proximate cause of bank issues. Need to increase adaptive management cost to understand the role of beavers in the system. Need to be mindful of existing riparian zone in refinement of the designs moving forward (access to the site via greenway could mitigate this construction impact). Strong connectivity to upstream investments in 17F2M and 17D2E. Proximity to the greenway and school compels for a larger action. 17C provides bedrock control to minimize risks.\
+-   Alternative3: Bank stabilization only. Low ecological benefits given the size of the site, Channel degradation is causing bank erosion.
 
 ![*CEICA Summary for 17B.*](CEICA.17B.jpeg)
-
 
 ```{r}
 #Select site to display
@@ -657,16 +633,14 @@ knitr::kable(CE.output.temp, caption="Cost-effectiveness summary.", align='c')
 
 ## *Site 2A*
 
-This is just placeholder text. Describe the site and alternatives. Potential real estate and coordination challenges in the power easement. Minimally, dialog with power company could be productive dialog about bank stabilization methods.  
+This is just placeholder text. Describe the site and alternatives. Potential real estate and coordination challenges in the power easement. Minimally, dialog with power company could be productive dialog about bank stabilization methods.
 
-- FWOP: Future WithOut Project.  
-- Alternative1 (**RECOMMENDATION**): Channel realignment. Best buy. Moves stream out of the easement and improves shading (not captured adequately in ecological models). Need to tie in some information on the benefits of stream shading (e.g.,g Rhett Jackson's work at Coweeta). Significant sediment input from banks. Similar cost for more lift than Alternative2.  
-- Alternative2: Channel shaping with bankfull bench.  
-- Alternative3: Minor instream structures. Not economically competitive given high cost and low benefit. 
-
+-   FWOP: Future WithOut Project.\
+-   Alternative1 (**RECOMMENDATION**): Channel realignment. Best buy. Moves stream out of the easement and improves shading (not captured adequately in ecological models). Need to tie in some information on the benefits of stream shading (e.g.,g Rhett Jackson's work at Coweeta). Significant sediment input from banks. Similar cost for more lift than Alternative2.\
+-   Alternative2: Channel shaping with bankfull bench.\
+-   Alternative3: Minor instream structures. Not economically competitive given high cost and low benefit.
 
 ![*CEICA Summary for 2A.*](CEICA.2A.jpeg)
-
 
 ```{r}
 #Select site to display
@@ -692,16 +666,14 @@ knitr::kable(CE.output.temp, caption="Cost-effectiveness summary.", align='c')
 
 ## *Site 2B*
 
-This is just placeholder text. Describe the site and alternatives. Potential real estate and coordination challenges in the power easement. Minimally, dialog with power company could be productive dialog about bank stabilization methods.  
+This is just placeholder text. Describe the site and alternatives. Potential real estate and coordination challenges in the power easement. Minimally, dialog with power company could be productive dialog about bank stabilization methods.
 
-- FWOP: Future WithOut Project.  
-- Alternative1 (**RECOMMENDATION**): Channel realignment. Best buy. Moves stream out of the easement and improves shading (not captured adequately in ecological models). Need to tie in some information on the benefits of stream shading (e.g.,g Rhett Jackson's work at Coweeta). Significant sediment input from banks. Similar cost for more lift than Alternative2.  
-- Alternative2: Channel shaping with bankfull bench.  
-- Alternative3: Minor instream structures. High unit cost.
-
+-   FWOP: Future WithOut Project.\
+-   Alternative1 (**RECOMMENDATION**): Channel realignment. Best buy. Moves stream out of the easement and improves shading (not captured adequately in ecological models). Need to tie in some information on the benefits of stream shading (e.g.,g Rhett Jackson's work at Coweeta). Significant sediment input from banks. Similar cost for more lift than Alternative2.\
+-   Alternative2: Channel shaping with bankfull bench.\
+-   Alternative3: Minor instream structures. High unit cost.
 
 ![*CEICA Summary for 2B.*](CEICA.2B.jpeg)
-
 
 ```{r}
 #Select site to display
@@ -727,12 +699,12 @@ knitr::kable(CE.output.temp, caption="Cost-effectiveness summary.", align='c')
 
 ## *Site 3E*
 
-This is just placeholder text. Describe the site and alternatives.  
+This is just placeholder text. Describe the site and alternatives.
 
-- FWOP (**RECOMMENDATION**): Future WithOut Project. High unit cost relative to other sites compels a lack of investment at this location.  
-- Alternative1: Bridge replacement with extensive action. Very high unit cost.  
-- Alternative2: Brdige replacement with minor action. Very high unit cost.  
-- Alternative3: Bank stabilization. High unit cost relative to other sites.
+-   FWOP (**RECOMMENDATION**): Future WithOut Project. High unit cost relative to other sites compels a lack of investment at this location.\
+-   Alternative1: Bridge replacement with extensive action. Very high unit cost.\
+-   Alternative2: Brdige replacement with minor action. Very high unit cost.\
+-   Alternative3: Bank stabilization. High unit cost relative to other sites.
 
 ![*CEICA Summary for 3E.*](CEICA.3E.jpeg)
 
@@ -758,15 +730,14 @@ colnames(CE.output.temp) <- CE.output.temp.names
 knitr::kable(CE.output.temp, caption="Cost-effectiveness summary.", align='c') 
 ```
 
-
 ## *Site 3F*
 
-This is just placeholder text. Describe the site and alternatives. Note the high adaptive management cost of all of these actions. All actions are innovative and would be strong demonstrations for the region. This site requires a conversation with CoA about risk vs. return vs. innovation. Currently the only site on South Utoy, which may have benefits from the perspective of increasing the geographic distribution of benefits.  
+This is just placeholder text. Describe the site and alternatives. Note the high adaptive management cost of all of these actions. All actions are innovative and would be strong demonstrations for the region. This site requires a conversation with CoA about risk vs. return vs. innovation. Currently the only site on South Utoy, which may have benefits from the perspective of increasing the geographic distribution of benefits.
 
-- FWOP: Future WithOut Project.  
-- Alternative1 (**RECOMMENDATION**): Large wood features for 50% of reach. Innovative methods for southeast stream restoration using large wood in more explicit ways. Innovative methods compel inclusion of the larger plan. Non-monetary benefits of demonstrating new techniques.  
-- Alternative2: Large wood features for 25% of reach. Non-cost-effective.  
-- Alternative3: Beaver reintroduction. Cost-effective plan (nearly a best buy). Lots of room for the river at this site, but flood risk needs to be considered further. Experimental action has low-cost, high-reward potential with strong demonstration value for the region as a whole. Uncertain timeframe for benefits with beavers. Downstream bridge crossing with known debris jams. Utility line crossing has a high risk component. Concern about liability of beaver moving off-site into neighboring areas.
+-   FWOP: Future WithOut Project.\
+-   Alternative1 (**RECOMMENDATION**): Large wood features for 50% of reach. Innovative methods for southeast stream restoration using large wood in more explicit ways. Innovative methods compel inclusion of the larger plan. Non-monetary benefits of demonstrating new techniques.\
+-   Alternative2: Large wood features for 25% of reach. Non-cost-effective.\
+-   Alternative3: Beaver reintroduction. Cost-effective plan (nearly a best buy). Lots of room for the river at this site, but flood risk needs to be considered further. Experimental action has low-cost, high-reward potential with strong demonstration value for the region as a whole. Uncertain timeframe for benefits with beavers. Downstream bridge crossing with known debris jams. Utility line crossing has a high risk component. Concern about liability of beaver moving off-site into neighboring areas.
 
 ![*CEICA Summary for 3F.*](CEICA.3F.jpeg)
 
@@ -794,11 +765,11 @@ knitr::kable(CE.output.temp, caption="Cost-effectiveness summary.", align='c')
 
 ## *Site 19A*
 
-This is just placeholder text. Describe the site and alternatives. Alternative 1 was formulated, but screened out due to constructability during design and cost.  
+This is just placeholder text. Describe the site and alternatives. Alternative 1 was formulated, but screened out due to constructability during design and cost.
 
-- FWOP: Future WithOut Project.  
-- Alternative2 (**RECOMMENDATION**): Floodplain bench for floodplain connectivity. Best buy. Very low unit cost. Also includes regrading actions from Alternative3.  
-- Alternative3: Regrade segment around culvert.
+-   FWOP: Future WithOut Project.\
+-   Alternative2 (**RECOMMENDATION**): Floodplain bench for floodplain connectivity. Best buy. Very low unit cost. Also includes regrading actions from Alternative3.\
+-   Alternative3: Regrade segment around culvert.
 
 ![*CEICA Summary for 19A.*](CEICA.19A.jpeg)
 
@@ -824,7 +795,6 @@ colnames(CE.output.temp) <- CE.output.temp.names
 knitr::kable(CE.output.temp, caption="Cost-effectiveness summary.", align='c') 
 ```
 
-
 ## *Summary of Site Recommendations*
 
 This is just placeholder text.
@@ -843,26 +813,23 @@ Table05 <- Table04[find.site.data,]
 knitr::kable(Table05, caption="Table 5. Summary of benefits and costs associated with site-scale recommendations.", align='c') 
 ```
 
+# **4. Watershed-scale analysis: Ecological Benefits**
 
-# **4. Watershed-scale analysis: Ecological Benefits**   
-
-In this section, yada yada yada. Blah, blah, blah.  
-
+In this section, yada yada yada. Blah, blah, blah.
 
 ## *CEICA with Ecological Benefits*
 
 This is just placeholder text. Notes on interpretting the results.
 
-- Concrete channel (17F2M and 17D2E) is a known sourse of ecological degradation and a clear ecological benefit. 17F2M and 17D2E are a cluster of activities. A plan including both of these actions is reasonable, which implies P128.  
-- The largest plan is still well-below the CAP limit, although costs will go up as the project proceeds.  
-- Includes four clusters of actions in the watershed: (1) known source of ecological degradation at the concrete channel at 17F2M, 17D2E, and 17B, (2) a clear problem in the larger system at 2A and 2B, (3) a demonstration or innovation site at 3F, and (4) a contribution to the South Utoy watershed at 19A.  
-- P128 provides the widest geographic coverage and thus provides the most access for communities. Social analysis in the subsequent section will be informative on this front.  
-- 2A and 2B have the potential to be removed from the plan due to other constraints like real estate and partnership challenges.  
-- Which plan reasonably maximizes ecological benefits (i.e., is the NER)? Probably P128.   
-- What is the least environmentally damaging? Not sure.  
-- Which plan reasonably maximizes ALL benefits (from a comprehensive benefits perspective)? Contingent on the next CEICA with social outcomes.   
-- What is the lowest plan we would accept from an ecological perspective? P14 might be the least acceptable (2A, 2B, 19A) because it includes one actions in North and South Utoy each.   
-
+-   Concrete channel (17F2M and 17D2E) is a known sourse of ecological degradation and a clear ecological benefit. 17F2M and 17D2E are a cluster of activities. A plan including both of these actions is reasonable, which implies P128.\
+-   The largest plan is still well-below the CAP limit, although costs will go up as the project proceeds.\
+-   Includes four clusters of actions in the watershed: (1) known source of ecological degradation at the concrete channel at 17F2M, 17D2E, and 17B, (2) a clear problem in the larger system at 2A and 2B, (3) a demonstration or innovation site at 3F, and (4) a contribution to the South Utoy watershed at 19A.\
+-   P128 provides the widest geographic coverage and thus provides the most access for communities. Social analysis in the subsequent section will be informative on this front.\
+-   2A and 2B have the potential to be removed from the plan due to other constraints like real estate and partnership challenges.\
+-   Which plan reasonably maximizes ecological benefits (i.e., is the NER)? Probably P128.\
+-   What is the least environmentally damaging? Not sure.\
+-   Which plan reasonably maximizes ALL benefits (from a comprehensive benefits perspective)? Contingent on the next CEICA with social outcomes.\
+-   What is the lowest plan we would accept from an ecological perspective? P14 might be the least acceptable (2A, 2B, 19A) because it includes one actions in North and South Utoy each.
 
 ```{r}
 #Isolate benefit and cost data only for sites with recommendations
@@ -899,9 +866,7 @@ sys.CEICA$BB <- sys.CEICA.BB[[1]][,4]
 CEICAplotter(sys.CEICA$Plan, sys.CEICA$Lift, sys.CEICA$AvgAnnCost, sys.CEICA$CE, sys.CEICA$BB, "CEICA.sys.jpeg")
 ```
 
-
 ![*CEICA Summary for watershed-scale recommendations.*](CEICA.sys.jpeg)
-
 
 ```{r}
 #Names of BB plans
@@ -945,68 +910,78 @@ rownames(Table07) <- NULL
 knitr::kable(Table07, caption="Table 07. Final array of watershed-scale plans.", align='c') 
 ```
 
-## *CEICA with Comprehensive Benefits*
+## *Summary of the Tentatively Selected Plan (TSP)*
 
 This is just placeholder text.
 
+# **5. Economic Analysis of the Tentatively Selected Plan (TSP)**
 
-# **5. Summary of Recommendations**   
+This is just placeholder text.
 
-In this section, yada yada yada. Blah, blah, blah.  
+# **5. Summary of Recommendations**
 
+In this section, yada yada yada. Blah, blah, blah.
 
-# **References Cited**   
+# **References Cited**
 
-Abera L. and McKay S.K. 2023. Life cycle cost analysis for stream restoration. ASCE Inspire, American Society of Civil Engineers, November 2023, Arlington, Virginia. https://doi.org/10.1061/9780784485163.067. 
+Abera L. and McKay S.K. 2023. Life cycle cost analysis for stream restoration. ASCE Inspire, American Society of Civil Engineers, November 2023, Arlington, Virginia. <https://doi.org/10.1061/9780784485163.067>.
 
-Abera L. and McKay S.K. 2024. Package ‘EngrEcon’. CRAN Reference Manual.
+Abera L. and McKay S.K. 2024. Package 'EngrEcon'. CRAN Reference Manual.
 
 EPA. (2016). Total Maximum Daily Load Evaluation for Five Stream Segments in the Suwannee River Basin for Fecal Coliform. The Georgia Department of Natural Resources Environmental Protection Division, February.
 
-Fischenich, J.C. 2006. Functional Objectives for Stream Restoration, EMRRP Technical Notes Collection (ERDC TN-EMRRP-SR-52). U.S. Army Engineer Research and Development Center, Vicksburg, MS. http://el.erdc.usace.army.mil/elpubs/pdf/sr52.pdf.
+Fischenich, J.C. 2006. Functional Objectives for Stream Restoration, EMRRP Technical Notes Collection (ERDC TN-EMRRP-SR-52). U.S. Army Engineer Research and Development Center, Vicksburg, MS. <http://el.erdc.usace.army.mil/elpubs/pdf/sr52.pdf>.
 
 Grant, W. E., and T. M. Swannack. 2008. Ecological modeling: A common-sense approach to theory and practice. Malden, MA: Blackwell Publishing.
 
 Harman, W., Starr, R., Carter, M., Tweedy, K., Clemmons, M., Suggs, K., & Miller, C. (2012). A Function-Based Framework for Stream Assessments and Restoration Projects (EPA 843-K-12-006). US Environmental Protection Agency, Office of Wetlands, Oceans, and Watersheds.
 
-McKay S.K. and Hernández-Abrams D.D. 2020. Package ‘ecorest’. CRAN Reference Manual.
+Jackson, C.R., Wenger, S.J., Bledsoe, B.P., Shepherd, J.M., Capps, K.A., Rosemond, A.D., Paul, M.J., Welch‐Devine, M., Li, K., Stephens, T. and Rasmussen, T.C., 2023. Water supply, waste assimilation, and low‐flow issues facing the Southeast Piedmont Interstate‐85 urban archipelago. JAWRA Journal of the American Water Resources Association, 59(5), pp.1146-1161.
 
-McKay S.K., Linkov I., Fischenich J.C., Miller S.J., and Valverde L.J.  2012.  Ecosystem restoration objectives and metrics.  ERDC TN-EMRRP-EBA-16.  U.S. Army Engineer Research and Development Center, Vicksburg, Mississippi. 
+McKay S.K. and Hernández-Abrams D.D. 2020. Package 'ecorest'. CRAN Reference Manual.
 
-McKay S.K., Pruitt B.A., Zettle B., Hallberg N., Hughes C., Annaert A., Ladart M., and McDonald J.  2018a.  Proctor Creek Ecological Model (PCEM): Phase 1-Site screening.  ERDC/EL TR-18-11.  U.S. Army Engineer Research and Development Center, Vicksburg, Mississippi.  
+McKay S.K., Linkov I., Fischenich J.C., Miller S.J., and Valverde L.J. 2012. Ecosystem restoration objectives and metrics. ERDC TN-EMRRP-EBA-16. U.S. Army Engineer Research and Development Center, Vicksburg, Mississippi.
 
-McKay S.K., Pruitt B.A., Zettle B.A., Hallberg N., Moody V., Annaert A., Ladart M., Hayden M., and McDonald J.  2018b.  Proctor Creek Ecological Model (PCEM): Phase 2-Benefits analysis.  ERDC/EL TR-18-11.  U.S. Army Engineer Research and Development Center, Vicksburg, Mississippi.  
+McKay S.K., Pruitt B.A., Zettle B., Hallberg N., Hughes C., Annaert A., Ladart M., and McDonald J. 2018a. Proctor Creek Ecological Model (PCEM): Phase 1-Site screening. ERDC/EL TR-18-11. U.S. Army Engineer Research and Development Center, Vicksburg, Mississippi.
 
-McKay S.K., Richards N., and Swannack T.M. 2022. Ecological model development: Evaluation of system quality.  ERDC/TN EMRRP-EBA-26.  U.S. Army Engineer Research and Development Center, Vicksburg, Mississippi. 
+McKay S.K., Pruitt B.A., Zettle B.A., Hallberg N., Moody V., Annaert A., Ladart M., Hayden M., and McDonald J. 2018b. Proctor Creek Ecological Model (PCEM): Phase 2-Benefits analysis. ERDC/EL TR-18-11. U.S. Army Engineer Research and Development Center, Vicksburg, Mississippi.
 
-McKay S.K., Athanasakes G., Taylor S., Miller W., Wagoner E., and Mattingly L. 2024.  Qualitative Habitat Evaluation Index for Louisville Streams (QHEILS).  ERDC/TN EMRRP-SR-92.  U.S. Army Engineer Research and Development Center, Vicksburg, Mississippi. 
+McKay S.K., Richards N., and Swannack T.M. 2022. Ecological model development: Evaluation of system quality. ERDC/TN EMRRP-EBA-26. U.S. Army Engineer Research and Development Center, Vicksburg, Mississippi.
 
-R Development Core Team.  2014.  R: A language and environment for statistical computing.  R Foundation for Statistical Computing, Vienna, Austria.  www.R-project.org.
+McKay S.K., Athanasakes G., Taylor S., Miller W., Wagoner E., and Mattingly L. 2024. Qualitative Habitat Evaluation Index for Louisville Streams (QHEILS). ERDC/TN EMRRP-SR-92. U.S. Army Engineer Research and Development Center, Vicksburg, Mississippi.
 
-Robinson R. Hansen W., and Orth K.  1995.  Evaluation of environmental investments procedures manual interim: Cost effectiveness and incremental cost analyses.  IWR Report 95-R-1.  Institute for Water Resources, U.S. Army Corps of Engineers, Alexandria, Virginia.  
+McKay S.K., Hernández-Abrams D.D., and Cushway K.C. 2024b. Package 'ecorest'. Version 2.0.0. [CRAN Reference Manual](https://cran.r-project.org/web/packages/ecorest/index.html).
+
+R Development Core Team. 2014. R: A language and environment for statistical computing. R Foundation for Statistical Computing, Vienna, Austria. www.R-project.org.
+
+Robinson R. Hansen W., and Orth K. 1995. Evaluation of environmental investments procedures manual interim: Cost effectiveness and incremental cost analyses. IWR Report 95-R-1. Institute for Water Resources, U.S. Army Corps of Engineers, Alexandria, Virginia.
 
 U.S. Army Corps of Engineers (USACE). 2000. Planning Guidance Notebook. ER-1105-2-100. U.S. Army Corps of Engineers, Washington, D.C.
 
-U.S. Army Corps of Engineers (USACE).  2011.  Assuring quality of planning models.  EC-1105-2-412. Washington, DC.
+U.S. Army Corps of Engineers (USACE). 2011. Assuring quality of planning models. EC-1105-2-412. Washington, DC.
 
-U.S. Army Corps of Engineers (USACE).  2023.  Federal Interest Rates for Corps of Engineers Projects for Fiscal Year 2024.  Economic Guidance Memorandum, 24-01. Washington, DC.
+U.S. Army Corps of Engineers (USACE). 2023. Federal Interest Rates for Corps of Engineers Projects for Fiscal Year 2024. Economic Guidance Memorandum, 24-01. Washington, DC.
 
-Wiest S., Menichino G.T., and McKay S.K. *Forthcoming*. Riparian Ecosystem Function Index (REFI). ERDC Technical Report. U.S. Army Engineer Research and Development Center, Vicksburg, Mississippi. 
+Walker, R. K. (2016). Interweaving Geochemical and Geospatial Data to Identify High Concentrations of Metal Contamination from Copper , Lead , and Zinc within Utoy Creek , Atlanta Ga [Georgia State University]. <https://doi.org/https://doi.org/10.57709/8514515>
 
+Wiest S., Menichino G.T., and McKay S.K. *Forthcoming*. Riparian Ecosystem Function Index (REFI). ERDC Technical Report. U.S. Army Engineer Research and Development Center, Vicksburg, Mississippi.
 
-# *Appendix A: Acronyms*   
+# **Appendix A: Acronyms**
 
-- CEICA: Cost-effectiveness and incremental cost analysis.  
-- CoA: City of Atlanta.  
-- PED: Pre-construction Engineering and Design.  
-- ROM: Rough Order of Magnitude.  
-- TSP: Tentatively Selected Plan.
-- USACE: U.S. Army Corps of Engineers.  
+-   AAHU: Average Annual Habitat Units.\
+-   CAP: Continuing Authorities Program.\
+-   CEICA: Cost-effectiveness and incremental cost analysis.\
+-   CoA: City of Atlanta.\
+-   ERDC: U.S. Army Engineer Research and Development Center.\
+-   HU: Habitat Units.\
+-   OSE: Other Social Effects.\
+-   PED: Pre-construction Engineering and Design.\
+-   ROM: Rough Order of Magnitude.\
+-   TSP: Tentatively Selected Plan.
+-   USACE: U.S. Army Corps of Engineers.
 
+# **Appendix B: Site-scale Ecological and Cost Data**
 
-# *Appendix B: Site-scale Alternatives*   
-
-Do we want to dump all of the ecological model inputs or outputs here? It makes for a huge set of tables, but it is a good practice for transparency and reproducibility. 
 
 ```{r}
 #Table of all ecological outputs.
@@ -1022,7 +997,6 @@ colnames(TableB01) <- c("Site", "Alternative", "Riparian Outputs, Left",
 rownames(TableB01) <- NULL
 knitr::kable(TableB01, caption="Table B01. Instream, riparian, and combined ecological outputs for all Utoy Creek sites (all in AAHUs).", align='c') 
 ```
-
 
 ```{r}
 #Table of OMRRR costs.
@@ -1055,15 +1029,17 @@ knitr::kable(TableB03, caption="Table B03. Major cost categories for all Utoy Cr
 ```
 
 
+# **Appendix C: CEICA Outcomes for All Watershed-scale Plans**
+
 ```{r}
 #Table of all major cost data.
-TableB04 <- cbind(sys.CEICA[,1:8], 
+TableC01 <- cbind(sys.CEICA[,1:8], 
                  formatC(sys.CEICA[,9], format="f", digits=0, big.mark = ","),
                  formatC(sys.CEICA[,10], format="f", digits=0, big.mark = ","),
                  formatC(sys.CEICA[,11], format="f", digits=0, big.mark = ","),
                  formatC(sys.CEICA[,10]/sys.CEICA[,9], format="f", digits=0, big.mark = ","),
                  sys.CEICA[,12:13])
-colnames(TableB04) <- c(colnames(sys.CEICA[1:11]),"Unit Cost", "CE", "BB")
-rownames(TableB04) <- NULL
-knitr::kable(TableB04, caption="Table B04. Summary of watershed-scale CEICA.", align='c') 
+colnames(TableC01) <- c(colnames(sys.CEICA[1:11]),"Unit Cost", "CE", "BB")
+rownames(TableC01) <- NULL
+knitr::kable(TableC01, caption="Table C01. Summary of watershed-scale CEICA.", align='c') 
 ```
