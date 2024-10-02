@@ -321,7 +321,7 @@ par(mfrow=c(1,2))
 
 #Create the shell of the plot
 plot(c(0, 1), c(0, 1), type = "n", 
-     xlim = c(0,50), ylim = c(0,7), axes = FALSE, 
+     xlim = c(0,50), ylim = c(0,9), axes = FALSE, 
      xlab="Time (years)", ylab="Ecological Benefit (Habitat Units)", main="")
 axis(1)
 axis(2, at = axTicks(2), labels = prettyNum(axTicks(2), big.mark = ",", scientific = FALSE), las = 0, cex.axis = 0.75, tick = TRUE)
@@ -350,7 +350,7 @@ legend("bottomright", legend = c("FWOP", "Alternative1", "Alternative2", "Altern
 
 #Add barplot of AAHUs
 barplot(AAHU$Lift[1:4], names.arg=AAHU$SiteAction[1:4], 
-        col=c("black", "blue", "purple", "red"),ylim=c(0,7),
+        col=c("black", "blue", "purple", "red"),ylim=c(0,9),
         xlab="Alternative", ylab="Ecological Lift (AAHU)"); box()
 
 #Turn off plot device
@@ -646,12 +646,14 @@ knitr::kable(CE.output.temp, caption="Table 10. Cost-effectiveness summary for S
 
 ## *Site 2A*
 
-This is just placeholder text. Describe the site and alternatives. Potential real estate and coordination challenges in the power easement. Minimally, dialog with power company could be productive dialog about bank stabilization methods.
+Site-2A is a 0.71-mile reach of North Utoy at the downstream end of this sub-watershed. Sites 17F2M, 17D2E, 2B, and 19A are all upstream of this location, and the mainstem of Utoy Creek begins at the downstream end of this reach. North Utoy Creek at this site flows through a powerline easement, which reduces riparian extent, increases water temperature, and reduces bank stability. The constraints provided by the power easement could require extensive coordination on real estate and access to the site. However, ecological degradation at the site compelled the development of three restoration alternatives.
 
--   FWOP: Future WithOut Project.\
--   Alternative1 (**RECOMMENDATION**): Channel realignment. Best buy. Moves stream out of the easement and improves shading (not captured adequately in ecological models). Need to tie in some information on the benefits of stream shading (e.g.,g Rhett Jackson's work at Coweeta). Significant sediment input from banks. Similar cost for more lift than Alternative2.\
--   Alternative2: Channel shaping with bankfull bench.\
--   Alternative3: Minor instream structures. Not economically competitive given high cost and low benefit.
+Benefits and costs were computed for each alternative, and CEICA were applied to these data. Figure 7 summarizes the CEICA results. Table 11 presents the incremental cost analysis for the best buy alternatives (only the FWOP and Alternative1). Table 12 summarizes outputs for all alternatives. Based on these data and team input, the recommended action at this site is Alternative1. The decision logic for this alternative is as follows:
+
+-   *FWOP: Future WithOut Project*. Reduced riparian cover is leading to erosion, channel change, increased temperatures, and other issues that will not alleviate without action. \
+-   *Alternative1 (**RECOMMENDATION**): Channel realignment*. This alternative relocates the stream out of the power easement. The relocation into a riparian forest would decrease stream temperatures (Steel et al. 2017) as well as reduce sediment input from the active channel and bank erosion in the reach. Stream temperature is not directly captured in the stream or riparian models, so this ecological benefits of this outcome are insufficiently quantified in the ecological lift. Furthermore, Alternative1 is the only "best buy" action, although other alternatives are cost-effective. Alternative1 is preferred to Alternative2 since it provides 25% more ecological benefits at only 4% additional cost.\
+-   *Alternative2: Channel shaping with bankfull bench*. This alternative leaves the channel in the current location, but establishes a two-stage channel form with a vegetated bankfull bench. This restoration action would reduce the effects of stream temperature and erosion in the reach, but it would not fully reconnect the river to the riparian area.\
+-   *Alternative3: Minor instream structures*. This alternative works within the existing channel footprint by adding small-scale instream grade control features. The primary benefit of this action would be to reduce bank and channel erosion, although few other benefits would be obtained (e.g., minimal effect on temperature). The alternative is not preferred given the high unit cost and low ecological efficacy relative to Alternative1 and Alternative2.
 
 ![*Figure 7. CEICA Summary for 2A.*](CEICA.2A.jpeg)
 
@@ -679,12 +681,15 @@ knitr::kable(CE.output.temp, caption="Table 12. Cost-effectiveness summary for S
 
 ## *Site 2B*
 
-This is just placeholder text. Describe the site and alternatives. Potential real estate and coordination challenges in the power easement. Minimally, dialog with power company could be productive dialog about bank stabilization methods.
+Site-2B is a 0.85-mile reach of North Utoy Creek just upstream of Site-2A. North Utoy Creek at this site also flows through a powerline easement, which reduces riparian extent, increases water temperature, and reduces bank stability. The constraints provided by the power easement could require extensive coordination on real estate and access to the site. However, ecological degradation at the site compelled the development of three restoration alternatives.
 
--   FWOP: Future WithOut Project.\
--   Alternative1 (**RECOMMENDATION**): Channel realignment. Best buy. Moves stream out of the easement and improves shading (not captured adequately in ecological models). Need to tie in some information on the benefits of stream shading (e.g.,g Rhett Jackson's work at Coweeta). Significant sediment input from banks. Similar cost for more lift than Alternative2.\
--   Alternative2: Channel shaping with bankfull bench.\
--   Alternative3: Minor instream structures. High unit cost.
+Benefits and costs were computed for each alternative, and CEICA were applied to these data. Figure 8 summarizes the CEICA results. Table 13 presents the incremental cost analysis for the best buy alternatives (only the FWOP and Alternative1). Table 14 summarizes outputs for all alternatives. Based on these data and team input, the recommended action at this site is Alternative1. The decision logic for this alternative is as follows:
+
+-   *FWOP: Future WithOut Project*. Reduced riparian cover is leading to erosion, channel change, increased temperatures, and other issues that will not alleviate without action. \
+-   *Alternative1 (**RECOMMENDATION**): Channel realignment*. This alternative relocates the stream out of the power easement. The relocation into a riparian forest would decrease stream temperatures (Steel et al. 2017) as well as reduce sediment input from the active channel and bank erosion in the reach. Stream temperature is not directly captured in the stream or riparian models, so this ecological benefits of this outcome are insufficiently quantified in the ecological lift. Furthermore, Alternative1 is the only "best buy" action, although other alternatives are cost-effective. Alternative1 is preferred to Alternative2 since it provides 53% more ecological benefits at 3% less cost.\
+-   *Alternative2: Channel shaping with bankfull bench*. This alternative leaves the channel in the current location, but establishes a two-stage channel form with a vegetated bankfull bench. This restoration action would reduce the effects of stream temperature and erosion in the reach, but it would not fully reconnect the river to the riparian area.\
+-   *Alternative3: Minor instream structures*. This alternative works within the existing channel footprint by adding small-scale instream grade control features. The primary benefit of this action would be to reduce bank and channel erosion, although few other benefits would be obtained (e.g., minimal effect on temperature). The alternative is not preferred given the high unit cost and low ecological efficacy relative to Alternative1 and Alternative2.
+
 
 ![*Figure 8. CEICA Summary for 2B.*](CEICA.2B.jpeg)
 
@@ -712,12 +717,12 @@ knitr::kable(CE.output.temp, caption="Table 14. Cost-effectiveness summary for S
 
 ## *Site 3E*
 
-This is just placeholder text. Describe the site and alternatives.
+Site-3E is a 0.47-mile reach of South Utoy Creek flowing from the Cascade Springs Nature Preserve to a confluence with a tributary west of Adams Drive Southwest. The creek flows under two bridges that create points of ecological degradation due to erosion and fish passage issues. Three restoration alternatives were developed with an emphasis on these challenging road-stream crossings. Benefits and costs were computed for each alternative, and CEICA were applied to these data. Figure 9 summarizes the CEICA results. Table 15 presents the incremental cost analysis for the best buy alternatives (FWOP, Alternative2, and Alternative3). Table 16 summarizes outputs for all alternatives. Based on these data and team input, the "no action" or FWOP alternative is recommended at this site based on the following decision logic:
 
--   FWOP (**RECOMMENDATION**): Future WithOut Project. High unit cost relative to other sites compels a lack of investment at this location.\
--   Alternative1: Bridge replacement with extensive action. Very high unit cost.\
--   Alternative2: Brdige replacement with minor action. Very high unit cost.\
--   Alternative3: Bank stabilization. High unit cost relative to other sites.
+-   *FWOP (**RECOMMENDATION**): Future WithOut Project*. The high unit cost and low ecological lift at this site compels a recommendation of "no action" at this site as part of the USACE feasibility study, although  partners may seek to address these issues through other programs.\
+-   *Alternative1: Bridge replacement with extensive action*. This alternative explore replacing a bridge at a road-stream crossing and coupling that mobilization with other bank stabilization and riparian restoration. The ecological lift for this action was relatively low and the unit cost was very high relative to other locations in the watershed.\
+-   *Alternative2: Brdige replacement with minor action*. This alternative explore replacing a bridge at a road-stream crossing with less riparian restoration. The action also had a high unit cost.\
+-   *Alternative3: Bank stabilization*. This action focused only on bank stabilization in the erosional areas around the roads without replacement of the bridge. The ecological lift for this action was low relative to other sites in the watershed.
 
 ![*Figure 9. CEICA Summary for 3E.*](CEICA.3E.jpeg)
 
@@ -745,12 +750,14 @@ knitr::kable(CE.output.temp, caption="Table 16. Cost-effectiveness summary for S
 
 ## *Site 3F*
 
-This is just placeholder text. Describe the site and alternatives. Note the high adaptive management cost of all of these actions. All actions are innovative and would be strong demonstrations for the region. This site requires a conversation with CoA about risk vs. return vs. innovation. Currently the only site on South Utoy, which may have benefits from the perspective of increasing the geographic distribution of benefits.
+Site-3F is a 0.83-mile reach of South Utoy Creek flowing from Dodson Drive Southwest to Harbin Road Southwest. The creek generally exhibits over-widening in this reach with high levels of sedimentation and impacted riparian zones. Three alternatives were developed at this site. The alternatives at this site were intended to explore innovative stream and riparian restoration practices (i.e., use of large wood and beaver reintroduction). The novelty of these actions led to higher adaptive management costs for this alternatives, but the return-on-investment would be in increased understanding of the efficacy of novel methods in the Atlanta Region. This site is also the only site with a recommended action in the South Utoy Creek subwatershed, which increases the distribution of restoration benefits to more watershed residents.
 
--   FWOP: Future WithOut Project.\
--   Alternative1 (**RECOMMENDATION**): Large wood features for 50% of reach. Innovative methods for southeast stream restoration using large wood in more explicit ways. Innovative methods compel inclusion of the larger plan. Non-monetary benefits of demonstrating new techniques.\
--   Alternative2: Large wood features for 25% of reach. Non-cost-effective.\
--   Alternative3: Beaver reintroduction. Cost-effective plan (nearly a best buy). Lots of room for the river at this site, but flood risk needs to be considered further. Experimental action has low-cost, high-reward potential with strong demonstration value for the region as a whole. Uncertain timeframe for benefits with beavers. Downstream bridge crossing with known debris jams. Utility line crossing has a high risk component. Concern about liability of beaver moving off-site into neighboring areas.
+Benefits and costs were computed for each alternative, and CEICA were applied to these data. Figure 10 summarizes the CEICA results. Table 17 presents the incremental cost analysis for the best buy alternatives (only the FWOP and Alternative1). Table 18 summarizes outputs for all alternatives. Based on these data and team input, the recommended action at this site is Alternative1. The decision logic for this alternative is as follows:
+
+-   *FWOP: Future WithOut Project*.\
+-   *Alternative1 (**RECOMMENDATION**): Large wood features for 50% of reach*. Innovative methods for southeast stream restoration using large wood in more explicit ways. Innovative methods compel inclusion of the larger plan. Non-monetary benefits of demonstrating new techniques.\
+-   *Alternative2: Large wood features for 25% of reach*. Non-cost-effective.\
+-   *Alternative3: Beaver reintroduction*. Cost-effective plan (nearly a best buy). Lots of room for the river at this site, but flood risk needs to be considered further. Experimental action has low-cost, high-reward potential with strong demonstration value for the region as a whole. Uncertain timeframe for benefits with beavers. Downstream bridge crossing with known debris jams. Utility line crossing has a high risk component. Concern about liability of beaver moving off-site into neighboring areas.
 
 ![*Figure 10. CEICA Summary for 3F.*](CEICA.3F.jpeg)
 
@@ -780,9 +787,9 @@ knitr::kable(CE.output.temp, caption="Table 18. Cost-effectiveness summary for S
 
 This is just placeholder text. Describe the site and alternatives. Alternative 1 was formulated, but screened out due to constructability during design and cost.
 
--   FWOP: Future WithOut Project.\
--   Alternative2 (**RECOMMENDATION**): Floodplain bench for floodplain connectivity. Best buy. Very low unit cost. Also includes regrading actions from Alternative3.\
--   Alternative3: Regrade segment around culvert.
+-   *FWOP: Future WithOut Project*.\
+-   *Alternative2 (**RECOMMENDATION**): Floodplain bench for floodplain connectivity*. Best buy. Very low unit cost. Also includes regrading actions from Alternative3.\
+-   *Alternative3: Regrade segment around culvert*. Insert. 
 
 ![*Figure 11. CEICA Summary for 19A.*](CEICA.19A.jpeg)
 
@@ -1011,6 +1018,8 @@ McKay S.K., Hernández-Abrams D.D., and Cushway K.C. 2024b. Package 'ecorest'. V
 R Development Core Team. 2014. R: A language and environment for statistical computing. R Foundation for Statistical Computing, Vienna, Austria. www.R-project.org.
 
 Robinson R. Hansen W., and Orth K. 1995. Evaluation of environmental investments procedures manual interim: Cost effectiveness and incremental cost analyses. IWR Report 95-R-1. Institute for Water Resources, U.S. Army Corps of Engineers, Alexandria, Virginia.
+
+Steel, E.A., Beechie, T.J., Torgersen, C.E. and Fullerton, A.H., 2017. Envisioning, quantifying, and managing thermal regimes on river networks. BioScience, 67(6), pp.506-522.
 
 U.S. Army Corps of Engineers (USACE). 2000. Planning Guidance Notebook. ER-1105-2-100. U.S. Army Corps of Engineers, Washington, D.C.
 
