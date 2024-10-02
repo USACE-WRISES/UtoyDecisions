@@ -47,7 +47,7 @@ library(viridis)
 #IMPORT ALL UTOY DATA
 
 #Import ecological modeling inputs
-eco <- read.csv("Utoy_Phase 2_EcoInputs_2024-08-05_EcoIn.csv", header=TRUE, dec=".", na.strings="NA", stringsAsFactors = FALSE)
+eco <- read.csv("Utoy_Phase 2_EcoInputs_2024-10-01_EcoIn.csv", header=TRUE, dec=".", na.strings="NA", stringsAsFactors = FALSE)
 
 #Import cost data
 cost <- read.csv("Utoy_Phase 2_EcoInputs_2024-08-05_CostIn.csv", header=TRUE, dec=".", na.strings="NA", stringsAsFactors = FALSE)
@@ -537,14 +537,14 @@ for(i in 1:nsites){
 
 ## *Site 17F2M*
 
-Site-17F2M is an 0.45-mile reach of trapezoidal concrete channel through the John A. White Golf Course. There is current no forested riparian area with the mowed areas of the golf course extending to the edge of the concrete channel. The site was initially divided into two reachs (17F and 17M), but the reaches were combined since due to the nearly identical channel geometry, problems and opportunities, and their proximity for mobilization. Three restoration alternatives were conceptualized with varying amounts of riparian restoration, all of which include removal of the concrete channel.
+Site-17F2M is an 0.45-mile reach of trapezoidal concrete channel through the John A. White Golf Course. There is current no forested riparian area with the mowed areas of the golf course extending to the edge of the concrete channel. The site was initially divided into two reachs (17F and 17M), but the reaches were combined due to the nearly identical channel geometry, problems and opportunities, and their proximity for mobilization. Three restoration alternatives were conceptualized with varying amounts of riparian restoration, all of which include removal of the concrete channel.
 
 Benefits and costs were computed for each alternative, and CEICA were applied to these data. Figure 4 summarizes the CEICA results. Table 5 presents the incremental cost analysis for the best buy alternatives (only the FWOP and Alternative3). Table 6 summarizes outputs for all alternatives. Based on these data and team input, the recommended action at this site is Alternative3. The decision logic for this alternative is as follows:
 
 -   *FWOP: Future WithOut Project*. Significant ecological degradation at the site compels action at this site.
 -   *Alternative1: Concrete channel removal with extensive riparian restoration*. This action removes the major source of degradation (the concrete channel) and plants approximately 25-foot forested buffers on each streambank. While addressing the primary issue, the forested buffer has the potential to conflict with current land use at the golf course, and the naturalization of the streambed may not address the high velocity flows of the concrete channel.\
 -   *Alternative2: Remove concrete channel with small-scale channel restoration*. This action removes the major source of degradation (the concrete channel) and plants approximately 10-foot forested buffers on each streambank. The alternative sought to provide a small buffer strip to return some basic riparian functions (e.g., shading, bank stabilization), but the smaller area still has potential for conflicts with the golf course usage. Furthermore, the large capital cost of concrete removal compels more riparian restoration to achieve return-on-investment during the construction mobilization.\
--   *Alternative3 (**TENTATIVE RECOMMENDATION**): Chain of wetlands*. This alternative removes the major source of degradation (the concrete channel) and creates a chain of wetland complexes through the reach. The goals of this design were to reduce channel velocities exiting the reach, which would have substantial benefits to hydrologic and sedimentologic processes downstream. Additionally, the wetland-oriented design could emphasize emergent vegetation (rather than forested cover), which would minimize line-of-sight conflicts with the golf course. This type of conversion of concrete channel to wetland has proven effective in other constrained urban sites (e.g., [Hanlon Park in Brisbane, Australia](https://landscapeaustralia.com/articles/restoration-and-connection-hanlon-parkburuda-waterway-rejuvenation/)). The downstream benefits also align with other investments in the watershed such as the downstream Site-17D2E, which is described in the following section.
+-   *Alternative3 (**RECOMMENDATION**): Chain of wetlands*. This alternative removes the major source of degradation (the concrete channel) and creates a chain of wetland complexes through the reach. The goals of this design were to reduce channel velocities exiting the reach, which would have substantial benefits to hydrologic and sedimentologic processes downstream. Additionally, the wetland-oriented design could emphasize emergent vegetation (rather than forested cover), which would minimize line-of-sight conflicts with the golf course. This type of conversion of concrete channel to wetland has proven effective in other constrained urban sites (e.g., [Hanlon Park in Brisbane, Australia](https://landscapeaustralia.com/articles/restoration-and-connection-hanlon-parkburuda-waterway-rejuvenation/)). The downstream benefits also align with other investments in the watershed such as the downstream Site-17D2E, which is described in the following section.
 
 
 ![*Figure 4. CEICA Summary for 17F2M.*](CEICA.17F2M.jpeg)
@@ -575,12 +575,15 @@ knitr::kable(CE.output.temp, caption="Table 6. Cost-effectiveness summary for Si
 
 ## *Site 17D2E*
 
-This is just placeholder text. Describe the site and alternatives.
+Site-17D2E is an 0.68-mile reach of trapezoidal concrete channel running from the John A. White Golf Course to Beecher Road Southwest. The riparian zone is mostly forested with nearby residences. The site was initially divided into two reachs (17D and 17E), but the reaches were combined due to the nearly identical channel geometry, problems and opportunities, and their proximity for mobilization. This site is adjacent to Site-17F2M, and together, the two sites represent an important opportunity for directly addressing a major cause of ecological degradation in the watershed. Three restoration alternatives were conceptualized with varying amounts of channel improvements.
 
--   FWOP: Future WithOut Project. Significant ecological degradation due to the concrete channel at the site compels action at this site.\
--   Alternative1 (**RECOMMENDATION**): Concrete channel removal with left bank wetland. Large lift. Direct effect on cause of ecological degradation. Low unit cost relative to watershed-scale actions.\
--   Alternative2: Concrete channel removal with bankfull bench. Not a best buy, but a strong option. Mobilization cost compels the larger action (Alternative1).\
--   Alternative3: Stabilization with natural bed and grade control. Does not lead to as large of ecological lift, but better than FWOP.
+Benefits and costs were computed for each alternative, and CEICA were applied to these data. Figure 5 summarizes the CEICA results. Table 7 presents the incremental cost analysis for the best buy alternatives (only the FWOP and Alternative1). Table 8 summarizes outputs for all alternatives. Based on these data and team input, the recommended action at this site is Alternative1. The decision logic for this alternative is as follows:
+
+-   *FWOP: Future WithOut Project*. Significant ecological degradation due to the concrete channel at the site compels action at this site.\
+-   *Alternative1 (**RECOMMENDATION**): Concrete channel removal with left bank wetland*. This action removes the concrete channel and constructs an overbank wetland complex in the left riparian area. These actions directly respond to sources of ecological degradation (i.e., the concrete channel and hydrologic change). Furthermore, this alternative has a large ecological lift, and low unit cost relative to other actions in the watershed (See Chapter 4).\
+-   *Alternative2: Concrete channel removal with bankfull bench*. This alternative removes the concrete channel and constructs an bankfull bench (i.e., a two-stage channel). The action restricts construction activities to the existing concrete channel area. Although not a best buy, the alternative does directly address the presence of the concrete channel. However, mobilization costs would compel the larger action (Alternative1), which has substantially more ecological lift (i.e. 28% greater).\
+-   *Alternative3: Stabilization with natural bed and grade control*. Alternative3 removes the concrete channel lining and replaces it with a natural bed and series of grade control features. The action is cost -effective and nearly a best buy (i.e., less than 5% difference in unit cost from Alternative1). This alternative provides substantially less ecological lift than Alternative1 (i.e., 56% less), but it does address the concrete channel and would be preferred over the FWOP.
+
 
 ![*Figure 5. CEICA Summary for 17D2E.*](CEICA.17D2E.jpeg)
 
@@ -594,7 +597,7 @@ BB.output.temp <- cbind(CEICA$altnames.BB[[i]], formatC(CEICA$BB[[i]][[2]][,1], 
                         formatC(CEICA$BB[[i]][[2]][,3], format="f", digits=0, big.mark = ","),
                         formatC(CEICA$ProjectFirst.BB[[i]], format="f", digits=0, big.mark = ","))
 colnames(BB.output.temp) <- BB.output.temp.names
-knitr::kable(BB.output.temp, caption="Incremental cost summary.", align='c') 
+knitr::kable(BB.output.temp, caption="Table 7. Incremental cost summary for Site-17D2E.", align='c') 
 
 #Display cost-effectiveness results
 CE.output.temp <- cbind(alts[[i]], formatC(CEICA$BB[[i]][[1]][,1], format="f", digits=2, big.mark = ","),
@@ -603,17 +606,19 @@ CE.output.temp <- cbind(alts[[i]], formatC(CEICA$BB[[i]][[1]][,1], format="f", d
                         formatC(CEICA$ProjectFirst[[i]], format="f", digits=0, big.mark = ","),
                         CEICA$BB[[i]][[1]][,3], CEICA$BB[[i]][[1]][,4])
 colnames(CE.output.temp) <- CE.output.temp.names
-knitr::kable(CE.output.temp, caption="Cost-effectiveness summary.", align='c') 
+knitr::kable(CE.output.temp, caption="Table 8. Cost-effectiveness summary for Site-17D2E.", align='c') 
 ```
 
 ## *Site 17B*
 
-This is just placeholder text. Describe the site and alternatives. **CONFUSION ABOUT THE ROLE OF BEAVERS. NEED TO REVISIT ECOLOGICAL MODEL INPUTS WITH TJ, GARRETT, LIYA, BRENNA, AND KEVIN.**
+Site-17B is a large 1.2-mile reach of natural channel bottom adjacent to a greenway (the Southwest Connector Trail). The concrete channels in Site-17D2E and Site-17F2M are upstream of this area. Site-17C is between these two sections and contains a large extent of natural bedrock, which provides grade control and reduces project risks for both this reach and the concrete channel sections. The riparian zone in Site-17B is largely forested with minor disturbances from the greenway and utility repair corridors. The primary source of degradation in the reach is bank erosion, which could be related to rapid delivery of flows from upstream concrete channels. The reach also runs next to Beecher Hills Elementary School, which presents important opportunities for outreach and education. Three restoration alternatives were conceptualized with varying amounts of channel and bank improvements.
 
--   FWOP: Future WithOut Project.\
--   Alternative1: Channel and bank stabilization with beaver removal.\
--   Alternative2 (**RECOMMENDATION**): Channel and bank stabilization. Justified by large increase in ecological benefits. Channel degradation appears to be the proximate cause of bank issues. Need to increase adaptive management cost to understand the role of beavers in the system. Need to be mindful of existing riparian zone in refinement of the designs moving forward (access to the site via greenway could mitigate this construction impact). Strong connectivity to upstream investments in 17F2M and 17D2E. Proximity to the greenway and school compels for a larger action. 17C provides bedrock control to minimize risks.\
--   Alternative3: Bank stabilization only. Low ecological benefits given the size of the site, Channel degradation is causing bank erosion.
+Benefits and costs were computed for each alternative, and CEICA were applied to these data. Figure 6 summarizes the CEICA results. Table 9 presents the incremental cost analysis for the best buy alternatives (only the FWOP and Alternative2). Table 10 summarizes outputs for all alternatives. Based on these data and team input, the recommended action at this site is Alternative2. The decision logic for this alternative is as follows:
+
+-   *FWOP: Future WithOut Project*. Extensive bank erosion within the reach would likely continue without restoration.\
+-   *Alternative1: Channel and bank stabilization with beaver removal*. This alternative includes channel restoration actions and bank stabilization at select locations throughout the reach. Channel degradation appears to be the proximate cause of bank erosion issues at the site. Additionally, beavers were observed in the reach, and they would be trapped and relocated as part of restoration actions.\
+-   *Alternative2 (**RECOMMENDATION**): Channel and bank stabilization*. This restoration action includes the same channel and bank stabilization actions as Alternative1, although beavers would be allowed to remain at the site. Beaver reintroduction has become a common restoration practice at sites where risks are low and uncertainties are tolerable. Site-17B does not contain major infrastructure or close promixity to residential areas. The presence of beavers can attentuate high flow conditions, moderate baseflows, and increase residence time for nutrient uptake. However, beavers are likely to remove some riparian canopy and introduce an element of uncertainty. Adaptive management would be needed to manage uncertainties with the presence of beavers, but these trade-offs were deemed acceptable at this location. As designs progress, actions will seek to minimize effects on existing riparian forests (e.g., by accessing the site through the greenway) and incorporating educational opportunities near the school.\
+-   *Alternative3: Bank stabilization only*. Channel degradation in the reach indicates that bank stabilization alone would be unlikely to address the underlying causes of bank erosion. Additionally, this alternative includes relatively low ecological benefits (i.e., less than 20% of Alternative2) at relatively high unit cost (290% greater than Alternative2).
 
 ![*Figure 6. CEICA Summary for 17B.*](CEICA.17B.jpeg)
 
@@ -627,7 +632,7 @@ BB.output.temp <- cbind(CEICA$altnames.BB[[i]], formatC(CEICA$BB[[i]][[2]][,1], 
                         formatC(CEICA$BB[[i]][[2]][,3], format="f", digits=0, big.mark = ","),
                         formatC(CEICA$ProjectFirst.BB[[i]], format="f", digits=0, big.mark = ","))
 colnames(BB.output.temp) <- BB.output.temp.names
-knitr::kable(BB.output.temp, caption="Incremental cost summary.", align='c') 
+knitr::kable(BB.output.temp, caption="Table 9. Incremental cost summary for Site-17B.", align='c') 
 
 #Display cost-effectiveness results
 CE.output.temp <- cbind(alts[[i]], formatC(CEICA$BB[[i]][[1]][,1], format="f", digits=2, big.mark = ","),
@@ -636,7 +641,7 @@ CE.output.temp <- cbind(alts[[i]], formatC(CEICA$BB[[i]][[1]][,1], format="f", d
                         formatC(CEICA$ProjectFirst[[i]], format="f", digits=0, big.mark = ","),
                         CEICA$BB[[i]][[1]][,3], CEICA$BB[[i]][[1]][,4])
 colnames(CE.output.temp) <- CE.output.temp.names
-knitr::kable(CE.output.temp, caption="Cost-effectiveness summary.", align='c') 
+knitr::kable(CE.output.temp, caption="Table 10. Cost-effectiveness summary for Site-17B.", align='c') 
 ```
 
 ## *Site 2A*
@@ -660,7 +665,7 @@ BB.output.temp <- cbind(CEICA$altnames.BB[[i]], formatC(CEICA$BB[[i]][[2]][,1], 
                         formatC(CEICA$BB[[i]][[2]][,3], format="f", digits=0, big.mark = ","),
                         formatC(CEICA$ProjectFirst.BB[[i]], format="f", digits=0, big.mark = ","))
 colnames(BB.output.temp) <- BB.output.temp.names
-knitr::kable(BB.output.temp, caption="Incremental cost summary.", align='c') 
+knitr::kable(BB.output.temp, caption="Table 11. Incremental cost summary for Site-2A.", align='c') 
 
 #Display cost-effectiveness results
 CE.output.temp <- cbind(alts[[i]], formatC(CEICA$BB[[i]][[1]][,1], format="f", digits=2, big.mark = ","),
@@ -669,7 +674,7 @@ CE.output.temp <- cbind(alts[[i]], formatC(CEICA$BB[[i]][[1]][,1], format="f", d
                         formatC(CEICA$ProjectFirst[[i]], format="f", digits=0, big.mark = ","),
                         CEICA$BB[[i]][[1]][,3], CEICA$BB[[i]][[1]][,4])
 colnames(CE.output.temp) <- CE.output.temp.names
-knitr::kable(CE.output.temp, caption="Cost-effectiveness summary.", align='c') 
+knitr::kable(CE.output.temp, caption="Table 12. Cost-effectiveness summary for Site-2A.", align='c') 
 ```
 
 ## *Site 2B*
@@ -693,7 +698,7 @@ BB.output.temp <- cbind(CEICA$altnames.BB[[i]], formatC(CEICA$BB[[i]][[2]][,1], 
                         formatC(CEICA$BB[[i]][[2]][,3], format="f", digits=0, big.mark = ","),
                         formatC(CEICA$ProjectFirst.BB[[i]], format="f", digits=0, big.mark = ","))
 colnames(BB.output.temp) <- BB.output.temp.names
-knitr::kable(BB.output.temp, caption="Incremental cost summary.", align='c') 
+knitr::kable(BB.output.temp, caption="Table 13. Incremental cost summary for Site-2B.", align='c') 
 
 #Display cost-effectiveness results
 CE.output.temp <- cbind(alts[[i]], formatC(CEICA$BB[[i]][[1]][,1], format="f", digits=2, big.mark = ","),
@@ -702,7 +707,7 @@ CE.output.temp <- cbind(alts[[i]], formatC(CEICA$BB[[i]][[1]][,1], format="f", d
                         formatC(CEICA$ProjectFirst[[i]], format="f", digits=0, big.mark = ","),
                         CEICA$BB[[i]][[1]][,3], CEICA$BB[[i]][[1]][,4])
 colnames(CE.output.temp) <- CE.output.temp.names
-knitr::kable(CE.output.temp, caption="Cost-effectiveness summary.", align='c') 
+knitr::kable(CE.output.temp, caption="Table 14. Cost-effectiveness summary for Site-2B.", align='c') 
 ```
 
 ## *Site 3E*
@@ -726,7 +731,7 @@ BB.output.temp <- cbind(CEICA$altnames.BB[[i]], formatC(CEICA$BB[[i]][[2]][,1], 
                         formatC(CEICA$BB[[i]][[2]][,3], format="f", digits=0, big.mark = ","),
                         formatC(CEICA$ProjectFirst.BB[[i]], format="f", digits=0, big.mark = ","))
 colnames(BB.output.temp) <- BB.output.temp.names
-knitr::kable(BB.output.temp, caption="Incremental cost summary.", align='c') 
+knitr::kable(BB.output.temp, caption="Table 15. Incremental cost summary for Site-3E.", align='c') 
 
 #Display cost-effectiveness results
 CE.output.temp <- cbind(alts[[i]], formatC(CEICA$BB[[i]][[1]][,1], format="f", digits=2, big.mark = ","),
@@ -735,7 +740,7 @@ CE.output.temp <- cbind(alts[[i]], formatC(CEICA$BB[[i]][[1]][,1], format="f", d
                         formatC(CEICA$ProjectFirst[[i]], format="f", digits=0, big.mark = ","),
                         CEICA$BB[[i]][[1]][,3], CEICA$BB[[i]][[1]][,4])
 colnames(CE.output.temp) <- CE.output.temp.names
-knitr::kable(CE.output.temp, caption="Cost-effectiveness summary.", align='c') 
+knitr::kable(CE.output.temp, caption="Table 16. Cost-effectiveness summary for Site-3E.", align='c') 
 ```
 
 ## *Site 3F*
@@ -759,7 +764,7 @@ BB.output.temp <- cbind(CEICA$altnames.BB[[i]], formatC(CEICA$BB[[i]][[2]][,1], 
                         formatC(CEICA$BB[[i]][[2]][,3], format="f", digits=0, big.mark = ","),
                         formatC(CEICA$ProjectFirst.BB[[i]], format="f", digits=0, big.mark = ","))
 colnames(BB.output.temp) <- BB.output.temp.names
-knitr::kable(BB.output.temp, caption="Incremental cost summary.", align='c') 
+knitr::kable(BB.output.temp, caption="Table 17. Incremental cost summary for Site-3F.", align='c') 
 
 #Display cost-effectiveness results
 CE.output.temp <- cbind(alts[[i]], formatC(CEICA$BB[[i]][[1]][,1], format="f", digits=2, big.mark = ","),
@@ -768,7 +773,7 @@ CE.output.temp <- cbind(alts[[i]], formatC(CEICA$BB[[i]][[1]][,1], format="f", d
                         formatC(CEICA$ProjectFirst[[i]], format="f", digits=0, big.mark = ","),
                         CEICA$BB[[i]][[1]][,3], CEICA$BB[[i]][[1]][,4])
 colnames(CE.output.temp) <- CE.output.temp.names
-knitr::kable(CE.output.temp, caption="Cost-effectiveness summary.", align='c') 
+knitr::kable(CE.output.temp, caption="Table 18. Cost-effectiveness summary for Site-3F.", align='c') 
 ```
 
 ## *Site 19A*
@@ -791,7 +796,7 @@ BB.output.temp <- cbind(CEICA$altnames.BB[[i]], formatC(CEICA$BB[[i]][[2]][,1], 
                         formatC(CEICA$BB[[i]][[2]][,3], format="f", digits=0, big.mark = ","),
                         formatC(CEICA$ProjectFirst.BB[[i]], format="f", digits=0, big.mark = ","))
 colnames(BB.output.temp) <- BB.output.temp.names
-knitr::kable(BB.output.temp, caption="Incremental cost summary.", align='c') 
+knitr::kable(BB.output.temp, caption="Table 19. Incremental cost summary for Site-19A.", align='c') 
 
 #Display cost-effectiveness results
 CE.output.temp <- cbind(alts[[i]], formatC(CEICA$BB[[i]][[1]][,1], format="f", digits=2, big.mark = ","),
@@ -800,7 +805,7 @@ CE.output.temp <- cbind(alts[[i]], formatC(CEICA$BB[[i]][[1]][,1], format="f", d
                         formatC(CEICA$ProjectFirst[[i]], format="f", digits=0, big.mark = ","),
                         CEICA$BB[[i]][[1]][,3], CEICA$BB[[i]][[1]][,4])
 colnames(CE.output.temp) <- CE.output.temp.names
-knitr::kable(CE.output.temp, caption="Cost-effectiveness summary.", align='c') 
+knitr::kable(CE.output.temp, caption="Table 20. Cost-effectiveness summary for Site-19A.", align='c') 
 ```
 
 ## *Summary of Site Recommendations*
@@ -818,7 +823,7 @@ for(i in 1:nsites){find.site.data[i] <- which(AAHU$ReachID == sites[i])[site.rec
 
 #SEND OUTPUT TABLE
 Table05 <- Table04[find.site.data,]
-knitr::kable(Table05, caption="Table 5. Summary of benefits and costs associated with site-scale recommendations.", align='c') 
+knitr::kable(Table05, caption="Table 21. Summary of benefits and costs associated with site-scale recommendations.", align='c') 
 ```
 
 # **4. Watershed-scale analysis: Ecological Benefits**
