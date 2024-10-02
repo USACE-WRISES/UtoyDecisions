@@ -1,6 +1,6 @@
 ---
-title: 'Decision Support Modeling for Utoy Creek'
-author: "S. Kyle McKay, Liya E. Abera, and Garrett Menichino"
+title: 'Socio-Economic Analysis'
+author: "S. Kyle McKay, Stephen Phillips, Liya E. Abera, and Garrett Menichino"
 date: "October 2024"
 output:
   html_document:
@@ -51,6 +51,10 @@ eco <- read.csv("Utoy_Phase 2_EcoInputs_2024-08-05_EcoIn.csv", header=TRUE, dec=
 
 #Import cost data
 cost <- read.csv("Utoy_Phase 2_EcoInputs_2024-08-05_CostIn.csv", header=TRUE, dec=".", na.strings="NA", stringsAsFactors = FALSE)
+
+#Import census data
+census <- read.csv("Utoy_Phase 2_EcoInputs_2024-10-01_CensusIn.csv", header=TRUE, dec=".", na.strings="NA", stringsAsFactors = FALSE)
+ncensus <- length(census$Census.Tract.Number)
 ```
 
 # **1. Introduction**
@@ -268,7 +272,7 @@ rownames(Table02) <- NULL
 knitr::kable(Table02, caption="Table 2. Example of ecological benefits computations for Site-17F2M.", align='c') 
 ```
 
-Ecological models were executed for specific points in time over the project life, but decision models require a time-averaged or "annualized" metric of ecological benefit for comparison with monetary investments. These annualized ecological outcomes are referred to as Average Annual Habitat Units (AAHUs). Ecological outcomes were annualized using the [ecorest](https://cran.r-project.org/web/packages/ecorest/index.html) R-package (Version 2.0.0, McKay et al. 2024b). Figure 3 shows an example of the annualization process for all alternatives at Site-17F2M to demonstrate methodologically how annualization works. Additionally, all ecological outcomes are presented as the net effect of restoration actions over the future without project condition, which is frequently called "ecological lift." Ecological outcomes are summarized in Appendix B. 
+Ecological models were executed for specific points in time over the project life, but decision models require a time-averaged or "annualized" metric of ecological benefit for comparison with monetary investments. These annualized ecological outcomes are referred to as Average Annual Habitat Units (AAHUs). Ecological outcomes were annualized using the [ecorest](https://cran.r-project.org/web/packages/ecorest/index.html) R-package (Version 2.0.0, McKay et al. 2024b). Figure 3 shows an example of the annualization process for all alternatives at Site-17F2M to demonstrate methodologically how annualization works. Additionally, all ecological outcomes are presented as the net effect of restoration actions over the future without project condition, which is frequently called "ecological lift." Ecological outcomes are summarized in Appendix B.
 
 ```{r}
 #BENEFIT ANNUALIZATION
@@ -359,9 +363,9 @@ invisible(dev.off())
 
 Cost estimates were compiled for each site-scale restoration action following standard cost engineering methods. At this phase, construction cost represents a parametric cost for comparative purposes only, which is confined to construction activities. No real estate, pre-construction engineering and design, construction management, or cultural resources costs were included at present.
 
-Monitoring and adaptive management are typically conducted over a ten-year window for ecosystem restoration projects (WRDA 2007, Section 2036). Monitoring cost was estimated for four points in time, a sampling event during pre-construction engineering design as well as sampling in years 1, 3, and 5 following construction. Each sampling event assumed collection of data on fish communities, invertebrate communities, bathymetric mapping, and hydraulic outcomes. Adaptive management was estimated a proportion of construction cost ranging between 7.5% and 25% depending on site- and alternative-complexity (Appendix B). 
+Monitoring and adaptive management are typically conducted over a ten-year window for ecosystem restoration projects (WRDA 2007, Section 2036). Monitoring cost was estimated for four points in time, a sampling event during pre-construction engineering design as well as sampling in years 1, 3, and 5 following construction. Each sampling event assumed collection of data on fish communities, invertebrate communities, bathymetric mapping, and hydraulic outcomes. Adaptive management was estimated a proportion of construction cost ranging between 7.5% and 25% depending on site- and alternative-complexity (Appendix B).
 
-Operations, maintenance, repair, replacement, and rehabilitation (OMRRR) costs were estimated relative to four common practices. First, quarterly site visits were planned for general maintenance to any small-scale restoration features, trash removal, and minor maintenance of educational features (signage, benches, or classrooms) at a cost of \$10,000 per year. Second, bi-annual site visits were planned to include a simple inspection, which were estimated as \$4.00 per linear foot of stream every other year. Third, invasive species removal was estimated to cost \$15,000 per site and occur once every 10-years. Fourth, repair of structural restoration features (e.g., rock, wood, and earth work) was assumed to occur once every 25 years. These estimates resulted in OMRRR costs ranging from 1.2% to 16.7% or construction cost depending on the site and alternative (Appendix B, Table B1), which is approximately in line with other stream restoration projects (Abera and McKay 2023). 
+Operations, maintenance, repair, replacement, and rehabilitation (OMRRR) costs were estimated relative to four common practices. First, quarterly site visits were planned for general maintenance to any small-scale restoration features, trash removal, and minor maintenance of educational features (signage, benches, or classrooms) at a cost of \$10,000 per year. Second, bi-annual site visits were planned to include a simple inspection, which were estimated as \$4.00 per linear foot of stream every other year. Third, invasive species removal was estimated to cost \$15,000 per site and occur once every 10-years. Fourth, repair of structural restoration features (e.g., rock, wood, and earth work) was assumed to occur once every 25 years. These estimates resulted in OMRRR costs ranging from 1.2% to 16.7% or construction cost depending on the site and alternative (Appendix B, Table B1), which is approximately in line with other stream restoration projects (Abera and McKay 2023).
 
 Average annual economic costs were computed for all cost categories. Interest during construction was computed based on construction costs with site- and alternative-specific construction durations. The FY24 Federal discount rate (2.75%, USACE 2023) was used to annualize construction cost, interest during construction, and monitoring and adaptive management expenses over a 50-year planning horizon. Cost data were annualized using the [EngrEcon](https://cran.r-project.org/web/packages/EngrEcon/index.html) software package, although a [web application](https://wrises.shinyapps.io/engrecon-webapp/) also exists for conducting these calculations. Table 3 provides an example of cost estimates for Site-17F2M, and Appendix B provides a cost summary for all sites and actions.
 
@@ -462,10 +466,9 @@ knitr::kable(Table03, caption="Table 3. Example of monetary cost data for Site-1
 
 ## *Summary of Inputs to CEICA*
 
-Non-monetary ecological benefits and monetary investment costs provide the primary inputs to CEICA. This chapter has examined the methods by which these outcomes were obtained, although other portions of the feasibility report provide greater detail. Table 4 summarizes the benefits and costs of all restoration actions at all sites considered in this analysis. 
+Non-monetary ecological benefits and monetary investment costs provide the primary inputs to CEICA. This chapter has examined the methods by which these outcomes were obtained, although other portions of the feasibility report provide greater detail. Table 4 summarizes the benefits and costs of all restoration actions at all sites considered in this analysis.
 
-The plan formulation strategy sought to identify a range of potential costs and ecological benefits, which was generally achieved. For instance, unit costs provide a range of investment options within each site (e.g., \$8,000 - \$45,000 per AAHU at Site-17F2M). Unit costs also vary widely across sites (i.e., \$2,000 - \$97,000 per AAHU). Furthermore, construction costs are in appropriate ranges to align with the CAP authorization for the Utoy Creek project. 
-
+The plan formulation strategy sought to identify a range of potential costs and ecological benefits, which was generally achieved. For instance, unit costs provide a range of investment options within each site (e.g., \$8,000 - \$45,000 per AAHU at Site-17F2M). Unit costs also vary widely across sites (i.e., \$2,000 - \$97,000 per AAHU). Furthermore, construction costs are in appropriate ranges to align with the CAP authorization for the Utoy Creek project.
 
 ```{r}
 #SEND OUTPUT TABLE
@@ -482,15 +485,17 @@ knitr::kable(Table04, caption="Table 4. Summary of benefit and cost inputs for e
 
 # **3. Site-by-site analysis**
 
-**RESUME EDITING HERE.** In this section, yada yada yada. Blah, blah, blah.
+This chapter conducts cost-effectiveness and incremental cost analysis (CEICA) to inform site-scale decision-making. These analytic tools provide a mechanism to examine the relative merits of different alternatives and elucidate trade-offs associated with levels of costs and ecological benefits.
 
 Cost-effectiveness analysis provides a mechanism for examining the efficiency of alternative actions (Robinson et al. 1995). For any given level of investment, the agency wants to identify the plan with the most return-on-investment (i.e., the most environmental benefits for a given level of cost or the least cost for a given level of environmental benefit). An "efficiency frontier" identifies all plans that efficiently provide benefits on a *per cost basis*.
 
 Incremental cost analysis is conducted on the set of cost-effective plans. This technique sequentially compares each plan to all higher cost plans to reveal changes in unit cost as output levels increase and eliminates plans that do not efficiently provide benefits on an *incremental unit cost basis*. Specifically, this analysis examines the slope of the cost-effectiveness frontier to isolate how the unit cost (\$/unit) increases as the magnitude of environmental benefit increases. Incremental cost analysis is ultimately intended to inform decision-makers about the consequences of increasing unit cost when increasing benefits (i.e., each unit becomes more expensive). Plans emerging from incremental cost analysis efficiently accomplish the objective relative to unit costs and are typically referred to as "best buys." Importantly, all "best buys" are cost-effective, but all cost-effective plans are not best buys.
 
-For Utoy Creek, CEICA will ultimately be applied at both the site- and watershed-scales in the feasibility study. However, only watershed scale assessments are presented here for the purpose of site screening. Five separate CEICA analyses are undertaken for: (1) the mainstem Utoy Creek and lower Watershed, (2) North Utoy Creek Watershed, (3) South Utoy Creek Watershed, (4) hydrologic restoration actions, and (5) social outcomes. These sets of actions were separately assessed for multiple reasons. First, a separate prioritization more equitably distributes actions across the watershed and allows the USACE team to see portfolios of actions more clearly emerge. Second, hydrologic and social outcomes relied on different metrics, and separate prioritization facilitates comparison of outcomes in a more comprehensive format. Third, the larger number of sites in Utoy Creek (63 sites) creates numerical limitations to studying portfolios of actions (i.e., 9 \* 10\^18 potential combinations). Because of this numerical constraint, a maximum five restoration actions were allowed in each portfolio. These four planning sets are presented separately below.
+For Utoy Creek, CEICA is applied at both the site- and watershed-scales in the feasibility study. In this chapter, CEICA is used to identify a recommended restoration action for each site. These site-scale recommendations are then examined as a portfolio of actions at the watershed-scale in Chapter 4. All combinations of actions and sites would have resulted in 49,152 potential plans. However, a sequential approach to site- and watershed-scale analyses was deemed preferable for two reasons. First, the different scales have different questions guiding plan formulation, namely: What is the preferred action at this site in light of constraints? What portfolio of actions makes the most sense for the watershed as a whole? Second, the sequential approach facilitated a dialog among team members about the relative merits of specific actions at both scales, and thus, this approach involved more critical thinking about the trade-offs at these different scales.
 
-Conduct CEICA for all sites and store results.
+CEICA was executed using the [ecorest](https://cran.r-project.org/web/packages/ecorest/index.html) R-package (Version 2.0.0, McKay et al. 2024b). This software tool allowed for real-time updates of inputs as they were developed, coupling of ecological models and decision support models, and facilitated documentation using [rmarkdown](https://rmarkdown.rstudio.com/). Upon selection of the TSP, the CEICA outcomes were manually recomputed in [IWR Planning Suite II](https://www.iwr.usace.army.mil/missions/economics/iwr-planning-suite/), which produced the same results.
+
+The following sections present the CEICA along with the decision logic for each site. The logic of decision-making was to visually examine CEICA results side-by-side, default to a decision array of best buy plans from incremental cost analysis, and then explore other cost-effective plans if appropriate. For each site, the project development team met to discuss site-scale recommendations, including diverse perspectives from planning, engineering, environmental, real estate, cultural resources, and project management. CEICA data were synthesized with other information to arrive at a recommended action. Each recommendation is accompanied by the supporting decision logic at the site. Notably, incremental cost values use unrounded habitat units and costs, which may lead to minor rounding errors relative to manual calculations. 
 
 ```{r}
 #Create empty list to store CEICA outcomes and alternative names
@@ -532,14 +537,17 @@ for(i in 1:nsites){
 
 ## *Site 17F2M*
 
-This is just placeholder text. Describe the site and alternatives. **EXPECTED Alt 1 and 3 to be competitive. NEED TO REVISIT BENEFITS AND DOUBLE-CHECK AREAS.** Alternatives 1 and 2 may be more compelling in light of connectivity to 17D2E.
+Site-17F2M is an 0.45-mile reach of trapezoidal concrete channel through the John A. White Golf Course. There is current no forested riparian area with the mowed areas of the golf course extending to the edge of the concrete channel. The site was initially divided into two reachs (17F and 17M), but the reaches were combined since due to the nearly identical channel geometry, problems and opportunities, and their proximity for mobilization. Three restoration alternatives were conceptualized with varying amounts of riparian restoration, all of which include removal of the concrete channel.
 
--   FWOP: Future WithOut Project. Significant ecological degradation at the site compels action at this site.
--   Alternative1: Concrete channel removal with extensive riparian restoration.\
--   Alternative2: Remove concrete channel with small-scale channel restoration.\
--   Alternative3 (**TENTATIVE RECOMMENDATION**): Chain of wetlands. Likely to have large hydrologic and sediment capture benefits, which would protect downstream investments. Line of sight in the golf course would not be impeded.
+Benefits and costs were computed for each alternative, and CEICA were applied to these data. Figure 4 summarizes the CEICA results. Table 5 presents the incremental cost analysis for the best buy alternatives (only the FWOP and Alternative3). Table 6 summarizes outputs for all alternatives. Based on these data and team input, the recommended action at this site is Alternative3. The decision logic for this alternative is as follows:
 
-![*CEICA Summary for 17F2M.*](CEICA.17F2M.jpeg)
+-   *FWOP: Future WithOut Project*. Significant ecological degradation at the site compels action at this site.
+-   *Alternative1: Concrete channel removal with extensive riparian restoration*. This action removes the major source of degradation (the concrete channel) and plants approximately 25-foot forested buffers on each streambank. While addressing the primary issue, the forested buffer has the potential to conflict with current land use at the golf course, and the naturalization of the streambed may not address the high velocity flows of the concrete channel.\
+-   *Alternative2: Remove concrete channel with small-scale channel restoration*. This action removes the major source of degradation (the concrete channel) and plants approximately 10-foot forested buffers on each streambank. The alternative sought to provide a small buffer strip to return some basic riparian functions (e.g., shading, bank stabilization), but the smaller area still has potential for conflicts with the golf course usage. Furthermore, the large capital cost of concrete removal compels more riparian restoration to achieve return-on-investment during the construction mobilization.\
+-   *Alternative3 (**TENTATIVE RECOMMENDATION**): Chain of wetlands*. This alternative removes the major source of degradation (the concrete channel) and creates a chain of wetland complexes through the reach. The goals of this design were to reduce channel velocities exiting the reach, which would have substantial benefits to hydrologic and sedimentologic processes downstream. Additionally, the wetland-oriented design could emphasize emergent vegetation (rather than forested cover), which would minimize line-of-sight conflicts with the golf course. This type of conversion of concrete channel to wetland has proven effective in other constrained urban sites (e.g., [Hanlon Park in Brisbane, Australia](https://landscapeaustralia.com/articles/restoration-and-connection-hanlon-parkburuda-waterway-rejuvenation/)). The downstream benefits also align with other investments in the watershed such as the downstream Site-17D2E, which is described in the following section.
+
+
+![*Figure 4. CEICA Summary for 17F2M.*](CEICA.17F2M.jpeg)
 
 ```{r}
 #Select site to display
@@ -552,7 +560,7 @@ BB.output.temp <- cbind(CEICA$altnames.BB[[i]], formatC(CEICA$BB[[i]][[2]][,1], 
                         formatC(CEICA$BB[[i]][[2]][,3], format="f", digits=0, big.mark = ","),
                         formatC(CEICA$ProjectFirst.BB[[i]], format="f", digits=0, big.mark = ","))
 colnames(BB.output.temp) <- BB.output.temp.names
-knitr::kable(BB.output.temp, caption="Incremental cost summary.", align='c') 
+knitr::kable(BB.output.temp, caption="Table 5. Incremental cost summary for Site-17F2M.", align='c') 
 
 #Display cost-effectiveness results
 CE.output.temp.names <- c("Alt", "Lift (AAHU)", "Avg Ann Cost", "Unit Cost","Construction Cost", "CE?", "BB?")
@@ -562,7 +570,7 @@ CE.output.temp <- cbind(alts[[i]], formatC(CEICA$BB[[i]][[1]][,1], format="f", d
                         formatC(CEICA$ProjectFirst[[i]], format="f", digits=0, big.mark = ","),
                         CEICA$BB[[i]][[1]][,3], CEICA$BB[[i]][[1]][,4])
 colnames(CE.output.temp) <- CE.output.temp.names
-knitr::kable(CE.output.temp, caption="Cost-effectiveness summary.", align='c') 
+knitr::kable(CE.output.temp, caption="Table 6. Cost-effectiveness summary for Site-17F2M.", align='c') 
 ```
 
 ## *Site 17D2E*
@@ -574,7 +582,7 @@ This is just placeholder text. Describe the site and alternatives.
 -   Alternative2: Concrete channel removal with bankfull bench. Not a best buy, but a strong option. Mobilization cost compels the larger action (Alternative1).\
 -   Alternative3: Stabilization with natural bed and grade control. Does not lead to as large of ecological lift, but better than FWOP.
 
-![*CEICA Summary for 17D2E.*](CEICA.17D2E.jpeg)
+![*Figure 5. CEICA Summary for 17D2E.*](CEICA.17D2E.jpeg)
 
 ```{r}
 #Select site to display
@@ -607,7 +615,7 @@ This is just placeholder text. Describe the site and alternatives. **CONFUSION A
 -   Alternative2 (**RECOMMENDATION**): Channel and bank stabilization. Justified by large increase in ecological benefits. Channel degradation appears to be the proximate cause of bank issues. Need to increase adaptive management cost to understand the role of beavers in the system. Need to be mindful of existing riparian zone in refinement of the designs moving forward (access to the site via greenway could mitigate this construction impact). Strong connectivity to upstream investments in 17F2M and 17D2E. Proximity to the greenway and school compels for a larger action. 17C provides bedrock control to minimize risks.\
 -   Alternative3: Bank stabilization only. Low ecological benefits given the size of the site, Channel degradation is causing bank erosion.
 
-![*CEICA Summary for 17B.*](CEICA.17B.jpeg)
+![*Figure 6. CEICA Summary for 17B.*](CEICA.17B.jpeg)
 
 ```{r}
 #Select site to display
@@ -640,7 +648,7 @@ This is just placeholder text. Describe the site and alternatives. Potential rea
 -   Alternative2: Channel shaping with bankfull bench.\
 -   Alternative3: Minor instream structures. Not economically competitive given high cost and low benefit.
 
-![*CEICA Summary for 2A.*](CEICA.2A.jpeg)
+![*Figure 7. CEICA Summary for 2A.*](CEICA.2A.jpeg)
 
 ```{r}
 #Select site to display
@@ -673,7 +681,7 @@ This is just placeholder text. Describe the site and alternatives. Potential rea
 -   Alternative2: Channel shaping with bankfull bench.\
 -   Alternative3: Minor instream structures. High unit cost.
 
-![*CEICA Summary for 2B.*](CEICA.2B.jpeg)
+![*Figure 8. CEICA Summary for 2B.*](CEICA.2B.jpeg)
 
 ```{r}
 #Select site to display
@@ -706,7 +714,7 @@ This is just placeholder text. Describe the site and alternatives.
 -   Alternative2: Brdige replacement with minor action. Very high unit cost.\
 -   Alternative3: Bank stabilization. High unit cost relative to other sites.
 
-![*CEICA Summary for 3E.*](CEICA.3E.jpeg)
+![*Figure 9. CEICA Summary for 3E.*](CEICA.3E.jpeg)
 
 ```{r}
 #Select site to display
@@ -739,7 +747,7 @@ This is just placeholder text. Describe the site and alternatives. Note the high
 -   Alternative2: Large wood features for 25% of reach. Non-cost-effective.\
 -   Alternative3: Beaver reintroduction. Cost-effective plan (nearly a best buy). Lots of room for the river at this site, but flood risk needs to be considered further. Experimental action has low-cost, high-reward potential with strong demonstration value for the region as a whole. Uncertain timeframe for benefits with beavers. Downstream bridge crossing with known debris jams. Utility line crossing has a high risk component. Concern about liability of beaver moving off-site into neighboring areas.
 
-![*CEICA Summary for 3F.*](CEICA.3F.jpeg)
+![*Figure 10. CEICA Summary for 3F.*](CEICA.3F.jpeg)
 
 ```{r}
 #Select site to display
@@ -771,7 +779,7 @@ This is just placeholder text. Describe the site and alternatives. Alternative 1
 -   Alternative2 (**RECOMMENDATION**): Floodplain bench for floodplain connectivity. Best buy. Very low unit cost. Also includes regrading actions from Alternative3.\
 -   Alternative3: Regrade segment around culvert.
 
-![*CEICA Summary for 19A.*](CEICA.19A.jpeg)
+![*Figure 11. CEICA Summary for 19A.*](CEICA.19A.jpeg)
 
 ```{r}
 #Select site to display
@@ -866,7 +874,7 @@ sys.CEICA$BB <- sys.CEICA.BB[[1]][,4]
 CEICAplotter(sys.CEICA$Plan, sys.CEICA$Lift, sys.CEICA$AvgAnnCost, sys.CEICA$CE, sys.CEICA$BB, "CEICA.sys.jpeg")
 ```
 
-![*CEICA Summary for watershed-scale recommendations.*](CEICA.sys.jpeg)
+![*Figure 12. CEICA Summary for watershed-scale recommendations.*](CEICA.sys.jpeg)
 
 ```{r}
 #Names of BB plans
@@ -914,11 +922,54 @@ knitr::kable(Table07, caption="Table 07. Final array of watershed-scale plans.",
 
 This is just placeholder text.
 
-# **5. Economic Analysis of the Tentatively Selected Plan (TSP)**
+# **5. Economics, Socioeconomics, and Human Resources**
 
-This is just placeholder text.
+This is just placeholder text for an introduction.
 
-# **5. Summary of Recommendations**
+Generally, Georgia's economy is characterized as diversified, dynamic, and strong with the Bureau of Economic Analysis measuring its gross state product to be \$805 billion in 2023. Georgia's temperate weather and piedmont mountains attracts vacationers and other visitors and helps make the state a popular destination for people all over the country and world. The City of Atlanta is recognized as having the busiest airport in the world, which is located adjacent to the Utoy Creek Watershed at its Southeast.
+
+The unemployment rate for the State of Georgia and Fulton County is 3.4 and 4.1 percent, respectively, as reported by the Bureau of Labor Statistics for July 2024 (data come from the monthly Current Population Survey, also known as the household survey). While not directly comparable, but as a point of reference, the average unemployment rate in 2022 for the 40 Census Tracts comprising the Utoy Creek Watershed according to the Census Bureau's 5-Year estimates from the American Community Survey is 5.7%.
+
+Median household income in Georgia is \$71,355 in 2022, and higher in the Atlanta MSA of \$82,625. However, despite the Utoy Creek Watershed being within the Atlanta MSA and its residents incurring its higher cost of living, the weighted average Median Household Income for residents within the watershed is lower than that of the Atlanta MSA and lower than that of the state of Georgia. The weighted average median household income for residents within the Utoy Creek watershed is \$62,737.
+
+## *Demographics*
+
+Insert introductory comment.
+
+U.S. Census Bureau, 2022 American Community Survey (ACS) 5-Year Estimates. Income in the Past 12 Months (in 2022 Inflation-Adjusted Dollars).
+
+*Georgia Population and Demographics*: The U.S. Census Bureau estimates Georgia to have a total population of 10,912,876 as of July 1, 2022, from extrapolating from the 2020 Decennial Census, which reported the State population at 10,711,937 allowing U.S. Census Bureau to infer growth in the State's population of 190% with 51.1% identifying as female. A strong majority of the State's population (91.2%) identify as one race alone, with 50.3% identifying as White, 30.8% identifying as Black or African American, 11.1% identifying as Hispanic or Latino, 5.5% identifying as Asian, 0.5% identifying as American Indian and Alaska Native, and 0.1% being Native Hawaiian and Other Pacific Islander. Within Georgia there are 4,092,467 households with an average of 2.6 persons per household.
+
+*Fulton County Population and Demographics*: The U.S. Census Bureau estimates Fulton County to have a total population of 1,079,105 as of July 1, 2023, from extrapolating from the 2020 Census, which reported the County population at 1,066,675 allowing the U.S. Census Bureau to infer an increase in the County's population of 1.2% with 51.4% identifying as female. A strong majority of the County's population (97.6%) identifying as one race alone, with 45.1% identifying as Black or African American, 44% identifying as White, 8.2% identifying as Hispanic or Latino, 8.2% identifying as Asian, and 0.3% identifying as American Indian and Alaska Native.
+
+*City of Atlanta, GA Demographics*: The U.S. Census Bureau estimates the City of Atlanta to have a total population of 510,823 as of July 1, 2023, from extrapolating from the 2020 Census, which reported the County population at 498,736 allowing the U.S. Census Bureau to infer an increase in the City's population of 2.4% with 50.6% identifying as female. A strong majority of the City's population (95.3%) identifying as one race alone, with 47.6% identifying as Black or African American, 40.8% identifying as White, 5.4% identifying as Hispanic or Latino, 4.9% identifying as Asian, and 0.3% identifying as American Indian and Alaska Native. The City's median household income reported at \$77,655 and an employment rate of 67.2% compared with the employment rate of 62.9% for the State of GA. The median household income in the United States was \$75,149 in 2022 dollars.
+
+*Utoy Creek Watershed Demographics*: The Utoy Creek Watershed overlaps with 40 census tracts as delineated by the 2020 Census. Figure 3 below and its corresponding Tables 2-5 depict these Utoy Creek Watershed 2020 Census Tracts' population and population density profile, age and gender profile, ethnic profile, and income, employment and poverty profile.
+
+*Utoy Creek Demographics for Underserved Communities*: The Climate and Economic Justice and the Environmental Protection Agency EJ Screen Mapping Tool was used to identify 36 communities within a one-mile radius located along the Utoy Creek area. See Appendix E for additional demographics and a community profile.
+
+![*Figure 13. Map of 2020 census tract boundaries in the Utoy Creek Watershed. There are 40 census tracts that overlap the watershed.*](Utoy_Census_Tracts.png)
+
+```{r}
+#Table of census tracts and population density
+Table0X <- cbind(census$Census.Tract.Number,
+                 formatC(census$Square.Miles, format="f", digits=3, big.mark = ","),
+                 formatC(census$X2020.Population, format="f", digits=0, big.mark = ","),
+                 formatC(census$X2020.Population.Density.per.square.mile, format="f", digits=0, big.mark = ","))
+colnames(Table0X) <- c("Census Tract","Area (sq miles)", "Population (2020)", "Population Density per Sq Mile (2020)")
+Table0X <- Table0X[-ncensus,]
+rownames(Table0X) <- NULL
+knitr::kable(Table0X, caption="Table 0X. Utoy Creek watershed census tracts population and density. Data from U.S. Census Bureau, 2020 Census Demographic Profile and U.S. Census Bureau 2023 Geographic Information Table.", align='c') 
+```
+
+
+
+
+## *Summary*
+
+What does this analysis tell us about the TSP?
+
+# **6. Summary of Recommendations**
 
 In this section, yada yada yada. Blah, blah, blah.
 
@@ -973,6 +1024,7 @@ Wiest S., Menichino G.T., and McKay S.K. *Forthcoming*. Riparian Ecosystem Funct
 -   CEICA: Cost-effectiveness and incremental cost analysis.\
 -   CoA: City of Atlanta.\
 -   ERDC: U.S. Army Engineer Research and Development Center.\
+-   FWOP: Future WithOut Project.\
 -   HU: Habitat Units.\
 -   OSE: Other Social Effects.\
 -   PED: Pre-construction Engineering and Design.\
@@ -981,7 +1033,6 @@ Wiest S., Menichino G.T., and McKay S.K. *Forthcoming*. Riparian Ecosystem Funct
 -   USACE: U.S. Army Corps of Engineers.
 
 # **Appendix B: Site-scale Ecological and Cost Data**
-
 
 ```{r}
 #Table of all ecological outputs.
@@ -1027,7 +1078,6 @@ colnames(TableB03) <- c("Site", "Alternative", "Construction Duration (mo)",
 rownames(TableB03) <- NULL
 knitr::kable(TableB03, caption="Table B03. Major cost categories for all Utoy Creek sites.", align='c') 
 ```
-
 
 # **Appendix C: CEICA Outcomes for All Watershed-scale Plans**
 
