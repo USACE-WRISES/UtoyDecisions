@@ -3,15 +3,15 @@ title: 'Socio-Economic Analysis'
 author: "S. Kyle McKay, Stephen Phillips, Liya E. Abera, and Garrett Menichino"
 date: "October 2024"
 output:
+  word_document:
+    toc: yes
+    toc_depth: '5'
   html_document:
     toc: yes
     toc_depth: 5
     toc_float:
       collapsed: no
       smooth_scroll: yes
-  word_document:
-    toc: yes
-    toc_depth: '5'
 ---
 
 **Corresponding Author**:\
@@ -63,11 +63,11 @@ The Utoy Creek watershed drains the southwest portion of the City of Atlanta int
 
 ![*Figure 1. Overview of the Utoy Creek watershed.*](Utoy_Watershed_Map.png)
 
-In partnership with the City of Atlanta, the USACE's Mobile District is leading a feasibility study of potential stream restoration actions in the Utoy Creek watershed. The study is authorized through the USACE's continuing authorities program (CAP) for aquatic ecosystem restoration (Section 206, WRDA 1996). In summer 2023, the project development team conducted preliminary project planning activities such as identification of problems and opportunities, setting ecosystem restoration objectives, and screening potential restoration sites. From fall 2023 to summer 2024, the project development team advanced restoration planning through actions such as field data collection, design of alternatives, ecological modeling, cost estimation, analysis of socio-economic benefits, and public and interagency meetings. This report summarizes various aspects of these activities for the purpose of informing restoration decisions and recommendations for the study as a whole. Specifically, this document presents cost-effectiveness and incremental cost analyses to guide development of the agency's recommended restoration plan as well as economic analysis of the recommend plan (**CHECK WITH STEPHEN PHILLIPS**).
+In partnership with the City of Atlanta, the USACE's Mobile District is leading a feasibility study of potential stream restoration actions in the Utoy Creek watershed. The study is authorized through the USACE's continuing authorities program (CAP) for aquatic ecosystem restoration (Section 206, WRDA 1996). In summer 2023, the project development team conducted preliminary project planning activities such as identification of problems and opportunities, setting ecosystem restoration objectives, and screening potential restoration sites. From fall 2023 to summer 2024, the project development team advanced restoration planning through actions such as field data collection, design of alternatives, ecological modeling, cost estimation, analysis of socio-economic benefits, and public and interagency meetings. This report summarizes various aspects of these activities for the purpose of informing restoration decisions and recommendations for the study as a whole. Specifically, this document presents cost-effectiveness and incremental cost analyses to guide development of the agency's recommended restoration plan as well as demographic analysis of communities affected by the recommend plan.
 
 Cost-effectiveness and incremental cost analyses (CEICA) are a set of methods for comparing non-monetary ecological benefits with monetary investment costs. Cost-effectiveness analysis provides a mechanism for examining the efficiency of alternative actions (Robinson et al. 1995). An "efficiency frontier" identifies all plans that efficiently provide benefits on a *per cost basis*. Incremental cost analysis is conducted on the set of cost-effective plans. This technique sequentially compares each plan to all higher cost plans to reveal changes in unit cost as output levels increase and eliminates plans that do not efficiently provide benefits on an *incremental unit cost basis*. Collectively, these techniques help USACE planning teams assess the question of "Is the next increment of ecological benefit worth the next increment of investment cost?"
 
-This report applies CEICA in multiple contexts to inform decisions in the Utoy Creek watershed. In Chapter 2, the overarching project planning framework is presented that includes the plan formulation strategy along with an overview of ecological benefits and cost estimates. These data provide the fundamental inputs to CEICA and are presented here to contextualize decision making. Additional information on these analyses may be found in other portions of the feasibility report documents and appendices. In Chapter 3, CEICA is conducted for individual restoration sites separately to identify recommended outcomes based on ecological criteria (i.e., the authorized purpose). Chapter 4 conducts CEICA at the watershed-scale using the site-scale recommendations from the prior chapter with the goal of identifying an effective portfolio of investments based on ecological benefits. From this analysis, a Tentatively Selected Plan (TSP) is identified. In Chapter 5, a more comprehensive view of project benefits is undertaken by examining the economic benefits of the TSP (**CHECK WITH STEPHEN PHILLIPS**). Chapter 6 concludes with a synthesis of the recommendations from these analyses.
+This report applies CEICA in multiple contexts to inform decisions in the Utoy Creek watershed. In Chapter 2, the overarching project planning framework is presented that includes the plan formulation strategy along with an overview of ecological benefits and cost estimates. These data provide the fundamental inputs to CEICA and are presented here to contextualize decision making. Additional information on these analyses may be found in other portions of the feasibility report documents and appendices. In Chapter 3, CEICA is conducted for individual restoration sites separately to identify recommended outcomes based on ecological criteria (i.e., the authorized purpose). Chapter 4 conducts CEICA at the watershed-scale using the site-scale recommendations from the prior chapter with the goal of identifying an effective portfolio of investments based on ecological benefits. From this analysis, a Tentatively Selected Plan (TSP) is identified. In Chapter 5, a more comprehensive view of project benefits is undertaken by examining the demographic composition of the communities nearby the recommended restoration sites. Chapter 6 concludes with a synthesis of the recommendations from these analyses.
 
 # **2. Project Planning Framework**
 
@@ -755,9 +755,9 @@ Site-3F is a 0.83-mile reach of South Utoy Creek flowing from Dodson Drive South
 Benefits and costs were computed for each alternative, and CEICA were applied to these data. Figure 10 summarizes the CEICA results. Table 17 presents the incremental cost analysis for the best buy alternatives (only the FWOP and Alternative1). Table 18 summarizes outputs for all alternatives. Based on these data and team input, the recommended action at this site is Alternative1. The decision logic for this alternative is as follows:
 
 -   *FWOP: Future WithOut Project*.\
--   *Alternative1 (**RECOMMENDATION**): Large wood features for 50% of reach*. Innovative methods for southeast stream restoration using large wood in more explicit ways. Innovative methods compel inclusion of the larger plan. Non-monetary benefits of demonstrating new techniques.\
--   *Alternative2: Large wood features for 25% of reach*. Non-cost-effective.\
--   *Alternative3: Beaver reintroduction*. Cost-effective plan (nearly a best buy). Lots of room for the river at this site, but flood risk needs to be considered further. Experimental action has low-cost, high-reward potential with strong demonstration value for the region as a whole. Uncertain timeframe for benefits with beavers. Downstream bridge crossing with known debris jams. Utility line crossing has a high risk component. Concern about liability of beaver moving off-site into neighboring areas.
+-   *Alternative1 (**RECOMMENDATION**): Large wood features for 50% of reach*. This alternative draws on stream restoration techniques common in the Pacific Northwest using locally available large wood to create channel and bank stabilization features. Specifically, the alternative selectively harvests a few trees from the existing riparian area and cables them together into engineered log jams for a 50% of the reach length. While common elsewhere (Bandrowski and COnyngham 2016), these methods are rarely applied in southeastern streams. This pilot project would provide a regional example for the utility of this restoration approach. In addition to the anticipated ecological benefits, there would be qualitative benefits associated with innovation of new techniques.\
+-   *Alternative2: Large wood features for 25% of reach*. This alternative explores the same method as Alternative1, but for a smaller portion of the reach. The mobilization cost for this action represented a majority of the expense, so this action was not cost-effective due to similar cost, but reduced benefit area.\
+-   *Alternative3: Beaver reintroduction*. Beaver reintroduction is a growing technique in stream restoration, but significant uncertainties remain as to the effects of these ponds on different ecological processes (e.g., Sheppy et al. 2024). This alternative would reintroduce beaver to this site with the goals of attenuating runoff and reestablishing biologically-mediated channel stabilization. This site has sufficient space for consideration of this action, although flood risk implications should be carefully considered. This plan was identified as cost-effective and very nearly a best buy (unit cost was 11% larger than Alternative1). This somewhat experimental action has low cost and high potential reward with additional benefits as a demonstration for the region as a whole. However, the uncertainty of outcomes and unclear timeframes of ecological return-on-investment led to not recommending this action. Furthermore, a downstream bridge crossing has a known history of debris jams, and there was concern about exacerbating this issue. Furthermore, a utility line crossing in the reach introduced another high risk component. 
 
 ![*Figure 10. CEICA Summary for 3F.*](CEICA.3F.jpeg)
 
@@ -785,11 +785,11 @@ knitr::kable(CE.output.temp, caption="Table 18. Cost-effectiveness summary for S
 
 ## *Site 19A*
 
-This is just placeholder text. Describe the site and alternatives. Alternative 1 was formulated, but screened out due to constructability during design and cost.
+Site-19A is a 0.95-mile reach of South Utoy Creek that parallels I-285 and Glenview Drive Southwest. The reach has high levels of sedimentation. Three restoration alternatives were initially conceptualized with varying amounts of channel and bank improvements, although Alternative1 was screened out due to constructability concerns raised during engineering analysis. Benefits and costs were computed for the remaining alternatives, and CEICA were applied to these data. Figure 11 summarizes the CEICA results. Table 19 presents the incremental cost analysis for the best buy alternatives (only the FWOP and Alternative2). Table 20 summarizes outputs for all alternatives. Based on these data and team input, the recommended action at this site is Alternative2. The decision logic for this alternative is as follows:
 
 -   *FWOP: Future WithOut Project*.\
--   *Alternative2 (**RECOMMENDATION**): Floodplain bench for floodplain connectivity*. Best buy. Very low unit cost. Also includes regrading actions from Alternative3.\
--   *Alternative3: Regrade segment around culvert*. Insert. 
+-   *Alternative2 (**RECOMMENDATION**): Floodplain bench for floodplain connectivity*. This alternative constructs a two-stage channel with a vegetated floodplain bench. The alternative seeks to accelerate channel evolution processes to a new alternative stable state with a low elevation frequently floodplain floodplain. Additionally, the area around the culvert entrance and exit would be regraded to reduce fish passage issues. This alternative was a best buy and displayed low unit cost relative to other actions in the watershed.\
+-   *Alternative3: Regrade segment around culvert*. This alternative only included the regarding of the culvert area without the floodplain bench. The action was eliminated on the basis of much higher unit cost. 
 
 ![*Figure 11. CEICA Summary for 19A.*](CEICA.19A.jpeg)
 
@@ -815,9 +815,10 @@ colnames(CE.output.temp) <- CE.output.temp.names
 knitr::kable(CE.output.temp, caption="Table 20. Cost-effectiveness summary for Site-19A.", align='c') 
 ```
 
-## *Summary of Site Recommendations*
 
-This is just placeholder text.
+# **4. Watershed-scale analysis: Ecological Benefits**
+
+In this section, CEICA is applied at the watershed-scale to identify an efficient and effective portfolio of sites. This analysis assumes that sites are independent and that benefits and costs are additive. However, future analyses could consider dependencies between sites for ecological benefits or potential reductions in cost associated with joint mobilization efforts. Based on the analyses in Chapter 3, Table 21 summarizes the benefits and costs of the site-scale recommendations. Notably, no action is recommended at Site-3E, leaving 7 sites for consideration.
 
 ```{r}
 #Isolate the recommended alternative at each site (1=FWOP, 2=Alt1, 3=Alt2, 4=Alt3)
@@ -829,27 +830,16 @@ find.site.data <- c()
 for(i in 1:nsites){find.site.data[i] <- which(AAHU$ReachID == sites[i])[site.recs[i]]}
 
 #SEND OUTPUT TABLE
-Table05 <- Table04[find.site.data,]
-knitr::kable(Table05, caption="Table 21. Summary of benefits and costs associated with site-scale recommendations.", align='c') 
+Table21 <- Table04[find.site.data,]
+knitr::kable(Table21, caption="Table 21. Summary of benefits and costs associated with site-scale recommendations.", align='c') 
 ```
 
-# **4. Watershed-scale analysis: Ecological Benefits**
 
-In this section, yada yada yada. Blah, blah, blah.
+Based on these data, watershed-scale "plans" were derived based on all potential combinations of restoration sites (128 plans). Figure 12 summarizes the CEICA results for watershed-scale plans. Table 22 presents the incremental cost analysis for the best buy alternatives. Appendix C presents benefit, cost, and CEICA outcomes for all plans considered. Based on these data and team input, the following observations are offered to guide the recommendation of a watershed-scale restoration plan:
 
-## *CEICA with Ecological Benefits*
-
-This is just placeholder text. Notes on interpretting the results.
-
--   Concrete channel (17F2M and 17D2E) is a known sourse of ecological degradation and a clear ecological benefit. 17F2M and 17D2E are a cluster of activities. A plan including both of these actions is reasonable, which implies P128.\
--   The largest plan is still well-below the CAP limit, although costs will go up as the project proceeds.\
--   Includes four clusters of actions in the watershed: (1) known source of ecological degradation at the concrete channel at 17F2M, 17D2E, and 17B, (2) a clear problem in the larger system at 2A and 2B, (3) a demonstration or innovation site at 3F, and (4) a contribution to the South Utoy watershed at 19A.\
--   P128 provides the widest geographic coverage and thus provides the most access for communities. Social analysis in the subsequent section will be informative on this front.\
--   2A and 2B have the potential to be removed from the plan due to other constraints like real estate and partnership challenges.\
--   Which plan reasonably maximizes ecological benefits (i.e., is the NER)? Probably P128.\
--   What is the least environmentally damaging? Not sure.\
--   Which plan reasonably maximizes ALL benefits (from a comprehensive benefits perspective)? Contingent on the next CEICA with social outcomes.\
--   What is the lowest plan we would accept from an ecological perspective? P14 might be the least acceptable (2A, 2B, 19A) because it includes one actions in North and South Utoy each.
+-   The largest plan (P128) has an estimated construction cost of \$4.5M, which is well-below the continuing authorities program limit for Section 206 restoration projects. However, costs will go up as additional cost factors are included in the estimate (e.g., real estate). Said differently, all plans are feasible from a cost affordability standpoint.\
+-   In general, four clusters of actions are generally covered by these seven restoration sites. First, the channelized and concrete-lined portions of North Utoy Creek (Sites 17F2M, 17D2E, and 17B) represent a grouping of sites that is directly addressing a major source of ecological degradation. Second, the downstrema portions of North Utoy Creek (Sites 2A and 2B) have comparable issues with sedimentation, bank erosion, and lost riparian cover in a powerline easement. Third, Site-19A provides large potential for ecological benefits in the South Utoy Creek watershed. Finally, Site-3F provides a unique opportunity for demonstrating novel and innovative, low-cost stream restoration methods benefiting the entire southeast region.\
+-   The scope of the study initially emphasized a watershed scale. The first plan including actions in both the North and South Utoy sub-watersheds is P14, which includes Sites 2A, 2B, and 19A. This could be considered the smallest acceptable plan because it is the first that meets the goals of watershed-wide actions.
 
 ```{r}
 #Isolate benefit and cost data only for sites with recommendations
@@ -899,44 +889,49 @@ for(i in 1:sum(sys.CEICA$BB)){
 
 ##########
 #Display incremental cost results
-Table06 <- cbind(sys.CEICA[find.sys.BB,1:8], 
+Table22 <- cbind(sys.CEICA[find.sys.BB,1:8], 
                  formatC(sys.CEICA[find.sys.BB,9], format="f", digits=0, big.mark = ","),
                  formatC(sys.CEICA[find.sys.BB,10], format="f", digits=0, big.mark = ","),
                  formatC(sys.CEICA[find.sys.BB,11], format="f", digits=0, big.mark = ","),
                  formatC(sys.CEICA[find.sys.BB,10]/sys.CEICA[find.sys.BB,9], format="f", digits=0, big.mark = ","),
                  formatC(sys.CEICA.BB[[2]][,3], format="f", digits=0, big.mark = ","))
-colnames(Table06) <- c("Plan", AAHU$ReachID[find.site.data2], "Ecological Lift", 
+colnames(Table22) <- c("Plan", AAHU$ReachID[find.site.data2], "Ecological Lift", 
                        "Average Annual Cost", "Construction Cost", "Unit Cost", "Incremental Unit Cost")
-rownames(Table06) <- NULL
-knitr::kable(Table06, caption="Table 6. Summary of watershed-scale CEICA outcomes.", align='c') 
+rownames(Table22) <- NULL
+knitr::kable(Table22, caption="Table 22. Summary of watershed-scale CEICA outcomes. For each site, 1 and 0 represent the site being included and excluded from the plan, respectively.", align='c') 
 ```
 
-This table shows a down-select of the watershed-scale plans to include some other plans of interest
+These observations then guided the selection of the "final array" of watershed plans. One additional cost-effective plan was added to this set (P16), which introduces a plan with approximate parity between actions on North and South Utoy Creek sub-watersheds (i.e., 1.5 miles and 2 sites in North Utoy and 1.7 miles and 2 sites in South Utoy). This plan also introduces the innovative suite of actions at Site-3F. Because this plan introduces Site-3F, Plan 64 was eliminated from the final array. Table 23 presents a side-by-side comparison of the final array. Based on these data and team input, the recommended restoration plan (i.e., the Tentatively Selected Plan) is P128. The decision logic for this alternative is as follows:
+
+-   *Stepping from P14 to P16*. The addition of Site-3F is worth the incremental cost because of the high potential for ecological benefit at low cost. The value of this site as a potential demonstration site for the City of Atlanta and the region as a whole is also high. If these methods prove effective, they could expand the breadth and speed at which stream and riparian restoration could occur.\
+-   *Stepping from P16 to P30*. Site-17B is included in this plan, which expands the breadth of actions to upstream portions of the North Utoy Creek watershed. This upstream investment contributes to downstream sites (i.e., 2A and 2B) by reducing sediment inflows.\
+-   *Stepping from P30 to P62*. By including Site-17D2E, this plan begins to address a major cause of watershed degradation, the presence of the concrete channel.\
+-   *Stepping from P62 to P128 (**RECOMMENDATION**)*. This plan includes all sites. The final site added to the set is Site-17F2M, which is the largest extent of concrete channel and most impacted riparian community. The unit cost for this site was the highest due to the significant investment needed to address these problems, but the ecological return-on-investment is high by directly addressing the cause of degradation. Mobilization costs will also likely reduce at this site by addressing Sites 17D2E and 17F2M together. This plan also provides the widest geographic coverage, which by definition reaches the largest number of communities at the watershed-scale. This plan also preserves the option for eliminating sites based on further analysis such as real estate constraints. 
+
 
 ```{r}
 #Identify plans to consider in the "final array". 
-final.array <- c(1, 13, 14, 16, 46, 62, 64, 97, 109, 113, 128)
+final.array <- c(1, 14, 16, 30, 62, 128)
 
 #Table of all major cost data.
-Table07 <- cbind(sys.CEICA[,1:8], 
+Table23 <- cbind(sys.CEICA[,1:8], 
                  formatC(sys.CEICA[,9], format="f", digits=0, big.mark = ","),
                  formatC(sys.CEICA[,10], format="f", digits=0, big.mark = ","),
                  formatC(sys.CEICA[,11], format="f", digits=0, big.mark = ","),
                  formatC(sys.CEICA[,10]/sys.CEICA[,9], format="f", digits=0, big.mark = ","),
                  sys.CEICA[,12:13])
-colnames(Table07) <- c(colnames(sys.CEICA[1:11]),"Unit Cost", "CE", "BB")
-Table07 <- Table07[final.array,]
-rownames(Table07) <- NULL
-knitr::kable(Table07, caption="Table 07. Final array of watershed-scale plans.", align='c') 
+colnames(Table23) <- c(colnames(sys.CEICA[1:10]), "Construction Cost", "Unit Cost", "CE", "BB")
+Table23 <- Table23[final.array,]
+rownames(Table23) <- NULL
+knitr::kable(Table23, caption="Table 23. Final array of watershed-scale plans.", align='c') 
 ```
 
-## *Summary of the Tentatively Selected Plan (TSP)*
+This analysis indicates that **the Tentatively Selected Plan is P128**. This plan includes restoration actions at upstream portions of North Utoy Creek (17F2M, 17D2E, 17B), downstream in North Utoy Creek near the Utoy Creek mainstem (2A, 2B), and in the South Utoy Creek watershed (3F, 19A). Collectively, these sites produce 117 habitat units of ecological lift at an anticipated construction cost of \$4.5M (unit cost of \$3,000/AAHU). 
 
-This is just placeholder text.
 
 # **5. Economics, Socioeconomics, and Human Resources**
 
-This is just placeholder text for an introduction.
+Prior analyses have emphasized project outcomes relative to ecological criteria (i.e., the authorized purpose) and investment cost (i.e., the primary constraint). However, ecosystem restoration actions affect a variety of social and economic endpoints, and USACE teams have been directed to more clearly describe the "comprehensive benefits" of project planning choices. This chapter seeks to contextualize the Tentatively Selected Plan by assessing the demography of the communities most directly affected by the project.
 
 Generally, Georgia's economy is characterized as diversified, dynamic, and strong with the Bureau of Economic Analysis measuring its gross state product to be \$805 billion in 2023. Georgia's temperate weather and piedmont mountains attracts vacationers and other visitors and helps make the state a popular destination for people all over the country and world. The City of Atlanta is recognized as having the busiest airport in the world, which is located adjacent to the Utoy Creek Watershed at its Southeast.
 
@@ -944,11 +939,11 @@ The unemployment rate for the State of Georgia and Fulton County is 3.4 and 4.1 
 
 Median household income in Georgia is \$71,355 in 2022, and higher in the Atlanta MSA of \$82,625. However, despite the Utoy Creek Watershed being within the Atlanta MSA and its residents incurring its higher cost of living, the weighted average Median Household Income for residents within the watershed is lower than that of the Atlanta MSA and lower than that of the state of Georgia. The weighted average median household income for residents within the Utoy Creek watershed is \$62,737.
 
-## *Demographics*
+The following sections further analyze the demography of the Utoy Creek Watershed, and then more specifically the communities adjacent to the proposed restoration sites.
 
-Insert introductory comment.
+## *Watershed Demographic Analysis*
 
-U.S. Census Bureau, 2022 American Community Survey (ACS) 5-Year Estimates. Income in the Past 12 Months (in 2022 Inflation-Adjusted Dollars).
+This analysis provides some contextual statistical summaries about the demography of communities in the region. Data are primarily obtained from the U.S. Census Bureau's American Community Survey, although sources are also used to supplement these data.
 
 *Georgia Population and Demographics*: The U.S. Census Bureau estimates Georgia to have a total population of 10,912,876 as of July 1, 2022, from extrapolating from the 2020 Decennial Census, which reported the State population at 10,711,937 allowing U.S. Census Bureau to infer growth in the State's population of 190% with 51.1% identifying as female. A strong majority of the State's population (91.2%) identify as one race alone, with 50.3% identifying as White, 30.8% identifying as Black or African American, 11.1% identifying as Hispanic or Latino, 5.5% identifying as Asian, 0.5% identifying as American Indian and Alaska Native, and 0.1% being Native Hawaiian and Other Pacific Islander. Within Georgia there are 4,092,467 households with an average of 2.6 persons per household.
 
@@ -956,7 +951,7 @@ U.S. Census Bureau, 2022 American Community Survey (ACS) 5-Year Estimates. Incom
 
 *City of Atlanta, GA Demographics*: The U.S. Census Bureau estimates the City of Atlanta to have a total population of 510,823 as of July 1, 2023, from extrapolating from the 2020 Census, which reported the County population at 498,736 allowing the U.S. Census Bureau to infer an increase in the City's population of 2.4% with 50.6% identifying as female. A strong majority of the City's population (95.3%) identifying as one race alone, with 47.6% identifying as Black or African American, 40.8% identifying as White, 5.4% identifying as Hispanic or Latino, 4.9% identifying as Asian, and 0.3% identifying as American Indian and Alaska Native. The City's median household income reported at \$77,655 and an employment rate of 67.2% compared with the employment rate of 62.9% for the State of GA. The median household income in the United States was \$75,149 in 2022 dollars.
 
-*Utoy Creek Watershed Demographics*: The Utoy Creek Watershed overlaps with 40 census tracts as delineated by the 2020 Census. Figure 3 below and its corresponding Tables 2-5 depict these Utoy Creek Watershed 2020 Census Tracts' population and population density profile, age and gender profile, ethnic profile, and income, employment and poverty profile.
+*Utoy Creek Watershed Demographics*: The Utoy Creek Watershed overlaps with 40 census tracts as delineated by the 2020 Census. Figure 3 below and its corresponding Tables 24-27 depict these Utoy Creek Watershed 2020 Census Tracts' population and population density profile, age and gender profile, ethnic profile, and income, employment and poverty profile.
 
 *Utoy Creek Demographics for Underserved Communities*: The Climate and Economic Justice and the Environmental Protection Agency EJ Screen Mapping Tool was used to identify 36 communities within a one-mile radius located along the Utoy Creek area. See Appendix E for additional demographics and a community profile.
 
@@ -964,32 +959,119 @@ U.S. Census Bureau, 2022 American Community Survey (ACS) 5-Year Estimates. Incom
 
 ```{r}
 #Table of census tracts and population density
-Table0X <- cbind(census$Census.Tract.Number,
+Table24 <- cbind(census$Census.Tract.Number,
                  formatC(census$Square.Miles, format="f", digits=3, big.mark = ","),
                  formatC(census$X2020.Population, format="f", digits=0, big.mark = ","),
                  formatC(census$X2020.Population.Density.per.square.mile, format="f", digits=0, big.mark = ","))
-colnames(Table0X) <- c("Census Tract","Area (sq miles)", "Population (2020)", "Population Density per Sq Mile (2020)")
-Table0X <- Table0X[-ncensus,]
-rownames(Table0X) <- NULL
-knitr::kable(Table0X, caption="Table 0X. Utoy Creek watershed census tracts population and density. Data from U.S. Census Bureau, 2020 Census Demographic Profile and U.S. Census Bureau 2023 Geographic Information Table.", align='c') 
+colnames(Table24) <- c("Census Tract","Area (sq miles)", "Population (2020)", "Population Density per Sq Mile (2020)")
+Table24 <- Table24[-ncensus,]
+rownames(Table24) <- NULL
+knitr::kable(Table24, caption="Table 24. Utoy Creek watershed census tracts population and density. Data from U.S. Census Bureau, 2020 Census Demographic Profile and U.S. Census Bureau 2023 Geographic Information Table.", align='c') 
 ```
 
 
+```{r}
+#Table of census tracts and population density
+Table25 <- cbind(census$Census.Tract.Number,
+                 formatC(census$X2020.Population, format="f", digits=0, big.mark = ","),
+                 formatC(census$Male, format="f", digits=0, big.mark = ","),
+                 formatC(census$Female, format="f", digits=0, big.mark = ","),
+                 formatC(census$Under.5, format="f", digits=0, big.mark = ","),
+                 formatC(census$Under.18, format="f", digits=0, big.mark = ","),
+                 formatC(census$Over.65, format="f", digits=0, big.mark = ","))
+colnames(Table25) <- c("Census Tract", "Total", "Male", "Female", "Under 5", "Under 18", "Over 65")
+Table25 <- Table25[-ncensus,]
+rownames(Table25) <- NULL
+knitr::kable(Table25, caption="Table 25. Age and Gender Profile (Population in 2020), Utoy Creek Watershed. Data from U.S. Census Bureau, 2020 Census Demographic Profile.", align='c') 
+```
 
 
-## *Summary*
+```{r}
+#Table of census tracts and population density
+Table26 <- cbind(census$Census.Tract.Number,
+                 formatC(census$White.alone.or.in.combination.with.one.or.more.other.races, format="f", digits=0, big.mark = ","),
+                 formatC(census$Black.or.African.American.alone.or.in.combination.with.one.or.more.other.races, format="f", digits=0, big.mark = ","),
+                 formatC(census$American.Indian.and.Alaska.Native.alone.or.in.combination.with.one.or.more.other.races, format="f", digits=0, big.mark = ","),
+                 formatC(census$Asian.alone.or.in.combination.with.one.or.more.other.races, format="f", digits=0, big.mark = ","),
+                 formatC(census$Native.Hawaiian.and.Other.Pacific.Islander.alone.or.in.combination.with.one.or.more.other.races, format="f", digits=0, big.mark = ","),
+                 formatC(census$Some.Other.Race.alone.or.in.combination.with.one.or.more.other.races, format="f", digits=0, big.mark = ","))
+colnames(Table26) <- c("Census Tract", "White", "Black or African American", "American Indian and Alaska Native ", "Asian", "Native Hawaiian and Other Pacific Islander", "Some other race")
+rownames(Table26) <- NULL
+knitr::kable(Table26, caption="Table 26. Ethnic profile, Utoy Creek watershed. Data from U.S. Census Bureau, 2020 Census Demographic and Housing Characteristics File (DHC). All fields include the stated ethnicity alone or in combination with one or more other races.", align='c') 
+```
 
-What does this analysis tell us about the TSP?
+
+```{r}
+#Table of census tracts and population density
+Table27 <- cbind(census$Census.Tract.Number,
+                 formatC(census$Median.Household.Income.2022, format="f", digits=0, big.mark = ","),
+                 formatC(100*census$Median.Household.Income....of.MSA.Average., format="f", digits=0, big.mark = ","),
+                 formatC(100*census$Persons.Below.the.Poverty.Threshold...., format="f", digits=1, big.mark = ","),
+                 formatC(100*census$Unemployment.Rate, format="f", digits=1, big.mark = ","))
+colnames(Table27) <- c("Census Tract", "Median Household Income (2022)", "Median Household Income as a Percent of MSA Average", "Persons below the Poverty Threshold (%)", "Unemployment Rate (%)")
+rownames(Table27) <- NULL
+knitr::kable(Table27, caption="Table 27. Income, Poverty and Employment Profile, Utoy Creek Watershed. Data from U.S. Census Bureau, 2022 American Community Survey (ACS) 5-Year Estimates. Income in the Past 12 Months (in 2022 Inflation-Adjusted Dollars).", align='c') 
+```
+
+
+## *Restoration Site Demographics*
+
+The prior section provides context for the communities residing in the broader Utoy Creek Watershed. However, it is also constructive to consider the communities in closest proximity to the proposed restoration actions. Table 28 shows the recommended restoration sites alongside nearby Census Tracts. These data are not directly aligned with the site polygons or defined by a specific proximity. However, greater insight into the surrounding communities in provided. 
+
+Overall, the recommended restoration sites generally include communities with lower income, higher poverty, and higher unemployment than the surround Atlanta area. Notably, Sites 2A and 2B are exceptions to this trend. In Chapter 4, Sites 2A and 2B were the top priorities based solely on ecological criteria, but other sites could be prioritized based on social criteria. Furthermore, economic metrics surrounding Sites 17B, 17D2E, and 17F2M indicate greater levels of economic depression, which would further bolster support for their inclusion in the TSP (via Plans 62 and 128).
+
+
+```{r}
+#Identify tracts associated with restoration sites
+#17B/17D2E/17F2M -> Tracts 61 (row 6), 80 (row 27), 81.04 (row 29)
+#2A/2B -> Tracts 79 (row 26)
+#3F -> Tracts 77.08 (row 18)
+#19A -> Tracts 77.03 (row 15)
+#Atlanta -> row 41
+rest.census <- c(6, 27, 29, 26, 18, 15, 41)
+
+#Table of census tracts and population density
+Table28 <- cbind(c("17B/17D2E/17F2M", "17B/17D2E/17F2M", "17B/17D2E/17F2M", "2A/2B", "3F", "19A", "Watershed"),
+                 census$Census.Tract.Number[rest.census],
+                 formatC(census$Median.Household.Income.2022[rest.census], format="f", digits=0, big.mark = ","),
+                 formatC(100*census$Persons.Below.the.Poverty.Threshold....[rest.census], format="f", digits=1, big.mark = ","),
+                 formatC(100*census$Unemployment.Rate[rest.census], format="f", digits=1, big.mark = ","))
+colnames(Table28) <- c("Restoration Sites", "Nearby Census Tract", "Median Household Income (2022)", "Persons below the Poverty Threshold (%)", "Unemployment Rate (%)")
+rownames(Table28) <- NULL
+knitr::kable(Table28, caption="Table 28. Summary of demographic economic indicators for census tracts nearby proposed restoration sites", align='c') 
+```
+
 
 # **6. Summary of Recommendations**
 
 In this section, yada yada yada. Blah, blah, blah.
+
+This appendix has provided the rationale and logic supporting the Tentatively Selected Plan. Chapter 2 described the plan formulation strategy and estimation of ecological benefits and monetary costs. Chapter 3 considered restoration decisions at the site-scale and advanced seven sites for further consideration. Chapter 4 analyzed different portfolios of restoration projects by considering 128 watershed-scale plans, which identify P128 as the Tentatively Selected Plan (TSP). Chapter 5 then contextualized the selection of the TSP by considering the deomgraphy of neighboring communities at regional, watershed, and site scales.
+
+Ultimately, Plan 128 restores 7 ecologically degraded sites in the Utoy Creek watershed (Table 29). Collectively these actions provide 117 AAHUs at an average annual cost of \$358,000 and an estimated construction cost of \$4,530,000. Recommended restoration actions occur in both North and South Utoy Creek Watersheds but are clustered to maximize synergies between actions.
+
+
+```{r}
+#Grab data from Table 21 and add summary for all sites.
+Table29 <- as.data.frame(Table21[-6,])
+Table29[8,] <- c("All Sites", "", "", 
+                 formatC(sys.CEICA$Lift[128], format="f", digits=0, big.mark = ","),
+                 formatC(sys.CEICA$ProjectFirstCost[128], format="f", digits=0, big.mark = ","),
+                 formatC(sys.CEICA$AvgAnnCost[128], format="f", digits=0, big.mark = ","),
+                 formatC(sys.CEICA$AvgAnnCost[128]/sys.CEICA$Lift[128], format="f", digits=0, big.mark = ","))
+
+#SEND OUTPUT TABLE
+knitr::kable(Table29, caption="Table 29. Summary of restoration actions included in the Tentatively Selected Plan.", align='c') 
+```
+
 
 # **References Cited**
 
 Abera L. and McKay S.K. 2023. Life cycle cost analysis for stream restoration. ASCE Inspire, American Society of Civil Engineers, November 2023, Arlington, Virginia. <https://doi.org/10.1061/9780784485163.067>.
 
 Abera L. and McKay S.K. 2024. Package 'EngrEcon'. CRAN Reference Manual.
+
+Bandrowski D.J. and Conyngham J. 2016. National Large Wood Manual: Assessment, Planning, Design, and Maintenance of Large Wood in Fluvial Ecosystems: Restoring Process, Function, and Structure. Bureau of Reclamation and U.S. Army Engineer Research and Development Center.
 
 EPA. (2016). Total Maximum Daily Load Evaluation for Five Stream Segments in the Suwannee River Basin for Fecal Coliform. The Georgia Department of Natural Resources Environmental Protection Division, February.
 
@@ -1018,6 +1100,8 @@ McKay S.K., Hernández-Abrams D.D., and Cushway K.C. 2024b. Package 'ecorest'. V
 R Development Core Team. 2014. R: A language and environment for statistical computing. R Foundation for Statistical Computing, Vienna, Austria. www.R-project.org.
 
 Robinson R. Hansen W., and Orth K. 1995. Evaluation of environmental investments procedures manual interim: Cost effectiveness and incremental cost analyses. IWR Report 95-R-1. Institute for Water Resources, U.S. Army Corps of Engineers, Alexandria, Virginia.
+
+Sheppy, J., Sudduth, E.B., Clinton, S., Riveros-Iregui, D. and Ledford, S.H., 2024. Urban beaver ponds show limited impact on stream carbon quantity in contrast to stormwater ponds. Urban Ecosystems, pp.1-15.
 
 Steel, E.A., Beechie, T.J., Torgersen, C.E. and Fullerton, A.H., 2017. Envisioning, quantifying, and managing thermal regimes on river networks. BioScience, 67(6), pp.506-522.
 
