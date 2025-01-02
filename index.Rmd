@@ -1220,3 +1220,131 @@ colnames(TableC01) <- c(colnames(sys.CEICA[1:11]),"Unit Cost", "CE", "BB")
 rownames(TableC01) <- NULL
 knitr::kable(TableC01, caption="Table C01. Summary of watershed-scale CEICA.", align='c') 
 ```
+
+
+
+```{r}
+#FIGURES FOR JOURNAL PAPER
+
+########################################
+#FIGURE 3 - SITE-SCALE ALTERNATIVES ANALYSIS (17D2E)
+
+##########
+#Create plot to present annualization data
+jpeg(filename="ZZ_Fig03_AlternativesAnalysis.jpeg", width = 12, height = 12, units = "in", res = 400)
+
+#Specify two plot areas
+par(mfrow=c(2,2), mar=c(5, 4, 2, 2))
+
+#Create the shell of the plot
+plot(c(0, 1), c(0, 1), type = "n", 
+     xlim = c(0,50), ylim = c(0,22), axes = FALSE, 
+     xlab="Time (years)", ylab="Ecological Benefit (habitat units)", main="(A) Ecological benefits time series")
+axis(1)
+axis(2, at = axTicks(2), labels = prettyNum(axTicks(2), big.mark = ",", scientific = FALSE), las = 0, cex.axis = 1.0, tick = TRUE)
+
+#Turn on grid lines
+grid(); box()
+
+#Add FWOP
+lines(c(0,2,10,50), utoy$TOTAL.HU[49:52], lwd = 2, col="black")
+points(c(0,2,10,50), utoy$TOTAL.HU[49:52], pch = 19, cex = 2, col = "black")
+
+#Add Alternative 1
+lines(c(0,2,10,50), utoy$TOTAL.HU[53:56], lwd = 2, col="red")
+points(c(0,2,10,50), utoy$TOTAL.HU[53:56], pch = 19, cex = 2, col = "red")
+
+#Add Alternative 2
+lines(c(0,2,10,50), utoy$TOTAL.HU[57:60], lwd = 2, col="darkorange")
+points(c(0,2,10,50), utoy$TOTAL.HU[57:60], pch = 19, cex = 2, col = "darkorange")
+
+#Add Alternative 3
+lines(c(0,2,10,50), utoy$TOTAL.HU[61:64], lwd = 2, col="darkgoldenrod1")
+points(c(0,2,10,50), utoy$TOTAL.HU[61:64], pch = 19, cex = 2, col = "darkgoldenrod1")
+
+#Add legend
+legend("bottomright", legend = c("No Action", "Alternative1", "Alternative2", "Alternative3"), fill = c("black", "red", "darkorange", "darkgoldenrod1"), bg = "white")
+
+##########
+#Add barplot of AAHUs
+barplot(AAHU$Lift[5:8], names.arg=c("No Action", "Alternative1", "Alternative2", "Alternative3"), 
+        col=c("black", "red", "darkorange", "darkgoldenrod1"),ylim=c(0,15),
+        xlab="Site-Scale Restoration Alternative", ylab="Ecological Lift (average annual habitat units)", main="(B) Annualized ecological benefits")
+box()
+
+##########
+#Add stacked barplot of annualized cost
+barplot(as.matrix(t(cost_ann[5:8,3:7])), names.arg=c("No Action", "Alternative1", "Alternative2", "Alternative3"), axes=FALSE,
+        beside=FALSE, ylim=c(0,100000), #col=viridis(5),
+        density=c(0,20,20,200,20), angle=c(0,45,90,0,135), col="black",
+        xlab="Site-Scale Restoration Alternative", ylab="Annualized Cost ($)", main="(C) Annualized cost")
+box()
+axis(2, at = axTicks(2), labels = prettyNum(axTicks(2), big.mark = ",", scientific = FALSE), las = 0, cex.axis = 1.0, tick = TRUE)
+
+#Add legend
+legend("topleft", legend = c("Construction", "Monitoring", "Adaptive Management", "Interest During Construction", "Operations and Maintenance"), 
+       density=c(0,20,20,200,20), angle=c(0,45,90,0,135), col="black", bg = "white", cex=1)
+
+##########
+#Add cost-effectiveness diagram
+plot(c(0, 1), c(0, 1), type = "n", xlim = c(0,15), ylim = c(0,100000), axes = FALSE, 
+     xlab = "Ecological Lift (average annual habitat units)", ylab = "Annualized Cost ($)", main="(D) Cost-effectiveness analysis")
+grid(); box()
+axis(1)
+axis(2, at = axTicks(2), labels = prettyNum(axTicks(2), big.mark = ",", scientific = FALSE), las = 0, tick = TRUE)
+lines(AAHU$Lift[5:8][order(AAHU$Lift[5:8])], cost_ann$Total[5:8][order(cost_ann$Total[5:8])], lwd = 2)
+points(AAHU$Lift[5:8], cost_ann$Total[5:8], pch = 19, cex = 2.0, col=c("black", "red", "darkorange", "darkgoldenrod1"))
+points(AAHU$Lift[c(5,6)], cost_ann$Total[c(5,6)], pch = 1, lwd=3.0, cex = 5.0, col = "black")
+legend("topleft", legend = c("Restoration Alternatives", "Cost-Effective Frontier", "Best Buys"), lwd = c(NA, NA, 2), pch = c(19, NA, 1), pt.cex = c(2, NA, 4), col = c("black", "black", "black"), bg = "white")
+
+#Turn off plot device
+invisible(dev.off())
+
+########################################
+#FIGURE 4 - WATERSHED-SCALE PORTFOLIO
+
+CE.Fig4 <- which(sys.CEICA$CE==1)
+CE.cost.Fig4 <- sys.CEICA$AvgAnnCost[CE.Fig4] #This line reorders the cost data CE.cost.Fig4[order(CE.cost.Fig4)]
+CE.ben.Fig4 <- sys.CEICA$Lift[CE.Fig4] #This line reorders the benefit data CE.ben.Fig4[order(CE.cost.Fig4)]
+CEICA.Fig4.col <- c("black", viridis(7))
+
+##########
+#Create plot to present annualization data
+jpeg(filename="ZZ_Fig04_WatershedPortfolio.jpeg", width = 12, height = 6, units = "in", res = 400)
+
+#Specify two plot areas
+par(mfrow=c(1,2), mar=c(5, 4, 2, 2))
+
+##########
+#Add cost-effectiveness diagram
+plot(c(0, 1), c(0, 1), type = "n", xlim = c(0,120), ylim = c(0,400000), axes = FALSE, 
+     xlab = "Ecological Lift (average annual habitat units)", ylab = "Annualized Cost ($)", main="(A) Cost-effectiveness analysis")
+grid(); box()
+axis(1)
+axis(2, at = axTicks(2), labels = prettyNum(axTicks(2), big.mark = ",", scientific = FALSE), las = 0, tick = TRUE)
+points(sys.CEICA$Lift, sys.CEICA$AvgAnnCost, pch = 1, cex = 0.8)
+points(CE.ben.Fig4, CE.cost.Fig4, pch = 19, cex = 1.0, col="black")
+lines(CE.ben.Fig4[order(CE.cost.Fig4)], CE.cost.Fig4[order(CE.cost.Fig4)], lwd = 2)
+points(sys.CEICA.BB[[2]][,1], sys.CEICA.BB[[2]][,2], pch = 1, lwd=3.0, cex = 3.0, col=CEICA.Fig4.col)
+legend("topleft", legend = c("All Restoration Alternatives", "Cost-Effective Frontier", "Best Buys"), lwd = c(NA, 2, NA), pch = c(1, 19, 1), pt.cex = c(0.8, 1.0, 3), col = c("black", "black", "black"), bg = "white")
+
+##########
+#Add incremental cost diagram
+plot(c(0, 1), c(0, 1), type = "n", xlim = range(sys.CEICA.BB[[2]][,1]), ylim = range(sys.CEICA.BB[[2]][,3]), axes = FALSE, 
+     xlab = "Ecological Lift (average annual habitat units)", ylab = "Incremental Cost per Incremental Benefit ($ / habitat unit)", main = "(B) Incremental cost analysis")
+box()
+axis(1)
+axis(2, at = axTicks(2), labels = prettyNum(axTicks(2), big.mark = ",", scientific = FALSE), las = 0, cex.axis = 1.0, tick = TRUE)
+
+for (i in 1:7) {
+  xtemp <- c(sys.CEICA.BB[[2]][i,1], sys.CEICA.BB[[2]][i+1,1], sys.CEICA.BB[[2]][i+1,1], sys.CEICA.BB[[2]][i,1])
+  ytemp <- c(0, 0, sys.CEICA.BB[[2]][i+1,3], sys.CEICA.BB[[2]][i+1,3])
+  polygon(xtemp, ytemp, col = CEICA.Fig4.col[i+1], border = "black")
+}
+
+legend("topleft", legend = c("2A", "2A+2B", "2A+2B+19A", "2A+2B+19A+17B", "2A+2B+19A+17B+17D2E", "2A+2B+19A+17B+17D2E+3F", "2A+2B+19A+17B+17D2E+3F+17F2M"), fill = CEICA.Fig4.col[-1], bg = "white")
+
+#Turn off plot device
+invisible(dev.off())
+
+```
