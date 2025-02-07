@@ -3,15 +3,15 @@ title: 'Socioeconomic Analysis'
 author: "S. Kyle McKay, Stephen Phillips, Liya E. Abera, and Garrett Menichino"
 date: "December 2024"
 output:
-  word_document:
-    toc: yes
-    toc_depth: '5'
   html_document:
     toc: yes
     toc_depth: 5
     toc_float:
       collapsed: no
       smooth_scroll: yes
+  word_document:
+    toc: yes
+    toc_depth: '5'
 ---
 
 **Corresponding Author**:\
@@ -1295,7 +1295,7 @@ axis(2, at = axTicks(2), labels = prettyNum(axTicks(2), big.mark = ",", scientif
 lines(AAHU$Lift[5:8][order(AAHU$Lift[5:8])], cost_ann$Total[5:8][order(cost_ann$Total[5:8])], lwd = 2)
 points(AAHU$Lift[5:8], cost_ann$Total[5:8], pch = 19, cex = 2.0, col=c("black", "red", "darkorange", "darkgoldenrod1"))
 points(AAHU$Lift[c(5,6)], cost_ann$Total[c(5,6)], pch = 1, lwd=3.0, cex = 5.0, col = "black")
-legend("topleft", legend = c("Restoration Alternatives", "Cost-Effective Frontier", "Best Buys"), lwd = c(NA, NA, 2), pch = c(19, NA, 1), pt.cex = c(2, NA, 4), col = c("black", "black", "black"), bg = "white")
+legend("topleft", legend = c("Restoration Alternatives", "Cost-Effective Frontier", "Best Buys"), lwd = c(NA, 2, NA), pch = c(19, NA, 1), pt.cex = c(2, NA, 4), col = c("black", "black", "black"), bg = "white")
 
 #Turn off plot device
 invisible(dev.off())
