@@ -1334,7 +1334,7 @@ plot(c(0, 1), c(0, 1), type = "n", xlim = range(sys.CEICA.BB[[2]][,1]), ylim = r
      xlab = "Ecological Lift (average annual habitat units)", ylab = "Incremental Cost per Incremental Benefit ($ / habitat unit)", main = "(B) Incremental cost analysis")
 box()
 axis(1)
-axis(2, at = axTicks(2), labels = prettyNum(axTicks(2), big.mark = ",", scientific = FALSE), las = 0, cex.axis = 1.0, tick = TRUE)
+axis(2, at = axTicks(2), labels = prettyNum(axTicks(2), scientific = FALSE), las = 0, cex.axis = 1.0, tick = TRUE)
 
 for (i in 1:7) {
   xtemp <- c(sys.CEICA.BB[[2]][i,1], sys.CEICA.BB[[2]][i+1,1], sys.CEICA.BB[[2]][i+1,1], sys.CEICA.BB[[2]][i,1])
